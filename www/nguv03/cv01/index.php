@@ -1,5 +1,6 @@
 <?php
 
+$avatar = 'jedi-logo.svg';
 $firstName = 'Anakin';
 $lastName = 'Skywalker';
 $title = 'Lead Developer / Architect';
@@ -32,7 +33,7 @@ $address = $street . ' ' . $propNumber . '/' . $orientationNumber . ', ' . $city
         <h1 class="text-center">My Business Card in PHP</h1>
         <div class="business-card bc-front row">
             <div class="col-sm-4">
-                <div class="logo"></div>
+                <div class="logo" style="background-image: url(./img/<?php echo $avatar; ?>)"></div>
             </div>
             <div class="col-sm-8">
                 <div class="bc-firstname"><?php echo $firstName; ?></div>
