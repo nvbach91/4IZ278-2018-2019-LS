@@ -17,7 +17,7 @@ array_push($people, new Person(
     'Temple of Eedit',
     42,
     121,
-    'Coruscant',
+    'Coruscant'
 ));
 
 array_push($people, new Person(
@@ -33,7 +33,7 @@ array_push($people, new Person(
     'Temple of Eedit',
     43,
     121,
-    'Coruscant',
+    'Coruscant'
 ));
 
 array_push($people, new Person(
@@ -49,7 +49,7 @@ array_push($people, new Person(
     'Senate District',
     874,
     12,
-    'Naboo',
+    'Naboo'
 ));
 
 ?>
