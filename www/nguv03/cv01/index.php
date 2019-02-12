@@ -15,8 +15,6 @@ $orientationNumber = 121;
 $city = 'Coruscant';
 $address = $street . ' ' . $propNumber . '/' . $orientationNumber . ', ' . $city;
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +29,7 @@ $address = $street . ' ' . $propNumber . '/' . $orientationNumber . ', ' . $city
 </head>
 <body>
     <main class="container">
-        <h1>My Business Card in PHP</h1>
+        <h1 class="text-center">My Business Card in PHP</h1>
         <div class="business-card bc-front row">
             <div class="col-sm-4">
                 <div class="logo"></div>
