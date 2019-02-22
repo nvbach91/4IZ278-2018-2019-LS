@@ -1,6 +1,6 @@
 <?php
 
-include './Person.php';
+require './Person.php';
 
 $people = [];
 
@@ -53,10 +53,10 @@ array_push($people, new Person(
 ));
 
 ?>
-<?php include './header.php'; ?>
+<?php require './header.php'; ?>
 <?php foreach($people as $person): ?>
     <div class="row">
-        <div class="business-card bc-front row">
+        <div class="business-card bc-front">
             <div class="col-sm-4">
                 <div class="logo" style="background-image: url(./img/<?php echo $person->avatar; ?>)"></div>
             </div>
@@ -67,7 +67,7 @@ array_push($people, new Person(
                 <div class="bc-company"><?php echo $person->company; ?></div>
             </div>
         </div>
-        <div class="business-card bc-back row">
+        <div class="business-card bc-back">
             <div class="col-sm-6">
                 <div class="bc-firstname"><?php echo $person->firstName; ?></div>
                 <div class="bc-lastname"><?php echo $person->lastName; ?></div>
@@ -83,4 +83,4 @@ array_push($people, new Person(
         </div>
     </div>
 <?php endforeach; ?>
-<?php include './footer.php'; ?>
+<?php require './footer.php'; ?>
