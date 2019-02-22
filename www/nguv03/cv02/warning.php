@@ -28,7 +28,7 @@ class Person {
 $people = [];
 
 // remove on of these and the warning goes away
-array_push($people, new Person(
+/*array_push($people, new Person(
     'jedi-logo.svg',
     'Anakin',
     'Skywalker',
@@ -42,7 +42,7 @@ array_push($people, new Person(
     42,
     121,
     'Coruscant'
-));
+));*/
 
 array_push($people, new Person(
     'jedi-master-logo.svg',
@@ -128,7 +128,7 @@ array_push($people, new Person(
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <?php 
-        require './hotreloader.php'; 
+        require '../hotreloader.php'; 
         $reloader = new HotReloader();
         $reloader->init();
     ?>
