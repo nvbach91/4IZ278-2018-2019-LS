@@ -1,5 +1,7 @@
 <?php 
 
+require './utils/index.php';
+
 $alertMessage = '';
 $alertType = 'alert-danger';
 
@@ -30,17 +32,23 @@ if ($submittedForm) {
         $alertMessage = 'Please use a valid phone number';
     }
 
+    // if no errors yet: send an email
+    if (!$alertMessage && !sendEmail(['recipient' => $email, 'subject' => 'Registration confirmation'])) {
+        $alertMessage = 'There was a problem sending email';
+    }
+
     // if no errors at all: display success
     if (!$alertMessage) {
         $alertType = 'alert-success';
-        $alertMessage = 'Yoohoo! You have successfully signed up!';
+        $alertMessage = 'Woohoo! You have successfully signed up!';
     }
 }
 
 ?>
 <?php require './components/header.php'; ?>
 <main class="container">
-    <h1 class="text-center">Form validation</h1>
+    <h1 class="text-center">Form validation example</h1>
+    <h2 class="text-center">Registration form</h2>
     <div class="row justify-content-center">
         <form class="form-signup" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <?php if ($submittedForm): ?>
@@ -48,15 +56,15 @@ if ($submittedForm) {
             <?php endif; ?>
             <div class="form-group">
                 <label>Name</label>
-                <input class="form-control" name="name" value="<?php echo isset($_POST['name']) ? $name : '' ?>">
+                <input class="form-control" name="name" value="<?php /* echo out info if submitted */ echo isset($_POST['name']) ? $name : '' ?>">
             </div>
             <div class="form-group">
                 <label>Email</label>
-                <input class="form-control" name="email" value="<?php echo isset($_POST['email']) ? $email : '' ?>">
+                <input class="form-control" name="email" value="<?php /* echo out info if submitted */ echo isset($_POST['email']) ? $email : '' ?>">
             </div>
             <div class="form-group">
                 <label>Phone</label>
-                <input class="form-control" name="phone" value="<?php echo isset($_POST['phone']) ? $phone : '' ?>">
+                <input class="form-control" name="phone" value="<?php /* echo out info if submitted */ echo isset($_POST['phone']) ? $phone : '' ?>">
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>

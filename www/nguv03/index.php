@@ -16,7 +16,7 @@ function addZeroPadding($num, $length) {
 $labs = [];
 array_push($labs, new Lab('Lab 01', './cv01/', 'I have no idea what i\'m doing', true));
 array_push($labs, new Lab('Lab 02', './cv02/', 'I have no idea what i\'m doing', true));
-array_push($labs, new Lab('Lab 03', './cv03/', 'I have no idea what i\'m doing', false));
+array_push($labs, new Lab('Lab 03', './cv03/', 'I have no idea what i\'m doing', true));
 array_push($labs, new Lab('Lab 04', './cv04/', 'I have no idea what i\'m doing', false));
 array_push($labs, new Lab('Lab 05', './cv05/', 'I have no idea what i\'m doing', false));
 array_push($labs, new Lab('Lab 06', './cv06/', 'I have no idea what i\'m doing', false));
