@@ -65,14 +65,17 @@ if ($submittedForm) {
             <div class="form-group">
                 <label>Name*</label>
                 <input class="form-control<?php echo in_array('name', $invalidInputs) ? ' is-invalid' : '' ?>" name="name" value="<?php echo isset($name) ? $name : '' ?>">
+                <small class="text-muted">Example: Homer Simpson</small>
             </div>
             <div class="form-group">
                 <label>Email*</label>
                 <input class="form-control<?php echo in_array('email', $invalidInputs) ? ' is-invalid' : '' ?>" name="email" value="<?php echo isset($name) ? $email : '' ?>">
+                <small class="text-muted">Example: example@gmail.com</small>
             </div>
             <div class="form-group">
                 <label>Phone*</label>
                 <input class="form-control<?php echo in_array('phone', $invalidInputs) ? ' is-invalid' : '' ?>" name="phone" value="<?php echo isset($phone) ? $phone : '' ?>">
+                <small class="text-muted">Example: +421 841 147 239</small>
             </div>
             <div class="form-group">
                 <label>Avatar URL*</label>
@@ -80,7 +83,7 @@ if ($submittedForm) {
                 <img class="avatar" src="<?php echo $avatar; ?>" alt="avatar">
                 <?php endif; ?>
                 <input class="form-control<?php echo in_array('avatar', $invalidInputs) ? ' is-invalid' : '' ?>" name="avatar" value="<?php echo isset($avatar) ? $avatar : ''; ?>">
-                <small class="text-muted">http://interactive.nydailynews.com/2016/05/simpsons-quiz/img/simp1.jpg</small>
+                <small class="text-muted">Example: http://interactive.nydailynews.com/2016/05/simpsons-quiz/img/simp1.jpg</small>
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
