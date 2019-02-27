@@ -48,6 +48,7 @@ if ($submittedForm) {
 ?>
 <?php require './components/header.php'; ?>
 <main class="container">
+    <br>
     <h1 class="text-center">Form validation example</h1>
     <h2 class="text-center">Registration form</h2>
     <div class="row justify-content-center">
@@ -56,19 +57,19 @@ if ($submittedForm) {
             <div class="alert <?php echo $alertType; ?>"><?php echo $alertMessage; ?></div>
             <?php endif; ?>
             <div class="form-group">
-                <label>Name</label>
+                <label>Name*</label>
                 <input class="form-control" name="name" value="<?php /* echo out info if submitted */ echo isset($name) ? $name : '' ?>">
             </div>
             <div class="form-group">
-                <label>Email</label>
+                <label>Email*</label>
                 <input class="form-control" name="email" value="<?php /* echo out info if submitted */ echo isset($name) ? $email : '' ?>">
             </div>
             <div class="form-group">
-                <label>Phone</label>
+                <label>Phone*</label>
                 <input class="form-control" name="phone" value="<?php /* echo out info if submitted */ echo isset($phone) ? $phone : '' ?>">
             </div>
             <div class="form-group">
-                <label>Avatar URL</label>
+                <label>Avatar URL*</label>
                 <?php if (isset($avatar)): ?>
                 <img class="avatar" src="<?php echo $avatar; ?>" alt="avatar">
                 <?php endif; ?>
