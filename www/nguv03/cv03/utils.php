@@ -1,6 +1,8 @@
 <?php 
 // create an object with key value pairs
 $sender = 'Bilbo Baggins <bilbo@baggins.cz>';
+
+// associative array to keep templates
 $emailTemplates = [
     'headers' => [
         'MIME-Version: 1.0',

@@ -1,6 +1,6 @@
 <?php 
 
-require './utils/index.php';
+require './utils.php';
 
 $alertMessage = '';
 $alertType = 'alert-danger';
@@ -11,9 +11,10 @@ if ($submittedForm) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
+    $avatar = $_POST['avatar'];
     
     // check for empty fields one by one
-    $fields = ['name', 'email', 'phone'];
+    $fields = ['name', 'email', 'phone', 'avatar'];
     foreach ($fields as $field) {
         $fieldValue = $_POST[$field];
         if (!$fieldValue) {
@@ -56,15 +57,22 @@ if ($submittedForm) {
             <?php endif; ?>
             <div class="form-group">
                 <label>Name</label>
-                <input class="form-control" name="name" value="<?php /* echo out info if submitted */ echo isset($_POST['name']) ? $name : '' ?>">
+                <input class="form-control" name="name" value="<?php /* echo out info if submitted */ echo isset($name) ? $name : '' ?>">
             </div>
             <div class="form-group">
                 <label>Email</label>
-                <input class="form-control" name="email" value="<?php /* echo out info if submitted */ echo isset($_POST['email']) ? $email : '' ?>">
+                <input class="form-control" name="email" value="<?php /* echo out info if submitted */ echo isset($name) ? $email : '' ?>">
             </div>
             <div class="form-group">
                 <label>Phone</label>
-                <input class="form-control" name="phone" value="<?php /* echo out info if submitted */ echo isset($_POST['phone']) ? $phone : '' ?>">
+                <input class="form-control" name="phone" value="<?php /* echo out info if submitted */ echo isset($phone) ? $phone : '' ?>">
+            </div>
+            <div class="form-group">
+                <label>Avatar URL</label>
+                <?php if (isset($avatar)): ?>
+                <img class="avatar" src="<?php echo $avatar; ?>" alt="avatar">
+                <?php endif; ?>
+                <input class="form-control" name="avatar" value="<?php echo isset($avatar) ? $avatar : ''; ?>">
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
