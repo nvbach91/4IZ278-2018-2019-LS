@@ -32,6 +32,6 @@ function sendEmail($args) {
     //echo $subject . '<br>';
     //echo $body . '<br>';
     //return true;
-    return mail($recipient, $subject, $body, $headers);
+    return 1; //mail($recipient, $subject, $body, $headers);
 };
 ?>
