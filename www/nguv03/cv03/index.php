@@ -11,6 +11,7 @@ $submittedForm = !empty($_POST);
 if ($submittedForm) {
     // get all fields while trimming them and converting any special chars to html entities
     $name = htmlspecialchars(trim($_POST['name']));
+    $gender = htmlspecialchars(trim($_POST['gender']));
     $email = htmlspecialchars(trim($_POST['email']));
     $phone = htmlspecialchars(trim($_POST['phone']));
     $avatar = htmlspecialchars(trim($_POST['avatar']));
@@ -21,26 +22,32 @@ if ($submittedForm) {
         array_push($invalidInputs, 'name');
     }
 
-    // if no errors yet: check for bad email
+    // check for bad gender
+    if (!in_array($gender, ['N', 'F', 'M'])) {
+        array_push($alertMessages, 'Please select a gender');
+        array_push($invalidInputs, 'gender');
+    }
+
+    // check for bad email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         array_push($alertMessages, 'Please use a valid email');
         array_push($invalidInputs, 'email');
     }
 
-    // if no errors yet: check for bad phone numbers
+    // check for bad phone numbers
     if (!preg_match('/^(\+\d{3} ?)?(\d{3} ?){3}$/', $phone)) {
         array_push($alertMessages, 'Please use a valid phone number');
         array_push($invalidInputs, 'phone');
     }
 
-    // if no errors yet: check for avatar URL
+    // check for avatar URL
     if (!filter_var($avatar, FILTER_VALIDATE_URL)) {
         array_push($alertMessages, 'Please use a valid URL for your avatar');
         array_push($invalidInputs, 'avatar');
     }
 
-    // if no errors yet: send an email
-    //if (!sendEmail(['recipient' => $email, 'subject' => 'Registration confirmation'])) {
+    // if no error: send an email
+    //if (!count($alertMessages) && !sendEmail(['recipient' => $email, 'subject' => 'Registration confirmation'])) {
     //    $alertMessage = 'There was a problem sending email';
     //}
 
@@ -66,6 +73,14 @@ if ($submittedForm) {
                 <label>Name*</label>
                 <input class="form-control<?php echo in_array('name', $invalidInputs) ? ' is-invalid' : '' ?>" name="name" value="<?php echo isset($name) ? $name : '' ?>">
                 <small class="text-muted">Example: Homer Simpson</small>
+            </div>
+            <div class="form-group">
+                <label>Gender*</label>
+                <select class="form-control" name="gender">
+                    <option value="N"<?php echo isset($gender) && $gender === 'N' ? ' selected' : '' ?>>Neutral</option>
+                    <option value="F"<?php echo isset($gender) && $gender === 'F' ? ' selected' : '' ?>>Female</option>
+                    <option value="M"<?php echo isset($gender) && $gender === 'M' ? ' selected' : '' ?>>Male</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Email*</label>
