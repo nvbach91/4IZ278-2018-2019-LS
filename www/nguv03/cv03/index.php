@@ -9,6 +9,7 @@ $alertType = 'alert-danger';
 // check if form is submitted
 $submittedForm = !empty($_POST);
 if ($submittedForm) {
+    //var_dump($_POST);
     // get all fields while trimming them and converting any special chars to html entities
     $name = htmlspecialchars(trim($_POST['name']));
     $gender = htmlspecialchars(trim($_POST['gender']));
