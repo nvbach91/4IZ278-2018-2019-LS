@@ -1,6 +1,6 @@
 <?php 
 // create an object with key value pairs
-$sender = 'Bilbo Baggins <bilbo@baggins.cz>';
+$sender = 'nguv03@vse.cz';
 
 // associative array to keep templates
 $emailTemplates = [
@@ -32,6 +32,7 @@ function sendEmail($args) {
     //echo $subject . '<br>';
     //echo $body . '<br>';
     //return true;
-    return 1; //mail($recipient, $subject, $body, $headers);
+    //return 1;
+    return mail($recipient, $subject, $body, $headers);
 };
 ?>

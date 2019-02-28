@@ -99,7 +99,7 @@ if ($submittedForm) {
                 <img class="avatar" src="<?php echo $avatar; ?>" alt="avatar">
                 <?php endif; ?>
                 <input class="form-control<?php echo in_array('avatar', $invalidInputs) ? ' is-invalid' : '' ?>" name="avatar" value="<?php echo isset($avatar) ? $avatar : ''; ?>">
-                <small class="text-muted">Example: http://interactive.nydailynews.com/2016/05/simpsons-quiz/img/simp1.jpg</small>
+                <small class="text-muted">Example: https://eso.vse.cz/~nguv03/cv03/img/homer.jpg</small>
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
