@@ -1,6 +1,8 @@
 <?php 
 // create an object with key value pairs
-$sender = 'nguv03@vse.cz';
+$xname = 'nguv03';
+$sender = $xname . '@vse.cz';
+$loginPageUrl = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/~' . $xname . '/login.php';
 
 // associative array to keep templates
 $emailTemplates = [
@@ -16,23 +18,18 @@ $emailTemplates = [
             "<h2>Registration confirmation</h2>" .
             "<p>Thank you for signing up!</p>" .
             "<h4>You registered email:</h4>" .
-            "<p><a href='mailto:$recipient'>$recipient</a></p>"
+            "<p><a href='mailto:$recipient'>$recipient</a></p>" .
+            "<p>You can now sign in here: <a href='$loginPageUrl'>$loginPageUrl</a></p>"
         );
     },
 ];
-function sendEmail($args) {
+
+function sendEmail($recipient, $subject) {
     // access variables from outside using keyword global
     global $emailTemplates;
     $headers = implode("\r\n", $emailTemplates['headers']);
-    $recipient = $args['recipient'];
-    $subject = $args['subject'];
-    $body = $emailTemplates[$subject]($recipient);
-    //echo $headers . '<br>';
-    //echo $recipient . '<br>';
-    //echo $subject . '<br>';
-    //echo $body . '<br>';
-    //return true;
-    //return 1;
-    return mail($recipient, $subject, $body, $headers);
+    $message = $emailTemplates[$subject]($recipient);
+    return mail($recipient, $subject, $message, $headers);
 };
+
 ?>

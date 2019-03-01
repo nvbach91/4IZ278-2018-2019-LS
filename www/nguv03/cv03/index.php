@@ -47,10 +47,12 @@ if ($submittedForm) {
         array_push($invalidInputs, 'avatar');
     }
 
-    // if no error: send an email
-    //if (!count($alertMessages) && !sendEmail(['recipient' => $email, 'subject' => 'Registration confirmation'])) {
-    //    $alertMessage = 'There was a problem sending email';
-    //}
+    // if no errors: send an confirmation email
+    if (!count($alertMessages)) {
+        if (!sendEmail($email, 'Registration confirmation')) {
+            array_push($alertMessages, 'There was a problem sending email');
+        }
+    }
 
     // if no errors at all: display success
     if (!count($alertMessages)) {
