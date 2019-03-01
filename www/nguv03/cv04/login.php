@@ -31,7 +31,7 @@ if (isset($_GET['email'])) {
 <main class="container">
     <br>
     <h1 class="text-center">Login</h1>
-    <form class="form-registration" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <form class="form-registration" method="POST">
         <?php if (isset($_GET['email']) && @$_GET['ref'] === 'registration'): ?>
             <div class="alert alert-success">Woohoo! You have successfully signed up!</div>
         <?php endif; ?>

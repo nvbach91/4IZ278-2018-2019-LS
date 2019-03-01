@@ -52,7 +52,7 @@ if ($submittedForm) {
     <br>
     <h1 class="text-center">Registration</h1>
     <div class="row justify-content-center">
-        <form class="form-registration" method="POST" >
+        <form class="form-registration" method="POST">
             <?php if ($submittedForm && !empty($errors)): ?>
                 <div class="alert alert-danger">
                     <?php echo implode('<br>', array_values($errors)); ?>
