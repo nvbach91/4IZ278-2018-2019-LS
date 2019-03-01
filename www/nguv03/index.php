@@ -17,16 +17,16 @@ $labs = [];
 array_push($labs, new Lab('Lab 01', './cv01/', 'I have no idea what i\'m doing', true));
 array_push($labs, new Lab('Lab 02', './cv02/', 'I have no idea what i\'m doing', true));
 array_push($labs, new Lab('Lab 03', './cv03/', 'I have no idea what i\'m doing', true));
-array_push($labs, new Lab('Lab 04', './cv04/', 'I have no idea what i\'m doing', false));
-array_push($labs, new Lab('Lab 05', './cv05/', 'I have no idea what i\'m doing', false));
-array_push($labs, new Lab('Lab 06', './cv06/', 'I have no idea what i\'m doing', false));
-array_push($labs, new Lab('Lab 07', './cv07/', 'I have no idea what i\'m doing', false));
-array_push($labs, new Lab('Lab 08', './cv08/', 'I have no idea what i\'m doing', false));
-array_push($labs, new Lab('Lab 09', './cv09/', 'I have no idea what i\'m doing', false));
-array_push($labs, new Lab('Lab 10', './cv10/', 'I have no idea what i\'m doing', false));
-array_push($labs, new Lab('Lab 11', './cv11/', 'I have no idea what i\'m doing', false));
-array_push($labs, new Lab('Lab 12', './cv12/', 'I have no idea what i\'m doing', false));
-array_push($labs, new Lab('Lab 13', './cv13/', 'I have no idea what i\'m doing', false));
+array_push($labs, new Lab('Lab 04', './cv04/', 'I have no idea what i\'m doing', true));
+array_push($labs, new Lab('Lab 05', './cv05/', 'I have no idea what i\'m doing', true));
+array_push($labs, new Lab('Lab 06', './cv06/', 'I have no idea what i\'m doing', true));
+array_push($labs, new Lab('Lab 07', './cv07/', 'I have no idea what i\'m doing', true));
+array_push($labs, new Lab('Lab 08', './cv08/', 'I have no idea what i\'m doing', true));
+array_push($labs, new Lab('Lab 09', './cv09/', 'I have no idea what i\'m doing', true));
+array_push($labs, new Lab('Lab 10', './cv10/', 'I have no idea what i\'m doing', true));
+array_push($labs, new Lab('Lab 11', './cv11/', 'I have no idea what i\'m doing', true));
+array_push($labs, new Lab('Lab 12', './cv12/', 'I have no idea what i\'m doing', true));
+array_push($labs, new Lab('Lab 13', './cv13/', 'I have no idea what i\'m doing', true));
 ?>
 <!DOCTYPE html>
 <html lang="en">
