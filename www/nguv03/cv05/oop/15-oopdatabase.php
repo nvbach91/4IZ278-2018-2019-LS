@@ -1,18 +1,22 @@
 <?php
 
 interface DatabaseOperations {
+    // note that these methods have no body
     public function fetch();
     public function create($args);
     public function save();
     public function delete();
 }
 abstract class Database implements DatabaseOperations {
+    // why is protected used here?
     protected $dbPath = '/app/db/'; 
     protected $dbExtension = '.db';
     protected $delimiter = ';';
     public function __construct() {
+        // what is static::class
         echo '-----', static::class, ' was instantiated-----', PHP_EOL;
     }
+    // this will get returned when one tries to stringify the instance with i.e. echo
     public function __toString() {
         return "database config: dbPath: $this->dbPath, dbExtenstion: $this->dbExtension, delimiter: $this->delimiter";
     }
