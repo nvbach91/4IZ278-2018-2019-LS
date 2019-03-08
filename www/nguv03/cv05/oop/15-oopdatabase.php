@@ -13,7 +13,7 @@ abstract class Database implements DatabaseOperations {
     protected $dbExtension = '.db';
     protected $delimiter = ';';
     public function __construct() {
-        // what is static::class
+        // what is static::class?
         echo '-----', static::class, ' was instantiated-----', PHP_EOL;
     }
     // this will get returned when one tries to stringify the instance with i.e. echo
@@ -60,7 +60,7 @@ class OrdersDB extends Database {
     <title>Document</title>
     <style>
         body { display: flex; }
-        pre { padding: 10px; width: 50%; overflow-x: scroll; }
+        pre { padding: 10px; width: 50%; overflow-x: auto; }
     </style>
 </head>
 <body>
@@ -138,12 +138,11 @@ echo $orders, PHP_EOL;
 
 
     </pre>
-    <pre>
-        <?php 
+    <pre><?php 
             
             $users = new UsersDB();
             $users->create(['name' => 'Dave', 'age' => 42]);
-            $users->create(['name' => 'Dave', 'age' => 42]);
+            $users->create(['name' => 'Jane', 'age' => 29]);
             $users->fetch();
             $users->save();
             $users->delete();
@@ -161,8 +160,7 @@ echo $orders, PHP_EOL;
             $orders->create(['number' => 42, 'date' => '2019-03-08']);
             echo $orders, PHP_EOL;
 
-        ?>
-    </pre>
+    ?></pre>
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 </body>
 </html>
