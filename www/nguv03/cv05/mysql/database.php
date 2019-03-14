@@ -2,9 +2,17 @@
 <?php
 interface DatabaseOperations {
     public function fetch($args);
+    // other operations CRUD
 }
 abstract class Database implements DatabaseOperations {
     protected $connection;
+    protected function query($query) {
+        $result = $this->connection->query($query);
+        if ($result) {
+            return $result->fetch_assoc();
+        }
+        return [];
+    }
     public function __construct() {
         $this->connection = new mysqli(
             DB_SERVER_URL, 
@@ -19,13 +27,9 @@ abstract class Database implements DatabaseOperations {
 }
 class UsersDB extends Database {
     public function fetch($args) {
-        $result = $this->connection->query(
+        return $this->query(
             "SELECT * FROM users WHERE Email = '" . $args['email'] . "'"
         );
-        if ($result) {
-            return $result->fetch_assoc();
-        }
-        return [];
     }
 }
 ?>
