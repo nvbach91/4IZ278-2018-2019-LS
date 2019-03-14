@@ -15,7 +15,7 @@ abstract class Database implements DatabaseOperations {
     protected $delimiter = ';';
     public function __construct() {
         // what is static::class?
-        echo '-----', static::class, ' was instantiated-----', '<br>';
+        echo '-----', static::class, ' was instantiated-----', PHP_EOL;
     }
     // this will get returned when one tries to stringify the instance with i.e. echo
     public function __toString() {
@@ -27,27 +27,27 @@ abstract class Database implements DatabaseOperations {
 }
 class UsersDB extends Database {
     public function create($args) { 
-        echo 'User ', $args['name'], ' age: ', $args['age'], ' was created', '<br>'; 
+        echo 'User ', $args['name'], ' age: ', $args['age'], ' was created', PHP_EOL; 
     }
-    public function fetch()  { echo 'A user was fetched', '<br>'; }
-    public function save()   { echo 'A user was saved  ', '<br>'; }
-    public function delete() { echo 'A user was deleted', '<br>'; }
+    public function fetch()  { echo 'A user was fetched', PHP_EOL; }
+    public function save()   { echo 'A user was saved  ', PHP_EOL; }
+    public function delete() { echo 'A user was deleted', PHP_EOL; }
 }
 class ProductsDB extends Database {
     public function create($args) { 
-        echo 'Product ', $args['name'], ' $', $args['price'], ' was created', '<br>'; 
+        echo 'Product ', $args['name'], ' $', $args['price'], ' was created', PHP_EOL; 
     }
-    public function fetch()  { echo 'A product was fetched', '<br>'; }
-    public function save()   { echo 'A product was saved  ', '<br>'; }
-    public function delete() { echo 'A product was deleted', '<br>'; }
+    public function fetch()  { echo 'A product was fetched', PHP_EOL; }
+    public function save()   { echo 'A product was saved  ', PHP_EOL; }
+    public function delete() { echo 'A product was deleted', PHP_EOL; }
 }
 class OrdersDB extends Database {
     public function create($args) { 
-        echo 'Order no. ', $args['number'], ' was created', '<br>'; 
+        echo 'Order no. ', $args['number'], ' was created', PHP_EOL; 
     }
-    public function fetch()  { echo 'An order was fetched', '<br>'; }
-    public function save()   { echo 'An order was saved  ', '<br>'; }
-    public function delete() { echo 'An order was deleted', '<br>'; }
+    public function fetch()  { echo 'An order was fetched', PHP_EOL; }
+    public function save()   { echo 'An order was saved  ', PHP_EOL; }
+    public function delete() { echo 'An order was deleted', PHP_EOL; }
 }
 
 ?>
@@ -82,7 +82,7 @@ abstract class Database implements DatabaseOperations {
     protected $delimiter = ';';
     public function __construct() {
         // what is static::class?
-        echo '-----', static::class, ' was instantiated-----', '<br>';
+        echo '-----', static::class, ' was instantiated-----', PHP_EOL;
     }
     // this will get returned when one tries to stringify the instance with i.e. echo
     public function __toString() {
@@ -94,27 +94,27 @@ abstract class Database implements DatabaseOperations {
 }
 class UsersDB extends Database {
     public function create($args) { 
-        echo 'User ', $args['name'], ' age: ', $args['age'], ' was created', '<br>'; 
+        echo 'User ', $args['name'], ' age: ', $args['age'], ' was created', PHP_EOL; 
     }
-    public function fetch()  { echo 'A user was fetched', '<br>'; }
-    public function save()   { echo 'A user was saved  ', '<br>'; }
-    public function delete() { echo 'A user was deleted', '<br>'; }
+    public function fetch()  { echo 'A user was fetched', PHP_EOL; }
+    public function save()   { echo 'A user was saved  ', PHP_EOL; }
+    public function delete() { echo 'A user was deleted', PHP_EOL; }
 }
 class ProductsDB extends Database {
     public function create($args) { 
-        echo 'Product ', $args['name'], ' $', $args['price'], ' was created', '<br>'; 
+        echo 'Product ', $args['name'], ' $', $args['price'], ' was created', PHP_EOL; 
     }
-    public function fetch()  { echo 'A product was fetched', '<br>'; }
-    public function save()   { echo 'A product was saved  ', '<br>'; }
-    public function delete() { echo 'A product was deleted', '<br>'; }
+    public function fetch()  { echo 'A product was fetched', PHP_EOL; }
+    public function save()   { echo 'A product was saved  ', PHP_EOL; }
+    public function delete() { echo 'A product was deleted', PHP_EOL; }
 }
 class OrdersDB extends Database {
     public function create($args) { 
-        echo 'Order no. ', $args['number'], ' was created', '<br>'; 
+        echo 'Order no. ', $args['number'], ' was created', PHP_EOL; 
     }
-    public function fetch()  { echo 'An order was fetched', '<br>'; }
-    public function save()   { echo 'An order was saved  ', '<br>'; }
-    public function delete() { echo 'An order was deleted', '<br>'; }
+    public function fetch()  { echo 'An order was fetched', PHP_EOL; }
+    public function save()   { echo 'An order was saved  ', PHP_EOL; }
+    public function delete() { echo 'An order was deleted', PHP_EOL; }
 }
 
 
@@ -134,9 +134,9 @@ echo '<br>';
 $orders = new OrdersDB();
 $orders->configInfo();
 echo '<br>';
-echo $orders, '<br>';
+echo $orders, PHP_EOL;
 $orders->create(['number' => 42, 'date' => '2019-03-08']);
-echo $orders, '<br>';
+echo $orders, PHP_EOL;
 
 
     </pre>
@@ -158,9 +158,9 @@ echo $orders, '<br>';
             $orders = new OrdersDB();
             $orders->configInfo();
             echo '<br>';
-            echo $orders, '<br>';
+            echo $orders, PHP_EOL;
             $orders->create(['number' => 42, 'date' => '2019-03-08']);
-            echo $orders, '<br>';
+            echo $orders, PHP_EOL;
 
     ?></pre>
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>

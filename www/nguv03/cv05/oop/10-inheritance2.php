@@ -10,9 +10,9 @@ abstract class Being {
     protected $isAlive = true;
     public function isAlive() {
         if ($this->isAlive) {
-            echo "Being is alive", '<br>';
+            echo "Being is alive", PHP_EOL;
         } else {
-            echo "Being is not alive", '<br>';
+            echo "Being is not alive", PHP_EOL;
         }
     }
     public function die() {
@@ -54,7 +54,7 @@ class Cat extends Animal {
 
 $cat = new Cat("Meooooow", 4);
 $cat->isAlive();
-echo $cat->getName() . " is " . $cat->getAge() . " years old", '<br>';
+echo $cat->getName() . " is " . $cat->getAge() . " years old", PHP_EOL;
 $cat->die();
 $cat->isAlive();
 

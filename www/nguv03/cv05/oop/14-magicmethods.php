@@ -13,7 +13,7 @@ class ExampleMagic {
 
 $e = new ExampleMagic();
 // tady se zavolá __toString()
-echo $e, '<br>', '<br>';
+echo $e, PHP_EOL, PHP_EOL;
 
 
 
@@ -57,22 +57,22 @@ class MagicClass {
 $m = new MagicClass();
 
 // calls __get
-echo "a: ", $m->a, '<br>';
-echo "x: ", $m->x, '<br>';
-echo "b: ", $m->b, '<br>';
+echo "a: ", $m->a, PHP_EOL;
+echo "x: ", $m->x, PHP_EOL;
+echo "b: ", $m->b, PHP_EOL;
 // calls __set
 $m->b = "BbbBB";
-echo "b: ", $m->b, '<br>';
+echo "b: ", $m->b, PHP_EOL;
 // calls __set
 $m->x = "XxxXXXX";
-echo "x: ", $m->x, '<br>';
+echo "x: ", $m->x, PHP_EOL;
 
 // calls __unset
 unset($m->b);
 
 // calls __isset
-echo "x isset: ", isset($m->x), '<br>';
-echo "b isset: ", isset($m->b), '<br>';
+echo "x isset: ", isset($m->x), PHP_EOL;
+echo "b isset: ", isset($m->b), PHP_EOL;
 
 // more magic methods:
 // __clone, __construct, __invoke, __toString, 

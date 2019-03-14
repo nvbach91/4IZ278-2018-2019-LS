@@ -14,8 +14,8 @@ abstract class Drawing {
     // classes that extend this class must implement this method
     public abstract function area();
     public function getCoordinates() {
-        echo "\$x is $this->x", '<br>';
-        echo "\$y is $this->y", '<br>';
+        echo "\$x is $this->x", PHP_EOL;
+        echo "\$y is $this->y", PHP_EOL;
     }
 }
 
@@ -37,8 +37,8 @@ class Circle extends Drawing {
 
 $o = new Circle(12, 45, 22);
 // __toString v akci
-echo "$o ", '<br>';
-echo "Area of the circle: " . $o->area(), '<br>';
+echo "$o ", PHP_EOL;
+echo "Area of the circle: " . $o->area(), PHP_EOL;
 echo $o->getCoordinates();
 
 ?>

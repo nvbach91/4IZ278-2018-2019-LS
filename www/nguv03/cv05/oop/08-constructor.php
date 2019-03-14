@@ -2,7 +2,7 @@
 
 class Song {
     function __construct() {
-        echo "Song object is created", '<br>';
+        echo "Song object is created", PHP_EOL;
     }
 
 }
@@ -26,7 +26,7 @@ class Friend {
     }
 
     function getInfo() {
-        echo "My friend $this->name was born in $this->born", '<br>';
+        echo "My friend $this->name was born in $this->born", PHP_EOL;
     }
 }
 

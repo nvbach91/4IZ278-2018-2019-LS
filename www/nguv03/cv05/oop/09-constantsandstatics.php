@@ -13,8 +13,8 @@ class Math {
 $math = new Math();
 
 // const and static can be accessed using the namespace syntax
-echo Math::$version, '<br>';
-echo Math::PI, '<br>';
-echo $math->getPI(), '<br>';
+echo Math::$version, PHP_EOL;
+echo Math::PI, PHP_EOL;
+echo $math->getPI(), PHP_EOL;
 
 ?>
