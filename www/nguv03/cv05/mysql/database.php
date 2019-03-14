@@ -18,7 +18,7 @@ abstract class Database implements DatabaseOperations {
             DB_SERVER_URL, 
             DB_USERNAME, 
             DB_PASSWORD, 
-            DB_DATABASE, 
+            DB_DATABASE
         );
         if ($this->connection->connect_error) {
             die("Connection to DB failed: " . $this->connection->connect_error);
