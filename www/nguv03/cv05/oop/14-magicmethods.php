@@ -1,4 +1,21 @@
 <?php
+/**
+ * Magické metody umožňují programátorovi přenést na PHP starost o některé 
+ * speciální a jiným způsobem těžko proveditelné úkoly, nezbytné při práci s OOP.
+ */
+
+class ExampleMagic {
+    private $info = "Magical Mallet!";
+    public function __toString() {
+        return $this->info;
+    }
+}
+
+$e = new ExampleMagic();
+// tady se zavolá __toString()
+echo $e, PHP_EOL, PHP_EOL;
+
+
 
 // access class members using magic methods
 class MagicClass {

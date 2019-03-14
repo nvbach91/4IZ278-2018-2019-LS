@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Přetěžování metod nebo operátoru nám umožňuje nadefinovat jednu metodu, která
+ * se chová podle toho, jaké parametry/kolik parametrů do ni předáme
+ * 
+ * v PHP nemáme klasické přetěžování jako v C++ nebo Java, ale můžeme použít trik
+ * tj. funkce, která vrátí pole argumentů
+ */
 class Mathe {
     public function getSum() {
         $args = func_get_args();

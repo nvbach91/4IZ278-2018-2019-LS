@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Pomocí klíčového slova abstrakt můžeme vynutit implementaci některých metod
+ * v podřazených třídách. Výhoda je v tom, že můžeme zajistit správné chování
+ * některých tříd.
+ * 
+ * V našem případě máme třídu Drawing, chceme aby všechny Drawingy VŽDY měly metodu 
+ * pro výpočet obsahu, ale ta se liší podle toho, o jakou konkrétní Drawing
+ * jde.
+ */
 abstract class Drawing {
     protected $x = 0;
     protected $y = 0;
