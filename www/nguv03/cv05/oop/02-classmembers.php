@@ -10,7 +10,7 @@ $dave->name = "Dave";
 $hope = new Person();
 $hope->name = "Hope";
 
-echo $dave->name, PHP_EOL;
-echo $hope->name, PHP_EOL;
+echo $dave->name, '<br>';
+echo $hope->name, '<br>';
 
 ?>

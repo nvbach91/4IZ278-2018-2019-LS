@@ -20,13 +20,13 @@ class Base {
 class Derived extends Base {
 
     public function info() {
-        echo "This is Derived class", PHP_EOL;
-        echo "Members inherited: ", PHP_EOL;
+        echo "This is Derived class", '<br>';
+        echo "Members inherited: ", '<br>';
 
-        echo $this->name, PHP_EOL;
-        echo $this->id, PHP_EOL;
+        echo $this->name, '<br>';
+        echo $this->id, '<br>';
         // $is_defined is not inherited since it is private in the base class
-        //echo $this->is_defined, PHP_EOL;
+        //echo $this->is_defined, '<br>';
     }
 }
 

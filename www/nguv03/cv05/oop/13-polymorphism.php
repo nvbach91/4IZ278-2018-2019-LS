@@ -41,7 +41,7 @@ $shapes = [
 ];
 
 foreach ($shapes as $shape) {
-    echo $shape->area(), PHP_EOL;
+    echo $shape->area(), '<br>';
 }
 
 ?>

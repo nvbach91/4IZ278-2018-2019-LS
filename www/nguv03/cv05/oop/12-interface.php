@@ -21,16 +21,16 @@ interface Volume {
 // Must implement all methods from the interface(s)
 class CellPhone implements Device, Volume {
     public function switchOn() {
-        echo "Switched On", PHP_EOL;
+        echo "Switched On", '<br>';
     }
     public function switchOff() {
-        echo "Switched off", PHP_EOL;
+        echo "Switched off", '<br>';
     }
     public function volumeUp() {
-        echo "Volume Up", PHP_EOL;
+        echo "Volume Up", '<br>';
     }
     public function volumeDown() {
-        echo "Volume Down", PHP_EOL;
+        echo "Volume Down", '<br>';
     }
 }
 
@@ -63,19 +63,19 @@ interface Action extends MovingAction, VerbalAction {
  */
 class Human implements Action {
     public function walk() {
-        echo "I'm walking", PHP_EOL;
+        echo "I'm walking", '<br>';
     }
     public function run() {
-        echo "I'm running", PHP_EOL;
+        echo "I'm running", '<br>';
     }
     public function talk() {
-        echo "I'm talking to you", PHP_EOL;
+        echo "I'm talking to you", '<br>';
     }
     public function speak($language) {
-        echo "I'm speaking in $language", PHP_EOL;
+        echo "I'm speaking in $language", '<br>';
     }
     public function act() {
-        echo "I'm acting", PHP_EOL;
+        echo "I'm acting", '<br>';
     }
 }
 

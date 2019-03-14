@@ -13,11 +13,11 @@ $connection = new mysqli($servername, $username, $password, $database);
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 } 
-echo "Connected successfully OOP STYLE" . PHP_EOL;
+echo "Connected successfully OOP STYLE" . '<br>';
 // you can close manually, 
 // otherwise the connection will close automatically when the script ends
 $connection->close();
-echo "Connection closed" . PHP_EOL;
+echo "Connection closed" . '<br>';
 ?>
 
 
@@ -29,11 +29,11 @@ $connection = mysqli_connect($servername, $username, $password, $database);
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 } 
-echo "Connected successfully PROCEDURAL STYLE" . PHP_EOL;
+echo "Connected successfully PROCEDURAL STYLE" . '<br>';
 // you can close manually, 
 // otherwise the connection will close automatically when the script ends
 mysqli_close($connection);
-echo "Connection closed" . PHP_EOL;
+echo "Connection closed" . '<br>';
 ?>
 
 
@@ -42,10 +42,10 @@ try {
     $connection = new PDO("mysql:host=$servername;dbname=test", $username, $password);
     // set the PDO error mode to exception
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully PDO STYLE" . PHP_EOL; 
+    echo "Connected successfully PDO STYLE" . '<br>'; 
 } catch(PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
 $connection = null;
-echo "Connection closed" . PHP_EOL;
+echo "Connection closed" . '<br>';
 ?>

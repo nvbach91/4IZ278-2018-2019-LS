@@ -11,7 +11,7 @@ $jane->name = "Jane";
 // can't do this since it's private
 // $p->age = 17;
 
-echo $jane->name, PHP_EOL;
+echo $jane->name, '<br>';
 
 
 

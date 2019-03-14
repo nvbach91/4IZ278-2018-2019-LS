@@ -22,9 +22,9 @@ class Mathe {
 }
 
 $s = new Mathe();
-echo $s->getSum(), PHP_EOL;
-echo $s->getSum(5), PHP_EOL;
-echo $s->getSum(3, 4), PHP_EOL;
-echo $s->getSum(3, 4, 7), PHP_EOL;
+echo $s->getSum(), '<br>';
+echo $s->getSum(5), '<br>';
+echo $s->getSum(3, 4), '<br>';
+echo $s->getSum(3, 4, 7), '<br>';
 
 ?>
