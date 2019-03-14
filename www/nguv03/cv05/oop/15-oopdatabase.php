@@ -2,6 +2,7 @@
 
 interface DatabaseOperations {
     // note that these methods have no body
+    // where are their bodies?
     public function fetch();
     public function create($args);
     public function save();
@@ -66,8 +67,9 @@ class OrdersDB extends Database {
 <body>
     <pre class="prettyprint lang-php">
 
-interface DatabaseOperations {
+    interface DatabaseOperations {
     // note that these methods have no body
+    // where are their bodies?
     public function fetch();
     public function create($args);
     public function save();
@@ -79,7 +81,7 @@ abstract class Database implements DatabaseOperations {
     protected $dbExtension = '.db';
     protected $delimiter = ';';
     public function __construct() {
-        // what is static::class
+        // what is static::class?
         echo '-----', static::class, ' was instantiated-----', PHP_EOL;
     }
     // this will get returned when one tries to stringify the instance with i.e. echo
