@@ -5,28 +5,25 @@
 abstract class Database implements DatabaseOperations {
     protected $connection;
     public function __construct() {
-        $this->connection = new mysqli(
-            DB_SERVER_URL, 
-            DB_USERNAME, 
-            DB_PASSWORD, 
-            DB_DATABASE
-        );
-        if ($this->connection->connect_error) {
-            die("Connection to DB failed: " . $this->connection->connect_error);
+        try {
+            $this->connection = new PDO(
+                'mysql:host=' . DB_HOST . ';dbname=' . DB_DATABASE . ';charset=utf8mb4',
+                DB_USERNAME,
+                DB_PASSWORD
+            );
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Connection to DB failed: " . $e->getMessage());
         } 
     }
-    protected function query($query) {
-        $results = [];
-        $queryResult = $this->connection->query($query);
-        if (!$queryResult) {
-            die($this->connection->error);
-        }
-        if ($queryResult->num_rows) {
-            while($row = $queryResult->fetch_assoc()) {
-                $results[] = $row;
-            }
-        }
-        return $results;
+    protected function execute($query) {
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function fetchBy($field, $value) {
+        $query = $this->connection->prepare('SELECT * FROM ' . $this->tableName . ' WHERE ' . $field . ' = ?');
+        $query->bindValue(1, $value);
+        return $this->execute($query);
     }
 }
 

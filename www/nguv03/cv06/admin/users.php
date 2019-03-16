@@ -5,11 +5,15 @@
 // to achieve this we need OOP
 $usersDB = new UsersDB();
 $users = $usersDB->fetchAll();
+//$users = $usersDB->fetchBy('email', 'samuel@drake.net');
 //var_dump($users);
 ?>
+
+<?php $contextPath = '..'; ?>
 <?php require __DIR__ . '/../incl/header.php'; ?>
 
 <main class="container">
+    <h2>Users</h2>
     <?php foreach($users as $user): ?>
     <div class="card">
         <div class="card-body">

@@ -1,8 +1,8 @@
 <?php 
 
 interface DatabaseOperations {
-    public function fetch($args);
     public function fetchAll();
+    public function fetchBy($field, $value);
     // other operations CRUD
 }
 

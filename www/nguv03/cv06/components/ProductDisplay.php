@@ -23,7 +23,7 @@ $products = $productsDB->fetchAll();
       <div class="card-body">
         <h4 class="card-title"><a href="#"><?php echo $product['name']; ?></a></h4>
         <h5><?php echo number_format($product['price'], 2), ' ', GLOBAL_CURRENCY; ?></h5>
-        <p class="card-text">...</p>
+        <p class="card-text"><?php echo substr(file_get_contents('http://loripsum.net/api/1/short/plaintext'), 57, 90); ?></p>
       </div>
       <div class="card-footer">
         <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>

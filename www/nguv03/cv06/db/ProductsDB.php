@@ -2,15 +2,10 @@
 <?php
 
 class ProductsDB extends Database {
+    protected $tableName = 'products';
     public function fetchAll() {
-        return $this->query(
-            "SELECT * FROM products"
-        );
-    }
-    public function fetch($args) {
-        return $this->query(
-            "SELECT * FROM products WHERE id='" . $args['id'] . "'"
-        );
+        $query = $this->connection->prepare('SELECT * FROM ' . $this->tableName);
+        return $this->execute($query);
     }
 }
 

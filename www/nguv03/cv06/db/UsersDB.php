@@ -2,15 +2,10 @@
 <?php
 
 class UsersDB extends Database {
+    protected $tableName = 'users';
     public function fetchAll() {
-        return $this->query(
-            "SELECT * FROM users"
-        );
-    }
-    public function fetch($args) {
-        return $this->query(
-            "SELECT * FROM users WHERE Email = '" . $args['email'] . "';"
-        );
+        $query = $this->connection->prepare('SELECT * FROM ' . $this->tableName);
+        return $this->execute($query);
     }
 }
 
