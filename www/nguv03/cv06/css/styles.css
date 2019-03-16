@@ -4,6 +4,10 @@
 body {
     padding-top: 56px;
 }
+.logo {
+    height: 50px;
+    width: 50px;
+}
 .slide {
     text-align: center;
 }
