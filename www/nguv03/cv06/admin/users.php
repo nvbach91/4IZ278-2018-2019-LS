@@ -6,7 +6,9 @@
 $usersDB = new UsersDB();
 $users = $usersDB->fetchAll();
 //$users = $usersDB->fetchBy('email', 'samuel@drake.net');
-//var_dump($users);
+//$usersDB->deleteBy('email', 'nathan@drake.net');
+//$usersDB->create(['email' => 'nathan@drake.net', 'name' => 'Nathan', 'age' => 45]);
+//$usersDB->updateBy(['email' => 'nathan@drake.net'], ['name' => 'Nate']);
 ?>
 
 <?php $contextPath = '..'; ?>
@@ -19,7 +21,7 @@ $users = $usersDB->fetchAll();
         <div class="card-body">
             <h5 class="card-title"><?php echo $user['name']; ?></h5>
             <h6 class="card-subtitle mb-2 text-muted"><?php echo $user['email']; ?></h6>
-            <p class="card-text"><?php echo file_get_contents('http://loripsum.net/api/1/short/plaintext'); ?></p>
+            <p class="card-text"><?php echo 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. De illis, cum volemus. Nescio quo modo praetervolavit oratio. Quid sequatur, quid repugnet, vident. Quo modo autem philosophus loquitur? Tum Quintus: Est plane, Piso, ut dicis, inquit. Duo Reges: constructio interrete.' ?></p>
             <a href="#" class="card-link">Visit website</a>
             <a href="#" class="card-link">GitHub profile</a>
         </div>

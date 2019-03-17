@@ -4,8 +4,19 @@
 class ProductsDB extends Database {
     protected $tableName = 'products';
     public function fetchAll() {
-        $query = $this->connection->prepare('SELECT * FROM ' . $this->tableName);
-        return $this->execute($query);
+        $sql = 'SELECT * FROM ' . $this->tableName;
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+    public function create($args) {
+        $sql = 'INSERT INTO ' . $this->tableName . '(name, price, img) VALUES (:name, :price, :img)';
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([
+            'name' => $args['name'], 
+            'price' => $args['price'], 
+            'img' => $args['img'],
+        ]);
     }
 }
 

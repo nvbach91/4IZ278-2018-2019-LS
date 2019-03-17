@@ -4,8 +4,19 @@
 class UsersDB extends Database {
     protected $tableName = 'users';
     public function fetchAll() {
-        $query = $this->connection->prepare('SELECT * FROM ' . $this->tableName);
-        return $this->execute($query);
+        $sql = 'SELECT * FROM ' . $this->tableName;
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+    public function create($args) {
+        $sql = 'INSERT INTO ' . $this->tableName . '(name, email, age) VALUES (:name, :email, :age)';
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([
+            'name' => $args['name'], 
+            'email' => $args['email'], 
+            'age' => $args['age'],
+        ]);
     }
 }
 
