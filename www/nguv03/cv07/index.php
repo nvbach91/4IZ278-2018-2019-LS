@@ -34,7 +34,7 @@ $goods = $stmt->fetchAll();
     <h1>Mango index</h1>
     Total mango count: <?php echo $count ?>
     <br/><br/>
-    <a href="new.php">New Good</a>
+    <a href="new.php">Add new mango</a>
     <br/><br/>
     <?php if ($count) { ?>
         <div class="products">
