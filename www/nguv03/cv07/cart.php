@@ -29,7 +29,7 @@ if (is_array($ids) && count($ids)) {
     <h1>My shopping cart</h1>
     Total goods selected: <?= @count($goods) ?>
     <br/><br/>
-    <a href="index.php">Back to the goods</a>
+    <a href="index.php">Back to the mangos!</a>
     <br/><br/>
     <?php if(@$goods): ?>
     <div class="products">
