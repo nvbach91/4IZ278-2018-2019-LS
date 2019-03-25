@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+.my-4 {
+    margin-top: 4rem !important;
+}
+.carousel-item img{
+    margin: 0 auto;
+}
