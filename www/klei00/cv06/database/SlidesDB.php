@@ -3,14 +3,6 @@
 <?php
 
 class SlidesDB extends Database {
-    protected $tableName = 'slides';
-
-    public function fetchAll(){
-        $sql = 'SELECT * FROM '.$this->tableName;
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute();
-        return $statement->fetchAll();
-    }
 
     public function create($args){
         $sql = 'INSERT INTO ' . $this->tableName . '(title, url) VALUES (:title, :url)';

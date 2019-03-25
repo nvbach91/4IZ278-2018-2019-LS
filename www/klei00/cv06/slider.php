@@ -2,7 +2,7 @@
 
 <?php
 
-$slidesDB = new SlidesDB();
+$slidesDB = new SlidesDB('slides');
 $slides = $slidesDB->fetchAll();
 
 ?>

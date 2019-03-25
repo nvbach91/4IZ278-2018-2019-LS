@@ -2,7 +2,7 @@
 
 <?php
 
-$categoriesDB = new CategoriesDB();
+$categoriesDB = new CategoriesDB('categories');
 $categories = $categoriesDB->fetchAll();
 
 ?>

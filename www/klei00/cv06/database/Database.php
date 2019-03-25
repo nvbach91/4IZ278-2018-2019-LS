@@ -14,12 +14,21 @@ abstract class Database implements DatabaseOperations {
     public $delimiter = ';';
 
     protected $pdo;
+    protected $tableName;
 
-    public function __construct(){
+    public function __construct($tableName){
+        $this->tableName = $tableName;
         // PDO - prace s databazi, pripojeni k databazi
         $this->pdo = new PDO ('mysql:host='.DB_HOST.';dbname='.DB_DATABASE.';charset=utf8mb4', DB_USERNAME, DB_PASSWORD);
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }    
+
+    public function fetchAll(){
+        $sql = 'SELECT * FROM '.$this->tableName;
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
 
     public function fetch($field, $value){
         $sql = 'SELECT * FROM '.$this->tableName.' WHERE '.$field.' = :value';

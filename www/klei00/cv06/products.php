@@ -2,7 +2,7 @@
 
 <?php
 
-$productsDB = new ProductsDB();
+$productsDB = new ProductsDB('products');
 $products = $productsDB->fetchAll();
 
 ?>
