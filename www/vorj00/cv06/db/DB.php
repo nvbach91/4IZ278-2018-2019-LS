@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/login.php';
+require __DIR__ . '/../../login.php';
 require_once __DIR__ . '/DatabaseInterface.php';
 
 abstract class Database implements DatabaseOperations
