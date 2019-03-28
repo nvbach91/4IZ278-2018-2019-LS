@@ -33,3 +33,6 @@ body {
     height: 50px;
     width: 50px;
 }
+.card-img-top {
+    padding: 20px;
+}

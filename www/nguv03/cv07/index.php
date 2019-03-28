@@ -40,7 +40,7 @@ $goods = $stmt->fetchAll();
         <div class="products">
             <?php foreach($goods as $row): ?>
             <div class="card product" style="width: calc(100% / 3)">
-                <!--img class="card-img-top" src="https://picsum.photos/200/100/?random" alt="Card image cap"-->
+                <img class="card-img-top" src="https://via.placeholder.com/300x150" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $row['name'] ?></h5>
                     <div class="card-subtitle"><?php echo $row['price'] ?></div>
