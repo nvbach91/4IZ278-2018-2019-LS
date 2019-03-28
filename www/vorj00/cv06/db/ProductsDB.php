@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . './DB.php';
+require_once __DIR__ . '/DB.php';
 
 class ProductsDB extends Database
 {

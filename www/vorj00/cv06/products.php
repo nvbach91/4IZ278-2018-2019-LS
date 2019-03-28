@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . './db/ProductsDB.php';
+require __DIR__ . '/db/ProductsDB.php';
 
 $products = new ProductsDB();
 

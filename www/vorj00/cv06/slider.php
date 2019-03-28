@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . './db/SlidesDB.php';
+require __DIR__ . '/db/SlidesDB.php';
 
 $slides = new SlidesDB();
 

@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . './login.php';
-require_once __DIR__ . './DatabaseInterface.php';
+require __DIR__ . '/login.php';
+require_once __DIR__ . '/DatabaseInterface.php';
 
 abstract class Database implements DatabaseOperations
 {
@@ -10,8 +10,8 @@ abstract class Database implements DatabaseOperations
     {
         $this->pdo = new PDO(
             /* DSN */'mysql:host=' . $GLOBALS['host'] . ';dbname=' . $GLOBALS['database'] . ';charset=utf8mb4',
-            /* USR */$GLOBALS['username'],
-            /* PWD */$GLOBALS['password']
+            /* USR */ $GLOBALS['username'],
+            /* PWD */ $GLOBALS['password']
         );
     }
 

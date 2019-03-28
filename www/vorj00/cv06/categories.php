@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . './db/CategoriesDB.php';
+require __DIR__ . '/db/CategoriesDB.php';
 
 $categories = new CategoriesDB();
 
