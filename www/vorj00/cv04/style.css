@@ -1,0 +1,36 @@
+body{
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    background-color: #FAFAFA;
+}
+
+a{
+    color: #146eb4;
+    text-decoration: none;
+}
+
+.card {
+}
+
+.card__left, .card__right{
+    width: 45%;
+}
+
+.card__left--border{
+    border-right: 2px solid #aaa;
+    text-align: center;
+    padding-right: 0.5rem;
+}
+
+.card img {
+    width: 100%;
+}
+
+.card__name {
+    color: #ff9900;
+    font-size: 1.5rem
+}
+
+.card__adress{
+    margin-bottom: 0.5rem;
+}
