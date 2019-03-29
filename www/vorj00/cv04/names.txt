@@ -1,0 +1,3 @@
+Homer Simpson;M;Evergreeen Terrace 14
+Ned Flanders;M;Evergreeen Terrace 15
+Someone Else;N;Nowhere
