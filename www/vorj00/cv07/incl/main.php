@@ -7,6 +7,7 @@ require __DIR__ . '/../db/GoodsDB.php';
 $goods = new GoodsDB();
 
 $results = $goods->fetchPage($offset);
+$pages = $goods->countPages();
 ?>
 
   <main class="container">
@@ -26,5 +27,12 @@ $results = $goods->fetchPage($offset);
         </div>
         <?php endforeach;?>
       </div>
+      <ul class="pagination">
+        <?php for ($i = 1; $i <= ceil($pages / 10); $i++): ?>
+        <li class="page-item <?php echo $offset / 10 + 1 == $i ? "active" : ""; ?>">
+            <a class="page-link" href="./index.php?offset=<?php echo ($i - 1) * 10; ?>"><?php echo $i; ?></a>
+        </li>
+        <?php endfor;?>
+    </ul>
     </div>
   </main>

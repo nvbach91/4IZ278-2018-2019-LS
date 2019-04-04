@@ -19,4 +19,12 @@ class GoodsDB extends Database
         $statement->execute();
         return $statement->fetchAll();
     }
+
+    public function countPages()
+    {
+        $sqlTemplate = 'SELECT COUNT(id) FROM goods';
+        $statement = $this->pdo->prepare($sqlTemplate);
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
 }
