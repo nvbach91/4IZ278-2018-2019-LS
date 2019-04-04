@@ -27,4 +27,12 @@ class GoodsDB extends Database
         $statement->execute();
         return $statement->fetchColumn();
     }
+
+    public function getGoodsItem()
+    {
+        $sql = "SELECT * FROM goods WHERE id = :id";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(['id' => $_GET['id']]);
+        return $statement->fetchColumn();
+    }
 }
