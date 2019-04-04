@@ -18,7 +18,7 @@ $cookieName = @$_COOKIE['name'];
             <a class="nav-link" href="./">Domů</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Košík</a>
+            <a class="nav-link" href="./cart.php">Košík</a>
           </li>
           <?php if (isset($cookieName)): ?>
           <li class="nav-item">
