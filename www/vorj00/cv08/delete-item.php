@@ -1,9 +1,15 @@
 <?php
 require __DIR__ . '/db/GoodsDB.php';
+
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: signin.php');
+    die();
+}
+
 $goodsDB = new GoodsDB();
 $goodsItem = $goodsDB->getGoodsItem($_GET['id']);
 
-session_start();
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
