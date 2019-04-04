@@ -28,6 +28,16 @@ class GoodsDB extends Database
         return $statement->fetchColumn();
     }
 
+    public function create($args)
+    {
+        $sql = 'INSERT INTO goods (name, description, price) VALUES (:name, :description, :price)';
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':name', $args['name'], PDO::PARAM_STR);
+        $statement->bindValue(':description', $args['description'], PDO::PARAM_STR);
+        $statement->bindValue(':price', $args['price'], PDO::PARAM_INT);
+        $statement->execute();
+    }
+
     public function getGoodsItem($id)
     {
         $sql = "SELECT * FROM goods WHERE id = :id";
@@ -35,7 +45,7 @@ class GoodsDB extends Database
         $statement->execute(['id' => $id]);
         return $statement->fetchColumn();
     }
-    
+
     public function getCart($ids)
     {
         $question_marks = str_repeat('?,', count($ids) - 1) . '?';

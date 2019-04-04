@@ -12,6 +12,7 @@ $pages = $goods->countPages();
 
   <main class="container">
       <!-- The main, dynamic content -->
+      <a href="./create-item.php" class="btn btn-primary">New item</a>
     <div class="container">
       <div class="row">
       <?php foreach ($results as $result): ?>
