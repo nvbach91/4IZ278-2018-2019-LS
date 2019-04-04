@@ -13,7 +13,7 @@ class GoodsDB extends Database
 
     public function fetchPage($offset)
     {
-        $sqlTemplate = 'SELECT * FROM goods ORDER BY id DESC LIMIT 10 OFFSET :offset';
+        $sqlTemplate = 'SELECT * FROM goods ORDER BY id LIMIT 10 OFFSET :offset';
         $statement = $this->pdo->prepare($sqlTemplate);
         $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
         $statement->execute();
