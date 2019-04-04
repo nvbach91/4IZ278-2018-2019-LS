@@ -22,6 +22,7 @@ $pages = $goods->countPages();
             <h5 class="card-title"><?php echo $result['name'] ?></h5>
             <p class="card-text"><?php echo $result['description'] ?></p>
             <a href="./buy.php?id=<?php echo $result['id'] ?>" class="card-link">BUY</a>
+            <a href="./edit-item.php?id=<?php echo $result['id'] ?>" class="card-link">edit</a>
           </div>
         </div>
         </div>
