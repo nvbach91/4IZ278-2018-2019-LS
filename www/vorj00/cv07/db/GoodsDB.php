@@ -47,6 +47,13 @@ class GoodsDB extends Database
         $statement->execute();
     }
 
+    public function delete($id){
+        $sql = 'DELETE FROM goods WHERE id = :id';
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
     public function getGoodsItem($id)
     {
         $sql = "SELECT * FROM goods WHERE id = :id";
