@@ -35,4 +35,14 @@ class GoodsDB extends Database
         $statement->execute(['id' => $_GET['id']]);
         return $statement->fetchColumn();
     }
+    
+    public function getCart()
+    {
+        $sql = "SELECT * FROM goods WHERE id IN ($question_marks) ORDER BY name";
+        $statement = $this->pdo->prepare($sql);
+        # array values - setrepeme pole aby bylo indexovane od 0, jen kvuli dotazu, jinak neprojde
+        $statement->execute(array_values($ids));
+        return $statement->fetchAll();
+    }
+
 }
