@@ -28,21 +28,32 @@ class GoodsDB extends Database
         return $statement->fetchColumn();
     }
 
-    public function getGoodsItem()
+    public function getGoodsItem($id)
     {
         $sql = "SELECT * FROM goods WHERE id = :id";
         $statement = $this->pdo->prepare($sql);
-        $statement->execute(['id' => $_GET['id']]);
+        $statement->execute(['id' => $id]);
         return $statement->fetchColumn();
     }
     
-    public function getCart()
+    public function getCart($ids)
     {
+        $question_marks = str_repeat('?,', count($ids) - 1) . '?';
         $sql = "SELECT * FROM goods WHERE id IN ($question_marks) ORDER BY name";
         $statement = $this->pdo->prepare($sql);
         # array values - setrepeme pole aby bylo indexovane od 0, jen kvuli dotazu, jinak neprojde
         $statement->execute(array_values($ids));
         return $statement->fetchAll();
+    }
+
+    public function getCartPrice($ids)
+    {
+        $question_marks = str_repeat('?,', count($ids) - 1) . '?';
+        $sql = "SELECT COUNT price FROM goods WHERE id IN ($question_marks)";
+        $statement = $this->pdo->prepare($sql);
+        # array values - setrepeme pole aby bylo indexovane od 0, jen kvuli dotazu, jinak neprojde
+        $statement->execute(array_values($ids));
+        return $statement->fetchColumn();
     }
 
 }

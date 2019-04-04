@@ -3,22 +3,11 @@ session_start();
 
 require __DIR__ . '/db/GoodsDB.php';
 $goodsDB = new GoodsDB();
-$goodsItem = $goodsDB->getGoodsItem();
 
 $ids = @$_SESSION['cart'];
 if (is_array($ids) && count($ids)) {
-    # retezec s otazniky pro predani seznamu ids
-    # pocet otazniku = pocet prvku v poli ids
-    # pokud mam treba v ids 1,2,3, vrati mi ?,?,?
-    $question_marks = str_repeat('?,', count($ids) - 1) . '?';
-    
-
-    
-    
-    $stmt_sum = $db->prepare("SELECT SUM(price) FROM goods WHERE id IN ($question_marks)");
-    # array values - setrepeme pole aby bylo indexovane od 0, jen kvuli dotazu, jinak neprojde
-    $stmt_sum->execute(array_values($ids));
-    $sum = $stmt_sum->fetchColumn();
+    $goods = $goodsDB->getCart($ids);
+    $goodsPrice = $goodsDB->getCartPrice($ids);
 }
 ?>
 
@@ -36,15 +25,15 @@ if (is_array($ids) && count($ids)) {
     <div class="products">
         <?php foreach($goods as $row): ?>
         <div class="card product" style="width: calc(100% / 3)">
-            <img class="card-img-top" src="https://via.placeholder.com/300x150" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title"><?php echo $row['name'] ?></h5>
                 <div class="card-subtitle"><?php echo $row['price'] ?></div>
                 <div class="card-text"><?php echo $row['description'] ?></div>
-                <form action="remove-item.php" method="POST">
-                    <input class="d-none" name="id" value="<?php echo $row['id'] ?>">
+                <!-- <form action="remove-item.php" method="POST">
+                    <input class="d-none" name="id" value="<?php /*echo $row['id']*/ ?>">
                     <button type="submit" class="btn btn-danger">Remove</button>
-                </form>
+                </form> -->
+                <a href="./remove-item.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Remove</a>
             </div>
         </div>
         <?php endforeach; ?>

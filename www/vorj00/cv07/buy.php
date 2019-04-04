@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/db/GoodsDB.php';
 $goodsDB = new GoodsDB();
-$goodsItem = $goodsDB->getGoodsItem();
+$goodsItem = $goodsDB->getGoodsItem($_GET['id']);
 
 session_start();
 if (!isset($_SESSION['cart'])) {
