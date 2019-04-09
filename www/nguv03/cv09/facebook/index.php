@@ -7,7 +7,7 @@ $fb = new \Facebook\Facebook(CONFIG['facebook']);
 
 $helper = $fb->getRedirectLoginHelper();
 $permissions = ['email']; // Optional permissions
-$loginUrl = $helper->getLoginUrl('https://vcap.me/4IZ278-2018-2019-LS/www/nguv03/cv09/facebook/fb-login-callback.php', $permissions);
+$loginUrl = $helper->getLoginUrl('https://' . CONFIG['domain'] . CONFIG['path'] . '/fb-login-callback.php', $permissions);
 
 ?>
 
