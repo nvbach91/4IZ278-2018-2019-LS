@@ -7,7 +7,7 @@ require __DIR__ . '/config.php';
 $fb = new \Facebook\Facebook(array_merge(CONFIG['facebook'], ['default_access_token' => $_SESSION['fb_access_token']]));
 try {
     $me = $fb->get('/me')->getGraphUser();
-    $picture = $fb->get('/me/picture?redirect=false')->getGraphUser();
+    $picture = $fb->get('/me/picture?redirect=false&height=200')->getGraphUser();
 } catch(\Facebook\Exceptions\FacebookResponseException $e) {
     echo 'Graph returned an error: ' . $e->getMessage();
     exit;
@@ -59,21 +59,8 @@ try {
                                 <br />
                                 <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
                                 <br />
-                                <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
-                            <!-- Split button -->
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary">
-                                    Social</button>
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span><span class="sr-only">Social</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Twitter</a></li>
-                                    <li><a href="#">Facebook</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Github</a></li>
-                                </ul>
-                            </div>
+                                <i class="glyphicon glyphicon-gift"></i>June 02, 1988
+                            </p>
                         </div>
                     </div>
                 </div>
