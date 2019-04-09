@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['fb_access_token'])) {
+    header('Location: index.php');
+    die();
+}
+
 require_once __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/config.php';
 

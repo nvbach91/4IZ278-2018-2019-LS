@@ -26,8 +26,9 @@ $loginUrl = $helper->getLoginUrl('https://' . CONFIG['domain'] . CONFIG['path'] 
 
 <body>
     <header></header>
-    <main class="container d-flex align-items-center justify-content-center" style="height: 500px;">
+    <main class="container d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
         <a class="btn btn-primary" href="<?php echo htmlspecialchars($loginUrl); ?>">Log in with Facebook!</a>
+        <p>You will be redirected to Facebook to sign in. Once signed in you will come back to us :)</p>
     </main>
     <footer></footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
