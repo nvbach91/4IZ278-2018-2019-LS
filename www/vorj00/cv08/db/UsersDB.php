@@ -38,4 +38,21 @@ class UsersDB extends Database
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getAuthority($id)
+    {
+        $sql = "SELECT authority FROM users WHERE id = :id";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(['id' => $id]);
+        return intval($statement->fetchColumn());
+    }
+
+    public function editAuthority($args)
+    {
+        $sql = 'UPDATE users SET authority = :authority WHERE id = :id';
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':id', $args['id'], PDO::PARAM_INT);
+        $statement->bindValue(':authority', $args['authority'], PDO::PARAM_INT);
+        $statement->execute();
+    }
 }

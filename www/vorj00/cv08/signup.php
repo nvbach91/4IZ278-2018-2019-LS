@@ -2,10 +2,19 @@
 session_start();
 
 require 'db.php';
+
+$errors = [];
+
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = @$_POST['email'];
+    $password = @$_POST['password'];
     // TODO PRO STUDENTY osetrit vstupy, email a heslo jsou povinne, atd.
+    if(isset($email)) {
+        $errors['email'] = true;
+    }
+    if(isset($password)) {
+        $errors['password'] = true;
+    }
     // TODO PRO STUDENTY jde se prihlasit prazdnym heslem, jen prototyp, pouzit filtry
     // $password = md5($_POST['password']); #chybi salt
     // $password = hash("sha256" , $password); #chybi salt
@@ -46,17 +55,21 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     <form class="form-signin" method="POST">
         <div class="form-label-group">
             <label for="email">Email address</label>
-            <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+            <input type="email" name="email" class="form-control" placeholder="Email address"  autofocus>
+            <?php if(isset($errors['email'])): ?>
             <div class="alert alert-warning">
                 <strong>Warning!</strong> Insert your e-mail, pls.
             </div>
+            <?php endif; ?>
         </div>
         <div class="form-label-group">
             <label for="password">Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Password" required>
+            <input type="password" name="password" class="form-control" placeholder="Password">
+            <?php if(isset($errors['password'])): ?>
             <div class="alert alert-warning">
                 <strong>Warning!</strong> Insert a password, please.
             </div>
+            <?php endif; ?>
         </div>
         <br>
         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Creat account</button>

@@ -1,5 +1,5 @@
+<?php include './incl/header.php' ?>
 <?php
-session_start();
 
 require __DIR__ . '/db/GoodsDB.php';
 $goodsDB = new GoodsDB();
@@ -13,7 +13,6 @@ if (is_array($ids) && count($ids)) {
 
 
 
-<?php include './incl/header.php' ?>
 <?php include './incl/nav.php' ?>
 <main class="container">
     <h1>My shopping cart</h1>
