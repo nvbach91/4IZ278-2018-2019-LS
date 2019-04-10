@@ -40,6 +40,9 @@
                     <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'cart') ? ' active' : '' ?>">
                         <a class="nav-link" href="./cart.php">Cart</a>
                     </li>
+                    <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'cart') ? ' active' : '' ?>">
+                        <a class="nav-link" href="./world-clock.php">World clock</a>
+                    </li>
                     <?php if ($_SESSION['user_privilege'] > 2): ?>
                         <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'login') ? ' active' : '' ?>">
                             <a class="nav-link" href="./users.php">Users</a>
