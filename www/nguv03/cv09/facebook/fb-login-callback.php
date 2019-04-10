@@ -11,7 +11,12 @@ $helper = $fb->getRedirectLoginHelper();
 if (isset($_GET['state'])) {
     $helper->getPersistentDataHandler()->set('state', $_GET['state']); 
 }
+?>
 
+<h3>Code</h3>
+<p><?php echo $_GET['code']; ?></p>
+
+<?php
 try {
     $accessToken = $helper->getAccessToken();
 } catch(\Facebook\Exceptions\FacebookResponseException $e) {
@@ -44,9 +49,21 @@ if (!isset($accessToken)) {
 $oAuth2Client = $fb->getOAuth2Client();
 // Get the access token metadata from /debug_token
 $tokenMetadata = $oAuth2Client->debugToken($accessToken);
-echo '<h3>Metadata</h3>';
 ?>
+<h3>Metadata</h3>
 <pre> <?php var_dump($tokenMetadata); ?> </pre>
+
+<?php
+/*
+$myAccessToken = file_get_contents('https://graph.facebook.com/oauth/access_token?' .
+    'client_id=' . CONFIG_FACEBOOK['app_id'] .
+    '&redirect_uri=' . CONFIG_PROTOCOL . CONFIG_DOMAIN . CONFIG_PATH . '/fb-login-callback.php' .
+    '&client_secret=' . CONFIG_FACEBOOK['app_secret'] .
+    '&code=' . $_GET['code']);
+*/
+?>
+
+<pre> <?php /* echo $myAccessToken; */ ?> </pre>
 
 <?php
 // Validation (these will throw FacebookSDKException's when they fail)
