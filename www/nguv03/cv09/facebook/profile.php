@@ -9,7 +9,7 @@ if (!isset($_SESSION['fb_access_token'])) {
 require_once __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/config.php';
 
-$fb = new \Facebook\Facebook(array_merge(CONFIG['facebook'], ['default_access_token' => $_SESSION['fb_access_token']]));
+$fb = new \Facebook\Facebook(array_merge(CONFIG_FACEBOOK, ['default_access_token' => $_SESSION['fb_access_token']]));
 try {
     $me = $fb->get('/me')->getGraphUser();
     $picture = $fb->get('/me/picture?redirect=false&height=200')->getGraphUser();
@@ -57,14 +57,18 @@ try {
                         </div>
                         <div class="col-sm-6 col-md-8">
                             <h4><?php echo $me->getName(); ?></h4>
-                            <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
-                            </i></cite></small>
+                            <small>
+                                <cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker"></i></cite>
+                            </small>
                             <p>
-                                <i class="glyphicon glyphicon-envelope"></i>email@example.com
-                                <br />
-                                <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
-                                <br />
-                                <i class="glyphicon glyphicon-gift"></i>June 02, 1988
+                                <i class="glyphicon glyphicon-envelope"></i>
+                                email@example.com
+                                <br>
+                                <i class="glyphicon glyphicon-globe"></i>
+                                <a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                                <br>
+                                <i class="glyphicon glyphicon-gift"></i>
+                                June 02, 1988
                             </p>
                         </div>
                     </div>

@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/config.php';
 
-$fb = new \Facebook\Facebook(CONFIG['facebook']);
+$fb = new \Facebook\Facebook(CONFIG_FACEBOOK);
 
 $helper = $fb->getRedirectLoginHelper();
 
@@ -50,11 +50,11 @@ echo '<h3>Metadata</h3>';
 
 <?php
 // Validation (these will throw FacebookSDKException's when they fail)
-$tokenMetadata->validateAppId(CONFIG['facebook']['app_id']);
+$tokenMetadata->validateAppId(CONFIG_FACEBOOK['app_id']);
 // If you know the user ID this access token belongs to, you can validate it here
 //$tokenMetadata->validateUserId('123');
 $tokenMetadata->validateExpiration();
-if (! $accessToken->isLongLived()) {
+if (!$accessToken->isLongLived()) {
     // Exchanges a short-lived access token for a long-lived one
     try {
         $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
