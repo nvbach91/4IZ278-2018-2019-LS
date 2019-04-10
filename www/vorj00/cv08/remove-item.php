@@ -1,14 +1,11 @@
 <?php
 session_start();
-
-$productToRemove = @$_POST['id'];
-if(!$productToRemove){
-    die("ID of a product is missing!");
-}
-
+$id = @$_GET['id'];
+#var_dump($_SESSION['cart']);
 foreach ($_SESSION['cart'] as $key => $value){
-    if ($value == $productToRemove) {
+    if ($value == $id) {
         unset($_SESSION['cart'][$key]);
+        echo "yes";
     }
 }
 header('Location: cart.php');
