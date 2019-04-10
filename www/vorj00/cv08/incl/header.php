@@ -1,3 +1,22 @@
+<?php
+
+$publiclyAllowedAdresses = ['cv08', 'index.php', 'login.php', 'signup.php'];
+
+$isPageAllowed = false;
+
+foreach ($publiclyAllowedAdresses as $address) {
+    if ($address === basename($_SERVER["REQUEST_URI"])) {
+        $isPageAllowed = true;
+        break;
+    }
+}
+
+if (!$isPageAllowed) {
+    header('Location: ./login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
