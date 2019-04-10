@@ -1,11 +1,10 @@
 <?php
 
-session_start();
-
 require 'db.php';
+require 'user_require.php';
 
-if(!isset($_COOKIE['name'])){
-    header('Location: login.php?need_login=true');
+if(!isset($_SESSION['userID'])){
+    header('Location: login.php');
     die();
 }
 
@@ -15,9 +14,6 @@ if(!isset($_SESSION['cart'])){
 
 $sql = "SELECT * FROM goods WHERE id = :id";
 $statement = $goodsDB->getPDO()->prepare($sql);
-if(!isset($_GET['id'])){
-    die("ID of a product is missing!");
-}
 $statement->execute(['id' => $_GET['id']]);
 $goods = $statement->fetch();
 if (!$goods){

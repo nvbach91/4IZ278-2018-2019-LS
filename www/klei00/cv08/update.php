@@ -1,5 +1,12 @@
 <?php
 require 'db.php';
+require 'manager_require.php';
+
+if(isset($_GET['id'])){
+    $idToUpdate = $_GET['id'];
+    $productsToUpdate = $goodsDB->fetch('id', $idToUpdate);
+    $productToUpdate = $productsToUpdate[0];
+}
 
 $errors=[];
 
@@ -18,8 +25,8 @@ if (!empty($_POST)){
         array_push($errors, 'Write a price of the product!');
     }
     if(!count($errors)){
-        $goodsDB->create(['name'=>$enteredName, 'description'=>$enteredDescription, 'price'=>$enteredPrice]);
-        header('Location: index.php?create=true');
+        $goodsDB->update(['id'=>$idToUpdate],['name'=>$enteredName, 'description'=>$enteredDescription, 'price'=>$enteredPrice]);
+        header('Location: index.php?update');
         die();
     }    
 }
@@ -28,8 +35,8 @@ if (!empty($_POST)){
 <?php require './components/header.php'; ?>
 
 <main class="container">
-    <h1>Create new product</h1>
-    <form class="form-signup" method="POST" action="new.php">
+    <h1>Edit the product</h1>
+    <form class="form-signup" method="POST" action="update.php?id=<?php echo $idToUpdate; ?>">
         <?php if(count($errors)): ?>
             <div class="alert alert-danger">
                 <?php foreach($errors as $error): ?>
@@ -39,17 +46,17 @@ if (!empty($_POST)){
             <?php endif ?>
         <div class="form-group">
             <label>Name</label>
-            <input class="form-control" name="name" value="<?php echo @$enteredName; ?>">
+            <input class="form-control" name="name" value="<?php echo isset($enteredName)?$enteredName:@$productToUpdate['name']; ?>">
         </div>
         <div class="form-group">
             <label>Description</label>
-            <textarea class="form-control" name="description" value="description"><?php echo @$enteredDescription; ?></textarea>
+            <textarea class="form-control" name="description" value="description"><?php echo isset($enteredDescription)?$enteredDescription:@$productToUpdate['description']; ?></textarea>
         </div>
         <div class="form-group">
             <label>Price</label>
-            <input class="form-control" type="number" step=".01" name="price" min="0" value="<?php echo @$enteredPrice; ?>">
+            <input class="form-control" type="number" step=".01" name="price" min="0" value="<?php echo isset($enteredPrice)?$enteredPrice:@$productToUpdate['price']; ?>">
         </div>
-        <button class="btn btn-dark" type="submit">Create</button>
+        <button class="btn btn-dark" type="submit">Edit</button>
     </form>
 </main>
 

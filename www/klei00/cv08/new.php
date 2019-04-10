@@ -1,5 +1,6 @@
 <?php
 require 'db.php';
+require 'manager_require.php';
 
 $errors=[];
 
@@ -19,7 +20,7 @@ if (!empty($_POST)){
     }
     if(!count($errors)){
         $goodsDB->create(['name'=>$enteredName, 'description'=>$enteredDescription, 'price'=>$enteredPrice]);
-        header('Location: index.php?create=true');
+        header('Location: index.php?create');
         die();
     }    
 }

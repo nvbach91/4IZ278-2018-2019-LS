@@ -1,10 +1,8 @@
 <?php
 session_start();
+require 'user_require.php';
 
 $productToRemove = @$_POST['id'];
-if(!$productToRemove){
-    die("ID of a product is missing!");
-}
 
 foreach ($_SESSION['cart'] as $key => $value){
     if ($value == $productToRemove) {
