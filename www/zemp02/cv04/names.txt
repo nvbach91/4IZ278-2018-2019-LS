@@ -1,0 +1,3 @@
+Kolega Karel;M;12;KarelGrad
+Soudruh Stalin;M;200;Stalingrad
+Komrad Lenin;F;50;Leningrad
