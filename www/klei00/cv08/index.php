@@ -9,6 +9,7 @@ if($currentUser){
 }
 
 $messages = [];
+$warnings = [];
 
 if(isset($_GET['signup'])){
   array_push($messages, 'Registration was successful');
@@ -24,6 +25,9 @@ if(isset($_GET['create'])){
 }
 if(isset($_GET['delete'])){
   array_push($messages, 'Product was successfully deleted');
+}
+if(isset($_GET['current_editor'])){
+  array_push($warnings, 'The product is currently being edited by '.$_GET['current_editor'].'. Try it later.');
 }
 
 // strankovani
@@ -49,6 +53,13 @@ $goods = $statement->fetchAll();
         <div class="alert alert-success">
                 <?php foreach($messages as $message): ?>
                 <p><?php echo $message; ?></p>
+                <?php endforeach ?>
+        </div>
+    <?php endif ?>
+    <?php if(count($warnings)): ?>
+        <div class="alert alert-warning">
+                <?php foreach($warnings as $warning): ?>
+                <p><?php echo $warning; ?></p>
                 <?php endforeach ?>
         </div>
     <?php endif ?>
