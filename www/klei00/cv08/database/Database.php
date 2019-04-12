@@ -9,10 +9,6 @@ const DB_PASSWORD = 'root';
 
 abstract class Database implements DatabaseOperations {
 
-    protected $path = '/database/';
-    protected $extension = '.db';
-    public $delimiter = ';';
-
     protected $pdo;
     protected $tableName;
 
@@ -51,7 +47,7 @@ abstract class Database implements DatabaseOperations {
 
         $sql = 'UPDATE ' . $this->tableName . ' SET '.implode(', ', $sets).' WHERE '.implode(' && ', $whereConditions);
         
-        echo $sql;
+        //echo $sql;
 
         $statement = $this->pdo->prepare($sql);
         foreach($args as $key => $value) {
