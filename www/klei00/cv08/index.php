@@ -54,10 +54,10 @@ $goods = $statement->fetchAll();
     <?php endif ?>
     <h1>Homepage</h1>
     <p>Total mango count: <?php echo $count ?></p>
-    <?php if($privilege === 3): ?>
+    <?php if($privilege > 2): ?>
       <a class="btn btn-dark" href="users.php">User Access Management</a>
     <?php endif; ?>
-    <?php if($privilege === 2 || $privilege === 3): ?>
+    <?php if($privilege > 1): ?>
       <a class="btn btn-dark" href="new.php">Add new mango</a>
     <?php endif; ?>
     <br><br>
@@ -71,7 +71,7 @@ $goods = $statement->fetchAll();
             <div class="card-subtitle"><?php echo $product['price'] ?> Kč</div>
             <div class="card-text"><?php echo $product['description'] ?></div>
             <a class="btn btn-dark" href='./buy.php?id=<?php echo $product['id'] ?>'>Buy</a>
-            <?php if($privilege === 2 || $privilege === 3): ?>
+            <?php if($privilege > 1): ?>
                 <a class="btn btn-secondary" href='./update.php?id=<?php echo $product['id'] ?>'>Edit</a>
                 <a class="btn btn-secondary" href='./delete.php?id=<?php echo $product['id'] ?>'>Delete</a>
             <?php endif; ?>
