@@ -9,6 +9,7 @@ if($currentUser){
 }
 
 $messages = [];
+$warnings = [];
 
 if(isset($_GET['signup'])){
   array_push($messages, 'Registration was successful');
@@ -24,6 +25,9 @@ if(isset($_GET['create'])){
 }
 if(isset($_GET['delete'])){
   array_push($messages, 'Product was successfully deleted');
+}
+if(isset($_GET['current_editor'])){
+  array_push($warnings, 'The product is currently being edited by '.$_GET['current_editor'].'. Try it later.');
 }
 
 // strankovani
@@ -52,12 +56,19 @@ $goods = $statement->fetchAll();
                 <?php endforeach ?>
         </div>
     <?php endif ?>
+    <?php if(count($warnings)): ?>
+        <div class="alert alert-warning">
+                <?php foreach($warnings as $warning): ?>
+                <p><?php echo $warning; ?></p>
+                <?php endforeach ?>
+        </div>
+    <?php endif ?>
     <h1>Homepage</h1>
     <p>Total mango count: <?php echo $count ?></p>
-    <?php if($privilege === 3): ?>
+    <?php if($privilege > 2): ?>
       <a class="btn btn-dark" href="users.php">User Access Management</a>
     <?php endif; ?>
-    <?php if($privilege === 2 || $privilege === 3): ?>
+    <?php if($privilege > 1): ?>
       <a class="btn btn-dark" href="new.php">Add new mango</a>
     <?php endif; ?>
     <br><br>
@@ -71,7 +82,7 @@ $goods = $statement->fetchAll();
             <div class="card-subtitle"><?php echo $product['price'] ?> Kč</div>
             <div class="card-text"><?php echo $product['description'] ?></div>
             <a class="btn btn-dark" href='./buy.php?id=<?php echo $product['id'] ?>'>Buy</a>
-            <?php if($privilege === 2 || $privilege === 3): ?>
+            <?php if($privilege > 1): ?>
                 <a class="btn btn-secondary" href='./update.php?id=<?php echo $product['id'] ?>'>Edit</a>
                 <a class="btn btn-secondary" href='./delete.php?id=<?php echo $product['id'] ?>'>Delete</a>
             <?php endif; ?>
