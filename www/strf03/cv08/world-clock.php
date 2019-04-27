@@ -7,16 +7,20 @@ require 'user_required.php';
 
 require __DIR__ . '/incl/header.php';
 
-
+ function printHtml ($string) { ?>
+     <?php echo $string; ?>
+<?php } ?>
+<?php
 function printTime($city, $timeZone, $dateFormat){
-    echo "<div> <b>$city </b>";
+     printHtml("<div>" . $city );
     date_default_timezone_set($timeZone);
     $date = date($dateFormat, time());
-    echo $date . "</div>";
-    echo "<br>";
+    printHtml($date . "</div>");
+    printHtml("<br>");
 }
 ?>
     <h1>World clock</h1>
+    <br>
 <?php
 
 
