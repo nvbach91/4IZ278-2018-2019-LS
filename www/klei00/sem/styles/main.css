@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    padding-top: 70px;
+}
+main {
+    padding-bottom: 30px;
+}
+.carousel-item img{
+    margin: 0 auto;
+}
+.products {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 2px 0 2px;
+}
+.product.col-md-6 {
+    padding: 0 !important;
+}
+.btn {
+    margin: 2px 0;
+}
+.pagination {
+    margin: auto 0;
+}
+.pagination a {
+    margin: 1px;
+    padding: 5px 10px;
+    background-color: grey;
+    color: white;
+}
+.pagination a.active {
+    color: black;
+}
