@@ -57,7 +57,7 @@ if(isset($_GET['genre'])){
   $statement->execute();
 }
 $books = $statement->fetchAll();
-$genres = $genresDB->fetchAll();
+$genres = $genresDB->fetchAllOrdered('name');
 ?>
 
 <?php require __DIR__.'/components/header.php' ?>
@@ -87,6 +87,7 @@ $genres = $genresDB->fetchAll();
       <a class="btn btn-dark" href="users.php">Správa uživatelů</a>
     <?php endif; ?>
     <?php if($role > 1): ?>
+      <a class="btn btn-dark" href="stock.php">Skladové zásoby</a>
       <a class="btn btn-dark" href="new.php">Přidat novou knihu</a>
       <br>
     <?php endif; ?>
@@ -96,6 +97,7 @@ $genres = $genresDB->fetchAll();
       <!-- Genres -->
       <div class="col-lg-3">
         <div class="list-group">
+        <a href="./index.php" class="list-group-item list-group-item-dark text-dark">Všechny žánry</a>
           <?php foreach($genres as $genre): ?>
               <a href="./index.php?genre=<?php echo strtolower($genre['genre_code']);?>" class="list-group-item list-group-item-dark text-dark"><?php echo $genre['name'] ?></a>
           <?php endforeach; ?>
