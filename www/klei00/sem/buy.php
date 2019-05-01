@@ -19,7 +19,23 @@ $books = $statement->fetch();
 if (!$books){
     die("Kniha nenalezena!");
 }
-$_SESSION['cart'][] = $books['book_code'];
+$bookToBuy = $books['book_code'];
+$piecesInCart = 1;
+
+if(isset($_POST['add'])){
+    $piecesInCart+=(int)$_SESSION['cart'][$bookToBuy];
+}else if(isset($_POST['remove'])){
+    $piecesInCart=(int)$_SESSION['cart'][$bookToBuy]-1;
+}else{
+    if(array_key_exists($bookToBuy, $_SESSION['cart'])){
+        $piecesInCart+=(int)$_SESSION['cart'][$bookToBuy];
+    }
+}
+if($piecesInCart > (int)$books['in_stock']){
+    header('Location: cart.php?capacity='.$bookToBuy);
+    die();
+}
+$_SESSION['cart'][$bookToBuy] = $piecesInCart;
 header('Location: cart.php');
 die();
 
