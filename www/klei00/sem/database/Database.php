@@ -26,6 +26,13 @@ abstract class Database implements DatabaseOperations {
         return $statement->fetchAll();
     }
 
+    public function fetchAllOrdered($orderBy){
+        $sql = 'SELECT * FROM '.$this->tableName.' ORDER BY '.$orderBy.' ASC';
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
     public function fetch($field, $value){
         $sql = 'SELECT * FROM '.$this->tableName.' WHERE '.$field.' = :value';
         $statement = $this->pdo->prepare($sql);
