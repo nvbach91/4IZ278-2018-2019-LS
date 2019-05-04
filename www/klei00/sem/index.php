@@ -87,6 +87,7 @@ $genres = $genresDB->fetchAllOrdered('name');
       <a class="btn btn-dark" href="users.php">Správa uživatelů</a>
     <?php endif; ?>
     <?php if($role > 1): ?>
+      <a class="btn btn-dark" href="orders.php">Správa objednávek</a>
       <a class="btn btn-dark" href="stock.php">Skladové zásoby</a>
       <a class="btn btn-dark" href="new.php">Přidat novou knihu</a>
       <br>
