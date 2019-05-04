@@ -1,9 +1,10 @@
 <?php
-
 require 'db.php';
 require 'user_require.php';
 
 $errors = [];
+$messages = [];
+
 if(isset($_GET['capacity'])){
   $book=$booksDB->fetch('book_code',$_GET['capacity']);
   if(!$book){
@@ -12,7 +13,11 @@ if(isset($_GET['capacity'])){
     array_push($errors, 'Více kusů knihy <i>'.$book[0]['title'].'</i> již nemáme skladem');
   }
 }
+if(isset($_GET['sent'])){
+    array_push($messages, 'Objednávka byla odeslána');
+}
 
+// adjusting quantity of books
 if(isset($_POST)){
   if(isset($_POST['add'])){
     header('Location: stock.php?change');
@@ -29,6 +34,7 @@ if(isset($_POST)){
       }
   }
 }
+// books to be showed in cart
 $goodsInCart = @$_SESSION['cart'];
 $sumPrice = 0;
 $sumPieces = 0;
@@ -52,6 +58,13 @@ if (is_array($goodsInCart) && count($goodsInCart)) {
         <div class="alert alert-danger">
             <?php foreach($errors as $error): ?>
               <p><?php echo $error; ?></p>
+            <?php endforeach ?>
+        </div>
+    <?php endif ?>
+    <?php if(count($messages)): ?>
+        <div class="alert alert-success">
+            <?php foreach($messages as $message): ?>
+              <p><?php echo $message; ?></p>
             <?php endforeach ?>
         </div>
     <?php endif ?>
@@ -100,7 +113,7 @@ if (is_array($goodsInCart) && count($goodsInCart)) {
     </div>
     <br>
     <p class="font-weight-bold">Celková cena: <?php echo @$sumPrice; ?> Kč</p>    
-    <a class="btn btn-dark" href="#">Odeslat objednávku</a>
+    <a class="btn btn-dark" href="order.php">Odeslat objednávku</a>
     <?php else: ?>
     <h5>Váš košík je prázdný.</h5>
     <?php endif; ?>

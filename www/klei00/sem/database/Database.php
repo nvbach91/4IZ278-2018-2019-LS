@@ -59,7 +59,6 @@ abstract class Database implements DatabaseOperations {
         foreach($args as $key => $value) {
             switch(true){
                 case ($value===""): $type = PDO::PARAM_NULL; break;
-                case is_numeric($value): $type = PDO::PARAM_INT; break;
                 default: $type = PDO::PARAM_STR; break;
             }
             $statement->bindValue(':' . $key, $value, $type);

@@ -6,13 +6,11 @@ class OrdersDB extends Database {
  
     public function create($args){
         $sql = 'INSERT INTO ' . $this->tableName . 
-            '(order_date, total_price, customer)
-            VALUES (:order_date, :total_price, :customer)';
+            '(order_date, customer)
+            VALUES (NOW(), :customer)';
         $statement = $this->pdo->prepare($sql);
         $statement->execute([
-            'order_date' => $args['order_date'], 
-            'total_price' => $args['total_price'],
-            'customer' => $args['customer']
+            'customer' => $args
         ]);
     }
 }
