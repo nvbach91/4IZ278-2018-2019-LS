@@ -145,5 +145,4 @@ $genres = $genresDB->fetchAllOrdered('name');
     <br>
     <?php } ?>
       </main>
-
 <?php require __DIR__.'/components/footer.php' ?>

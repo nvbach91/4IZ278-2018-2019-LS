@@ -1,6 +1,19 @@
 <?php
 session_start();
 require 'db.php';
+require_once __DIR__.'/facebook/logger.php'; 
+
+// Facebook
+$fb = new \Facebook\Facebook([
+    'app_id' => '353829385257639',
+    'app_secret' => '5823485577286f1900e22da50cbe773e',
+    'default_graph_version' => 'v2.10'
+]);
+$helper = $fb->getRedirectLoginHelper();
+$permissions = ['email'];
+$loginUrl = $helper->getLoginUrl(
+    'https://localhost/sem/facebook/fb-login.php', $permissions
+);
 
 $errors=[];
 $messages = [];
@@ -66,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          <br>
          <button type="submit" class="btn btn-dark">Přihlásit se</button>  
       </form>
-      <p>Nemáte ještě svůj účet? <a class="text-dark" href="signup.php" title="Sign up">Zaregistrujte se</a>!</p>
+      <p>Nemáte ještě svůj účet? <a class="text-dark font-weight-bold" href="signup.php" title="Sign up">Zaregistrujte se</a> nebo se přihlašte přes <a class="text-dark font-weight-bold" href="<?php echo @$loginUrl;?>"><i class="fa fa-facebook-square"></i> Facebook</a></p>
       <div style="margin-bottom: 300px"></div>
    </main>
 <?php require './components/footer.php'; ?>

@@ -11,7 +11,6 @@ $users = $usersDB->fetchAll();
 
 <?php require __DIR__.'/components/header.php'; ?>
 <main class="container padding">
-    <h1>Správa uživatelů</h1>
     <?php if(count($messages)): ?>
         <div class="alert alert-success">
                 <?php foreach($messages as $message): ?>
@@ -19,6 +18,7 @@ $users = $usersDB->fetchAll();
                 <?php endforeach ?>
         </div>
     <?php endif ?>
+    <h1>Správa uživatelů</h1>
     <table class="table table-striped">
         <thead>
             <tr>

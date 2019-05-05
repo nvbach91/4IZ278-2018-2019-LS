@@ -12,6 +12,7 @@
   <link rel="shortcut icon" href="/sem/images/icon.png">
   <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/sem/styles/main.css">
 </head>
 
