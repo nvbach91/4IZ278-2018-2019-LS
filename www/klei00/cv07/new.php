@@ -47,7 +47,7 @@ if (!empty($_POST)){
         </div>
         <div class="form-group">
             <label>Price</label>
-            <input class="form-control" type="number" name="price" min="0" value="<?php echo @$enteredPrice; ?>">
+            <input class="form-control" type="number" step=".01" name="price" min="0" value="<?php echo @$enteredPrice; ?>">
         </div>
         <button class="btn btn-dark" type="submit">Create</button>
     </form>

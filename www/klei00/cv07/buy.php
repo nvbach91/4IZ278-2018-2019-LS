@@ -15,6 +15,9 @@ if(!isset($_SESSION['cart'])){
 
 $sql = "SELECT * FROM goods WHERE id = :id";
 $statement = $goodsDB->getPDO()->prepare($sql);
+if(!isset($_GET['id'])){
+    die("ID of a product is missing!");
+}
 $statement->execute(['id' => $_GET['id']]);
 $goods = $statement->fetch();
 if (!$goods){
