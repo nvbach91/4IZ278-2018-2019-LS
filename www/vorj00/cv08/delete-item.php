@@ -3,7 +3,7 @@ require __DIR__ . '/db/GoodsDB.php';
 
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header('Location: signin.php');
+    header('Location: login.php');
     die();
 }
 
