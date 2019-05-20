@@ -4,7 +4,7 @@ require 'manager_require.php';
 
 $id = $_GET['book'];
 
-//require 'check_lock.php';
+require 'check_lock.php';
 
 $booksDB->delete('book_code', $id);
 

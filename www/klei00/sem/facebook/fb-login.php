@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/../db.php';
+require_once __DIR__.'/../db.php';
 require_once __DIR__.'/vendor/autoload.php';
 
 // Facebook
@@ -34,8 +34,6 @@ $fb = new \Facebook\Facebook([
     'default_access_token' => $accessToken
 ]);
 try {
-    $me = $fb->get('/me')->getGraphUser();
-    $picture = $fb->get('/me/picture?redirect=false&height=200')->getGraphUser();
     $user = $fb->get('/me?fields=email,name', $accessToken)->getGraphUser();
 } catch(\Facebook\Exceptions\FacebookResponseException $e) {
     echo 'Graph returned an error: ' . $e->getMessage();
@@ -60,9 +58,8 @@ if(!$users){
                 'password' => NULL]);
     $users = $usersDB->fetch('email', $email);
 }
-$_SESSION['userID'] = $users[0]['user_id'];
-$_SESSION['email'] = $users[0]['email'];
-$_SESSION['role'] = $user[0]['role'];
+$_SESSION['fb'] = $accessToken;
+
 header('Location: ../index.php?login');
 die();
 ?>

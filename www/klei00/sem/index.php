@@ -3,9 +3,8 @@ require 'db.php';
 require 'user_require.php';
 
 //user role
-$currentUser = $usersDB->fetch('user_id', $_SESSION['userID']);
-if($currentUser){
-  $role = (int)$currentUser[0]['role'];
+if(isset($_SESSION['role'])){
+  $role = $_SESSION['role'];
 }
 
 // errors and messages
