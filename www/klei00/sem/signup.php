@@ -50,7 +50,8 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
             $_SESSION['userID'] = $user[0]['user_id'];
             $_SESSION['email'] = $user[0]['email'];
             $_SESSION['role'] = $user[0]['role'];
-            header('Location: index.php?signup');
+           
+            header('Location: mail.php?recipient='.$_SESSION['email'].'&mail=Registrace');
         }        
     }    
 }

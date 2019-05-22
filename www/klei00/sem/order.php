@@ -29,7 +29,7 @@ $totalPrice = $statement->fetchColumn();
 if(isset($totalPrice)){
     $ordersDB->update(['order_number'=>$orderID], ['total_price'=>$totalPrice]);
     unset($_SESSION['cart']);
-    header('Location: cart.php?sent');
+    header('Location: mail.php?recipient='.$_SESSION['email'].'&mail=Objednavka');
     die();
 }else{
     die('Chyba při výpočtu celkové ceny');

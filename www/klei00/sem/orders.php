@@ -5,6 +5,10 @@ require 'manager_require.php';
 $messages = [];
 $errors = [];
 
+if(isset($_GET['submit'])){
+    array_push($messages, 'Objednávka byla potvrzena');
+}
+
 if(isset($_GET['id'])){
     $orderToSubmit = $ordersDB->fetch('order_number', $_GET['id']);
     if((int)$orderToSubmit[0]['status']===2){
@@ -29,7 +33,12 @@ if(isset($_GET['id'])){
                 $booksDB->update(['book_code'=>$item['book_code']], ['in_stock'=>$newQuantity]);
             }
             $ordersDB->update(['order_number'=>$orderToSubmit[0]['order_number']], ['status'=>2]);
-            array_push($messages, 'Objednávka byla potvrzena');
+            $statement = $ordersDB->getPDO()->prepare("SELECT email from orders left join users on orders.customer=users.user_id where orders.order_number=:orderID");
+            $statement->execute([
+                'orderID'=>$orderToSubmit[0]['order_number']
+            ]);
+            $email=$statement->fetchAll();
+            header('Location: mail.php?recipient='.$email[0]['email'].'&mail=Stav');
         }
     }    
 }
