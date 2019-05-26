@@ -1,0 +1,65 @@
+/*CSS pro homepage pro přihlášení a registrace*/
+.ikona {
+    padding: 5px 15px;
+    border-radius: 5px 0 0 5px;
+    background-color: #2ecc71;
+    align-items: center;
+}
+
+.inputvlevo {
+    width: auto;
+    border-radius: 0 5px 5px 0;
+    border: none;
+    padding: 15px;
+}
+
+.jmenologoff ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+.jmenologoff ul li {
+    padding: 0 30px 0 0;
+}
+
+.centerdiv {
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    background-size: 100%;
+    background-position: center center;
+}
+
+.centerdiv table {
+    text-align: center;
+    margin: auto;
+    padding: 50px;
+    border: none;
+    background: rgb(244, 247, 248);
+    color: rgb(16, 49, 58);
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: 0 15px 35px hsla(0, 0%, 0%, .2)
+}
+
+.centerdiv a {
+    color: rgb(16, 49, 58);
+}
+
+.centerdiv input {
+    color: rgb(16, 49, 58);
+    border: 1px solid rgb(221, 221, 221);
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.centerdiv h2 {
+    font-size: 2rem
+}

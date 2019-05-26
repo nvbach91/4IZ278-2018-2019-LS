@@ -1,0 +1,112 @@
+/*CSS pro záhlaví po přihlášení*/
+#hledani input{
+	border: none;
+	background-color: rgba(255,255,255,.5);
+	transition:.5s;
+	border-radius: 5px 0 0 5px;	
+}
+
+#hledani input[type="submit"]{
+	border-radius: 0 5px 5px 0;
+	background-color: rgba(189, 195, 199,.5);
+	width: 100%;
+}
+
+#hledani input:focus{
+	background-color: #fff;
+}
+
+#hledani input:focus ~ input{
+	background-color: #bdc3c7;
+}
+
+#notifikaceCislo{
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 150px;
+    border-radius: 100%;
+    background-color: #c0392b;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 3px;
+}
+
+#notifikace{
+    z-index: 100;
+    display: block;
+    display: none;
+    position: absolute;
+    background-color: #ecf0f1;
+    color: #000;
+    width: 400px;
+    max-height: 300px;
+    top: 60px;
+    transform: translateX(-100%);
+    padding: 10px;
+    overflow: auto;
+}
+
+#notifikace h4{
+    margin: 0;
+    padding: 5px 0;
+    text-align: center;
+}
+
+#notifikace a{
+    display: block;
+    color: #000;
+    text-decoration: none;
+}
+
+.menucont{
+	background-color: #e67e22;
+	background-color: rgba(46, 204, 113,1);
+	color: #fff;
+}
+
+.menu{
+	margin: 0 0 0 20px;
+}
+
+.responsivnibutton{
+	font-size:50px;
+	text-align:center;
+}
+
+.responsivnibutton:hover{
+	background-color:#27ae60;
+	cursor:pointer;
+}
+
+.menu ul{
+	margin: 0 0 0 -20px;
+	padding:0;
+	font-size: 20px;
+	list-style: none;
+	display:flex;
+	flex-flow: row nowrap;
+	}
+
+.menuli{
+	display:flex;
+	flex-flow: column nowrap;
+	text-align: center;
+}
+
+.menuli i{
+	font-size:30px;
+}
+
+.menu ul li a{
+	display: block;
+	color:#fff;
+	text-decoration:none;
+	padding: 20px;
+}
+
+.menu ul li a:hover{
+	background-color: #d35400;
+}
