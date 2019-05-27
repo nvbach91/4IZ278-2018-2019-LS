@@ -5,7 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/include/fb-config.php';
 
 require_once "include/connect.php";
-require_once "include/classes/login.php";
+require_once "include/classes/Login.php";
 
 // callback for facebook, this code is from official Facebook PHP SDK dokumentation + 4IZ278 VBN docs
 
