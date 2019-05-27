@@ -1,8 +1,11 @@
 <html>
 <?php
 $title = "Nastavení";
-include "include/head.php";
 ?>
+
+<head>
+    <?php include "include/head.php";?>
+</head>
 
 <body>
     <?php
@@ -10,7 +13,7 @@ include "include/zahlavi.php";
 include "include/menu.php";
 ?>
 
-    <script type="text/javascript" src="js/registrace.js"></script>
+    <script type="text/javascript" src="assets/js/registrace.js"></script>
     <?php
 
 //osobní údaje

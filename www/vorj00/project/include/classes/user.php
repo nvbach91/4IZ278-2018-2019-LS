@@ -13,7 +13,7 @@ class User
     // password uživatele
 	private $password;
     // přátelé uživatele
-	public $pratele;
+	public $friends;
     // profilový obrázek uživatele
 	public $profile_pic;
 
@@ -31,7 +31,7 @@ class User
 		$this->last_name = $row['last_name'];
 		$this->email = $row['email'];
 		$this->password = $row['password'];
-		$this->pratele = $row['pratele'];
+		$this->friends = $row['friends'];
 		$this->profile_pic = $row['profile_pic'];
 	}
 	// zobrazení účastí všech uživatelů
@@ -50,7 +50,7 @@ class User
 			$this->profile_pic = $row['profile_pic'];
 			$this->email = $row['email'];
 			$this->password = $row['password'];
-			$this->pratele = $row['pratele'];
+			$this->friends = $row['friends'];
 			$this->profile_pic = $row['profile_pic'];
 			// dále HTML, které ukazuje účast !pozor - často (graficky) upraveno, aby zobrazoval jen 1-5 uživatelů
 ?>
@@ -90,11 +90,11 @@ class User
 		// když chci akceptovat žádost o přátelství
 		if (isset($_POST['acceptfriend' . $profile_user->id])) {
 			// vytvořím pole přátel přihlášeného uživatele a spočítám je
-			$friend_array = $user_id->pratele;
-			$friendArray_explode = explode(",", $user_id->pratele);
+			$friend_array = $user_id->friends;
+			$friendArray_explode = explode(",", $user_id->friends);
 			$friendArray_count = count(array_filter($friendArray_explode));
 			// to stejné u profilu uživatele
-			$friend_array_friend = $profile_user->pratele;
+			$friend_array_friend = $profile_user->friends;
 			$friendArray_explode_friend = explode(",", $friend_array_friend);
 			$friendArray_count_friend = count(array_filter($friendArray_explode_friend));
 			// když zatím nemám kamarády, tak vložím jenom jeho, jinak před něj hodím čárku
@@ -112,8 +112,8 @@ class User
 				$user_id_insert = ',' . $user_id->id;
 			}
 			// přidám ho k sobě do přátel a mě k němu
-			$add_friend_query = $con->query("update users set pratele=concat('$friend_array','$profile_id_insert') where id='$user_id->id'");
-			$add_friend_friend_query = $con->query("update users set pratele=concat('$friend_array_friend','$user_id_insert') where id='$profile_user->id'");
+			$add_friend_query = $con->query("update users set friends=concat('$friend_array','$profile_id_insert') where id='$user_id->id'");
+			$add_friend_friend_query = $con->query("update users set friends=concat('$friend_array_friend','$user_id_insert') where id='$profile_user->id'");
 			// a odstraním žádost o přátelství
 			$delete_request = $con->query("delete from friend_requests where user_from='$requestFrom' and user_to='$requestTo'");
 			header("Refresh:0");
@@ -135,10 +135,10 @@ class User
 		// když si chci odebrat přátele
 		if (isset($_POST['removefriend'])) {
 			// udělám si pole mých přátel
-			$friend_array = $user_id->pratele;
+			$friend_array = $user_id->friends;
 			$friend_array_explode = explode(",", $friend_array);
 			// udělám pole jeho přátel
-			$friend_array_username = $profile_user->pratele;
+			$friend_array_username = $profile_user->friends;
 			$friend_array_explode_username = explode(",", $friend_array_username);
 			// vytvořím si pomocné proměnné, které odstraním
 			$userComma = "," . $user_id->id;
@@ -166,8 +166,8 @@ class User
 				$friend2 = str_replace($user_id->id, "", $friend_array_username);
 			}
 			// odstraním ho z mých přátel a sebe z jeho přátel a pak refreshnu stránku
-			$removeFriendQuery = $con->query("update users set pratele='$friend1' where id='$user_id->id'");
-			$removeFriendQuery_username = $con->query("update users set pratele='$friend2' where id='$profile_user->id'");
+			$removeFriendQuery = $con->query("update users set friends='$friend1' where id='$user_id->id'");
+			$removeFriendQuery_username = $con->query("update users set friends='$friend2' where id='$profile_user->id'");
 			header("Refresh:0");
 		}
 		/*konec formulářových akcí*/
@@ -182,17 +182,17 @@ class User
     <input type="hidden" name="token" value="<?php echo $token; ?>" />
     <?php
 			// udělám si pole mých přátel
-			$friendArray = explode(',', $user_id->pratele);
+			$friendArray = explode(',', $user_id->friends);
 			// když tam nějaká žádost je
 			if (!$row == "") {
 				// když je ta žádost ode mě
 				if ($requestFrom == $user_id->id) {
-					echo '<button style="background-color:#3498db" name="removefriendrequest">Žádost odeslána ×</button>';
+					echo '<button class="background-blue" name="removefriendrequest">Žádost odeslána ×</button>';
 				} //když je od něj/ní
 				else {
 					echo '<h3>Žádost o přátelství:</h3>
         <button type="submit" name="acceptfriend' . $this->id . '">Přijmout</button>
-        <button type="submit" name="declinefriend' . $this->id . '" style="background-color:#e74c3c">Odmítnout</button>';
+        <button type="submit" name="declinefriend' . $this->id . '" class="background-red">Odmítnout</button>';
 				}
 			} //když tam žádost není
 			else {

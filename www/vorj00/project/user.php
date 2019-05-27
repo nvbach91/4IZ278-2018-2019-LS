@@ -7,24 +7,31 @@ $profile_user->id = $profile_id;
 $profile_user->user_data();
 
 $title = "$profile_user->first_name $profile_user->last_name — Profil";
-include "include/head.php";
 ?>
+
+<head>
+    <?php include "include/head.php";?>
+</head>
+
 <body>
-<?php
+    <?php
 include "include/zahlavi.php";
 include "include/menu.php";
 
 ?>
-<div class="cont">
-<div id="userCard">
-    <div><h2><?php echo $profile_user->first_name . ' ' . $profile_user->last_name; ?></h2></div>
-    <div><img src="<?php echo $profile_user->profile_pic; ?>" width="100%"></div>
-    <div>
-<?php
+    <div class="cont">
+        <div id="userCard">
+            <div>
+                <h2><?php echo $profile_user->first_name . ' ' . $profile_user->last_name; ?></h2>
+            </div>
+            <div><img src="<?php echo $profile_user->profile_pic; ?>" width="100%"></div>
+            <div>
+                <?php
 $profile_user->user_profile();
 ?>
+            </div>
+        </div>
     </div>
-</div>
-</div>
 </body>
+
 </html>

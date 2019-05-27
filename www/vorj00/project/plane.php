@@ -1,10 +1,13 @@
 <html>
 <?php
 $title = "Naplánovat akci";
-include "include/head.php";
 ?>
-<link rel="stylesheet" type="text/css" href="assets/plugins/datepicker/DateTimePicker.css">
-<script type="text/javascript" src="assets/plugins/datepicker/DateTimePicker.js"></script>
+
+<head>
+    <?php include "include/head.php";?>
+    <link rel="stylesheet" type="text/css" href="assets/plugins/datepicker/DateTimePicker.css">
+</head>
+
 
 <body>
 
@@ -21,7 +24,7 @@ include "include/menu.php";?>
     <div class="cont">
         <form class="naplanovat" method="post" action="vytvorit-udalost.php" enctype="multipart/form-data">
             <input type="hidden" name="token" value="<?php echo $token; ?>" />
-            <table align="center">
+            <table>
                 <tr>
                     <td>Název:</td>
                     <td><input name="nazev" required></td>
@@ -45,7 +48,7 @@ include "include/menu.php";?>
                         google.maps.event.addListener(autocomplete, 'place_changed', function() {});
                     }
                     </script>
-                    <script src="js/jsNaplanovat.js"></script>
+                    <script src="assets/js/jsNaplanovat.js"></script>
                     <td>
                         <div id="locationField">
                             <input id="autocomplete" name="kde" type="text" placeholder="" required>
@@ -98,11 +101,12 @@ $event_plane->event_user_choice();
                 });
                 </script>
                 <tr>
-                    <td colspan="2" align="center"><button type="submit" name="vytvorit">Hotovo</button></td>
+                    <td colspan="2"><button type="submit" name="vytvorit">Hotovo</button></td>
                 </tr>
             </table>
         </form>
     </div>
+    <script type="text/javascript" src="assets/plugins/datepicker/DateTimePicker.js"></script>
 </body>
 
 </html>

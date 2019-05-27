@@ -36,7 +36,7 @@ class Termin
 		$this->end_input = strtotime($_POST['do']);
 		$trvani_dni = $_POST['dni'];
         // když nejsou pozvaní, bude prázné pole, jinak data z formuláře
-		if($_POST['invite']!==null){$this->invite = @$_POST['invite'];}else{$this->invite = [];}
+		if(isset($_POST['invite'])){$this->invite = @$_POST['invite'];}else{$this->invite = [];}
 		// pozvané spočítám a vytvořím proměnnou, ze které bude součást MySQL příkazu
 		$invite_count = count($this->invite);
 		$invite_textarray = "";
@@ -125,14 +125,14 @@ class Termin
 			}
 			// když na výstupu nic nevyjde
 			else { ?>
-    <h2>V daném rozpětí bohužel není volný termín</h2>
-    <?php
+<h2>V daném rozpětí bohužel není volný termín</h2>
+<?php
 			}
 		}
 		// když vstupní podmínky neumožňují výstup
 		else { ?>
-    <h2>Za daných podmínek nelze najít vhodné datum</h2>
-    <?php
+<h2>Za daných podmínek nelze najít vhodné datum</h2>
+<?php
 		}
 	}
 }

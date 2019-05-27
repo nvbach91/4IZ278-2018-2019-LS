@@ -25,6 +25,10 @@ textarea {
     width: 100%;
 }
 
+input[type="submit"] {
+    cursor: pointer;
+}
+
 textarea {
     height: 100px;
 }
@@ -422,9 +426,11 @@ form {
 }
 
 #naseptavac {
-    background-color: #ecf0f1;
-    padding: 5px;
+    background-color: #dbf2e5;
+    color: #24a058;
+    padding: 0.5rem;
     display: flex;
+    cursor: pointer;
 }
 
 #naseptavac * {
@@ -444,8 +450,9 @@ form {
 }
 
 .nastaveniIconsCont {
-    background-color: #bdc3c7;
-    padding: 15px;
+    background-color: #dbf2e5;
+    color: #24a058;
+    padding: 1rem;
     margin: 5px 0 0 0;
     display: flex;
     flex-flow: row wrap;
@@ -488,4 +495,16 @@ form {
 .searchOutput * {
     display: flex;
     align-self: center;
+}
+
+.display-none {
+    display: none;
+}
+
+.background-blue {
+    background-color: #3498db;
+}
+
+.background-red {
+    color: #e74c3c
 }

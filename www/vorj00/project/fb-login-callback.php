@@ -7,6 +7,8 @@ require __DIR__ . '/include/fb-config.php';
 require_once "include/connect.php";
 require_once "include/classes/login.php";
 
+// callback for facebook, this code is from official Facebook PHP SDK dokumentation + 4IZ278 VBN docs
+
 $fb = new \Facebook\Facebook(CONFIG_FACEBOOK);
 
 $helper = $fb->getRedirectLoginHelper();
@@ -78,7 +80,3 @@ try {
 
 $fbLogin = new Login();
 $fbLogin->fb_login($me, $photo['url']);
-
-//echo $me['email'];
-
-//header('Location: index.php');

@@ -7,8 +7,12 @@ $event_detail->id = $id_event;
 $event_detail->event_data();
 
 $title = $event_detail->name;
-include "include/head.php";
 ?>
+
+<head>
+    <?php include "include/head.php";?>
+    <link rel="stylesheet" href="assets/css/event.css">
+</head>
 
 <body>
     <?php
@@ -25,10 +29,9 @@ if (isset($_POST['insertpost'])) {
     Post::post_insert();
 }
 ?>
-    <div class="akce" style="
-background: linear-gradient(rgba(44, 62, 80, .8), rgba(44, 62, 80, .8)), url(../user_data/events_pics/<?php echo $event_detail->photo; ?>);
-background-size: 100%;
-background-position: center center;">
+    <div class="akce"
+        style="
+background: linear-gradient(rgba(44, 62, 80, .8), rgba(44, 62, 80, .8)), url(../user_data/events_pics/<?php echo $event_detail->photo; ?>);">
 
         <div class="cont">
             <h1><?php echo $event_detail->name; ?></h1>
@@ -69,7 +72,7 @@ if (in_array($user_id->id, $event_detail->invited_explode)) {
                     </div>
                 </div>
                 <div class="akcemistocont">
-                    <iframe width="100%" height="300" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCzeO4CjXYLjtcTcXPG4E6QsrehcijWWEw
+                    <iframe width="100%" height="300" frameborder="0" class="map" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCzeO4CjXYLjtcTcXPG4E6QsrehcijWWEw
     &q=<?php echo $event_detail->place; ?>">
                     </iframe>
                 </div>

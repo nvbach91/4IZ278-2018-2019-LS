@@ -1,31 +1,37 @@
 <html>
-<?php 
-$title = "Kalendář";
-include "include/head.php";
-?>
-<body>
 <?php
+$title = "Kalendář";
+?>
+
+<head>
+    <?php include "include/head.php";?>
+    <link rel="stylesheet" href="assets/css/calendar.css">
+</head>
+
+<body>
+    <?php
 include "include/zahlavi.php";?>
-<?php include "include/menu.php";?>
-<div class="cont">
-	<link rel="stylesheet" href="assets/css/monthly.css">
-		<div style="text-align:center; margin: auto; width:50vw">
-			<div class="monthly" id="mycalendar"></div>
-		</div>
+    <?php include "include/menu.php";?>
+    <div class="cont">
+        <link rel="stylesheet" href="assets/css/monthly.css">
+        <div class="calendar">
+            <div class="monthly" id="mycalendar"></div>
+        </div>
+    </div>
+    <!-- třeba staré jQUERY -->
+    <script type="text/javascript" src="assets/js/jquery-2.2.0.js"></script>
+    <script type="text/javascript" src="assets/js/monthly.js"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
 
-<script type="text/javascript" src="js/jquery-2.2.0.js"></script>
-<script type="text/javascript" src="js/monthly.js"></script>
-<script type="text/javascript">
-	$(window).load( function() {
-
-		$('#mycalendar').monthly({
-			mode: 'event',
-			xmlUrl: 'calendar-event-export.php'
-		});
+        $('#mycalendar').monthly({
+            mode: 'event',
+            xmlUrl: 'calendar-event-export.php'
+        });
 
 
-	});
-</script>
-</div>
+    });
+    </script>
 </body>
+
 </html>

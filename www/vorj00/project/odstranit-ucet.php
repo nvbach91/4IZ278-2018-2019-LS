@@ -14,11 +14,9 @@ else{
 	die("Musíš být přihlášen, ty anonyme.");
 }
 ?>
-<center>
 <form action="odstranit-ucet.php" method="post">
-<input type="hidden" name="token" value="<?php echo $token; ?>" />
-Opravdu chceš uzavřít svůj účet?<br>
-<input type="submit" name="yes" value="Ano">
-<input type="submit" name="no" value="Ne, chci zpátky!">
+    <input type="hidden" name="token" value="<?php echo $token; ?>" />
+    Opravdu chceš uzavřít svůj účet?<br>
+    <input type="submit" name="yes" value="Ano">
+    <input type="submit" name="no" value="Ne, chci zpátky!">
 </form>
-</center>

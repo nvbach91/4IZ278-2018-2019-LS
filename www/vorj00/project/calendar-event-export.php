@@ -1,20 +1,8 @@
 <?php
 /*Exportuje data z databáze do XML*/
 
-//database configuration
-/*$config['mysql_host'] = "localhost";
-$config['mysql_user'] = "root";
-$config['mysql_pass'] = "";
-$config['db_name']    = "prazdninovac";
-$config['table_name'] = "events";
-
-//connect to host
-mysql_connect($config['mysql_host'],$config['mysql_user'],$config['mysql_pass']);
-//select database
-@mysql_select_db($config['db_name']) or die( "Unable to select database");
- */
 $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-//$root_element = $config['table_name']."s"; //fruits
+
 $xml .= "<events>";
 
     //send the xml header to the browser

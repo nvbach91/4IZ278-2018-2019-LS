@@ -6,20 +6,23 @@ $i = rand(0, count($bg) - 1); // generate random number size of the array
 $selectedBg = "$bg[$i]"; // set variable equal to which random filename was chosen
 $selectedBg .= ".jpg";
 ?>
-<style type="text/css">
-.centerdiv {
-    background: url("assets/img/homepage-background/<?php echo $selectedBg; ?>");
-}
-</style>
 <html>
 <?php
 $title = "Přihlášení";
-include "include/head.php";
 ?>
-<link rel="stylesheet" href="style/login.css">
-<script type="text/javascript" src="js/registrace.js"></script>
+
+<head>
+    <?php include "include/head.php";?>
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
 
 <body>
+    <style type="text/css">
+    .centerdiv {
+        background: url("assets/img/homepage-background/<?php echo $selectedBg; ?>");
+    }
+    </style>
+
     <?php
 include "include/fb-login-helper.php";
 include "include/zahlavilogin.php";
@@ -78,6 +81,7 @@ if (!empty($_POST['token'])) {
             </table>
         </form>
     </div>
+    <script type="text/javascript" src="assets/js/registrace.js"></script>
 </body>
 
 </html>

@@ -17,24 +17,16 @@ if (!isset($_SESSION['user_id'])) {
     $user_id->user_data();
 }
 ?>
-
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/css.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <link
-        rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
-        crossorigin="anonymous">
-    <script
-	    src="https://code.jquery.com/jquery-3.4.1.min.js"
-		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-		crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/js.js"></script>
-    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.ico"/>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="assets/css/css.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="assets/js/js.js"></script>
+<link rel="shortcut icon" type="image/png" href="assets/img/favicon.ico" />
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo isset($title) ? "$title | Prázdninovač" : "Prázninovač"; ?></title>
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><?php echo isset($title) ? "$title | Prázdninovač" : "Prázninovač"; ?></title>

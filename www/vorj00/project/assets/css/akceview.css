@@ -31,7 +31,8 @@ body {
 }
 
 .eventlistTermin {
-    background-color: #ecf0f1;
+    background-color: #dbf2e5;
+    color: #24a058;
     display: flex;
     justify-content: space-between;
     margin: 0 0 5px;
