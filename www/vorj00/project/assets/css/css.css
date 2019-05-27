@@ -458,6 +458,7 @@ form {
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 
 .nastaveniIconsCont img {
@@ -507,4 +508,8 @@ form {
 
 .background-red {
     color: #e74c3c
+}
+
+.horizontal-center {
+    margin: 0 auto;
 }

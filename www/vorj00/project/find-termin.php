@@ -25,7 +25,7 @@ include "include/menu.php";?>
 
         <form action="find-termin-output" method="post">
             <input type="hidden" name="token" value="<?php echo $token; ?>" />
-            <table>
+            <table class="horizontal-center">
                 <tr>
                     <td>Interval od:</td>
                     <td><input class="startDateTime1" type="text" data-field="datetime" data-startend="start"
