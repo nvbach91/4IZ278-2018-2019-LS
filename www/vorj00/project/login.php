@@ -19,7 +19,7 @@ $title = "Přihlášení";
 <body>
     <style type="text/css">
     .centerdiv {
-        background: url("assets/img/homepage-background/<?php echo $selectedBg; ?>");
+        background-image: url("assets/img/homepage-background/<?php echo $selectedBg; ?>");
     }
     </style>
 
@@ -28,10 +28,9 @@ include "include/fb-login-helper.php";
 include "include/zahlavilogin.php";
 
 $login = @$_POST['loginSubmit'];
-$registrace = @$_POST['registrovat'];
+$registrace = @$_POST['registrovat'] || @$_POST['registrace'];
 
 if (!empty($_POST['token'])) {
-
     if (hash_equals($_SESSION['token'], $_POST['token'])) {
 
         if (isset($login)) {
@@ -41,7 +40,9 @@ if (!empty($_POST['token'])) {
 
         if (isset($registrace)) {
             $registrace_login = new Login();
-            $registrace_login->login_registration();
+            //$registrace_login->login_registration();
+            $registerRespond = $registrace_login->login_registration();
+            //echo "aaa " . sizeof($registerRespond);
         }
     } else {
         echo "Neplatný token, odešlete prosím formulář znovu.\n";
@@ -58,30 +59,48 @@ if (!empty($_POST['token'])) {
                         <h2>Registrace</h2>
                 </tr>
                 <tr>
-                    <td><input type="text" name="first_name" id="jmeno" placeholder="Jméno" required></td>
-                    <td><input type="text" name="last_name" id="last_name" placeholder="Příjmení" required></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="email" name="email" placeholder="E-mail" id="email" required></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="email" name="email2" placeholder="E-mail znova" id="confirm_email"
-                            onpaste="return false" required></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="password" name="password" placeholder="Heslo" id="password" required>
+                    <td>
+                        <input type="text" name="first_name" id="jmeno" placeholder="Jméno"
+                            value="<?php echo @$_POST['first_name'] ?>" required>
+                        <?php echo "<span>" . @$registerRespond['first_name'] . "</span>"; ?>
+                    </td>
+                    <td>
+                        <input type="text" name="last_name" id="last_name" placeholder="Příjmení"
+                            value="<?php echo @$_POST['last_name'] ?>" required>
+                        <?php echo "<span>" . @$registerRespond['last_name'] . "</span>"; ?>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="submit" name="registrovat" id="registrovat" value="Registrovat"></td>
+                    <td colspan="2">
+                        <input type="email" name="email" placeholder="E-mail" id="email"
+                            value="<?php echo @$_POST['email'] ?>" required>
+                        <?php echo "<span>" . @$registerRespond['email'] . "</span>"; ?>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><a href="<?php echo $FBloginUrl ?>">Nah, I want FB</a></td>
+                    <td colspan="2">
+                        <input type="email" name="email2" placeholder="E-mail znova" id="confirm_email"
+                            onpaste="return false" value="<?php echo @$_POST['email2'] ?>" required>
+                        <?php echo "<span>" . @$registerRespond['email2'] . "</span>"; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="password" name="password" placeholder="Heslo" id="password" required>
+                        <?php echo "<span>" . @$registerRespond['password'] . "</span>"; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" id="registrovat" name="registrovat" value="Registrovat"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><a href="<?php echo $FBloginUrl ?>">Nah, raději FB</a>
+                    </td>
                 </tr>
             </table>
         </form>
     </div>
-    <script type="text/javascript" src="assets/js/registrace.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/registrace.js"></script> -->
 </body>
 
 </html>
