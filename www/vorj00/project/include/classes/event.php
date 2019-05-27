@@ -346,7 +346,7 @@ class Event
 		// do účastí vložím admina jako účastníka a pozvané do pozvaných
 		$participation_query_push = $con->query("insert into participation values ($id,'$user_id->id','','$invite_textarray')");
 		// a nakonec se přesměruju na vytvořenou akci
-		header('Location: /' . $id);
+		header('Location: ' . $id);
 	}
 	// když změním typ účasti
 	public function event_participation_click($akce_primarni, $akce_kontra)

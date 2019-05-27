@@ -1,7 +1,7 @@
 <?php
 
-require_once "event.php";
-require_once "post.php";
+require_once "Event.php";
+require_once "Post.php";
 
 // třída na komentáře dědí příspěvky
 class Comment extends Post

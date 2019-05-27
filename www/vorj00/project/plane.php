@@ -37,17 +37,6 @@ include "include/menu.php";?>
 
                 <tr>
                     <td>Kde:</td>
-                    <script type="text/javascript"
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2JRsX5_FNelQLiRtywO4p4TaE3GOTe14&libraries=places">
-                    </script>
-                    <script>
-                    var autocomplete;
-                    window.onload = function initialize() {
-                        autocomplete = new google.maps.places.Autocomplete(
-                            (document.getElementById('autocomplete')), {});
-                        google.maps.event.addListener(autocomplete, 'place_changed', function() {});
-                    }
-                    </script>
                     <script src="assets/js/jsNaplanovat.js"></script>
                     <td>
                         <div id="locationField">
