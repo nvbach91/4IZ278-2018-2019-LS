@@ -11,7 +11,7 @@
 			<input type="search" name="search" placeholder="Zadej dotaz"><input type="submit" value="Hledat">
 		</form>
 		</li>
-        <div><li><a href="user?id=<?php echo $user_id->id; ?>"><?php echo $user_id->first_name . ' ' . $user_id->prijmeni; ?></a></li>
+        <div><li><a href="user?id=<?php echo $user_id->id; ?>"><?php echo $user_id->first_name . ' ' . $user_id->last_name; ?></a></li>
             <li><a href="user?id=<?php echo $user_id->id; ?>"><img src="<?php echo $user_id->profile_pic; ?>" height="40px"></a></li></div>
 
         <li><a href="settings"><i class="fa fa-cog"></i></a></li>

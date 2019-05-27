@@ -98,7 +98,7 @@ class Termin
 				// beru účasti
 				$event_spec->participation();
 				// když se kdokoli z pozvaných jako účastník akce, přidá se akce do $this->ucasti
-				if (!empty(array_intersect($this->invite, $event_spec->ucastni_se_explode))) {
+				if (!empty(array_intersect($this->invite, $event_spec->attending_explode))) {
 					array_push($this->ucasti, array(
 						$start_total,
 						$end_total

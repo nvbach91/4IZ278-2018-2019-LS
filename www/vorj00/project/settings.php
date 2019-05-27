@@ -28,7 +28,7 @@ if (isset($_FILES['profilepic'])) {
     $user_id->user_update_profilepic();
 }
 
-//heslo
+//password
 if (isset($_POST['password'])) {
     $user_id->user_update_password();
 }
@@ -40,15 +40,15 @@ if (isset($_POST['password'])) {
             <div class="nastaveniIconsCont" onclick="$(this).Dropdown('nastaveniOsobni');">
                 <div><i class="fa fa-caret-right nastaveniOsobni"></i><i class="fa fa-caret-down nastaveniOsobni"
                         style="display:none"></i> Osobní údaje</div>
-                <div><?php echo $user_id->first_name; ?> <?php echo $user_id->prijmeni; ?></div>
+                <div><?php echo $user_id->first_name; ?> <?php echo $user_id->last_name; ?></div>
             </div>
             <div class="nastaveniOsobni" style="display:none">
                 <form action="settings.php" method="post">
                     <input type="hidden" name="token" value="<?php echo $token; ?>" />
                     Křestní jméno:<input type="text" name="first_name" id="first_name"
                         value="<?php echo $user_id->first_name; ?>"><br>
-                    Příjmení:<input type="text" name="prijmeni" id="prijmeni"
-                        value="<?php echo $user_id->prijmeni; ?>"><br>
+                    Příjmení:<input type="text" name="last_name" id="last_name"
+                        value="<?php echo $user_id->last_name; ?>"><br>
                     <br>
                     <input type="submit" name="updatename" id="updatename" value="Aktualizovat">
                 </form>
@@ -90,8 +90,8 @@ if (isset($_POST['password'])) {
                 <form method="post">
                     <input type="hidden" name="token" value="<?php echo $token; ?>" />
                     Staré heslo:<input type="password" name="oldpassword" id="oldpassword" autocomplete="off"><br>
-                    Nové heslo:<input type="password" name="heslo1" id="heslo1"><br>
-                    Nové heslo znova:<input type="password" name="heslo2" id="heslo2"><br>
+                    Nové heslo:<input type="password" name="password1" id="password1"><br>
+                    Nové heslo znova:<input type="password" name="password2" id="password2"><br>
                     <input type="submit" name="password" id="password" value="Aktualizovat">
                 </form>
             </div>

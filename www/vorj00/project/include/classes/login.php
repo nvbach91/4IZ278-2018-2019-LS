@@ -4,8 +4,8 @@ class Login
 {
     // email
     public $email;
-    // heslo
-    private $heslo;
+    // password
+    private $password;
     // pro přihlášení
     public function login_connect()
     {
@@ -13,15 +13,15 @@ class Login
         // získám údaje z přihlašovacího formuláře
         $email = strip_tags(@$_POST['loginEmail']);
         $email = $con->real_escape_string($email);
-        $heslo = $con->real_escape_string(@$_POST['loginHeslo']);
+        $password = $con->real_escape_string(@$_POST['loginPassword']);
         // vezmu mail, který uživatel zadal
         $loginQuery = $con->query("select * from users where email='$email'");
-        // a z daného uživatele si vezmu mail a heslo
+        // a z daného uživatele si vezmu mail a password
         $row = $loginQuery->fetch_assoc();
         $id = $row['id'];
-        $hesloDat = $row['heslo'];
-        // když heslo sedí
-        if (password_verify($heslo, $hesloDat)) {
+        $passwordDat = $row['password'];
+        // když password sedí
+        if (password_verify($password, $passwordDat)) {
             // spočítám, jestli je opravdu jen jeden - kvůli možné SQL injection
             $loginQueryNum = $loginQuery->num_rows;
             // a když je jeden
@@ -38,11 +38,11 @@ class Login
         global $con;
         // vezmu údaje z formuláře a případně očistím je o možné omyly/SQL injection
         $first_name = mb_convert_case(strip_tags(@$_POST['first_name']), MB_CASE_TITLE, "UTF-8");
-        $prijmeni = mb_convert_case(strip_tags(@$_POST['prijmeni']), MB_CASE_TITLE, "UTF-8");
+        $last_name = mb_convert_case(strip_tags(@$_POST['last_name']), MB_CASE_TITLE, "UTF-8");
         $email = strip_tags(@$_POST['email']);
-        $heslo = strip_tags(@$_POST['heslo']);
-        // zahashuju heslo
-        $heslo = password_hash($heslo, PASSWORD_DEFAULT);
+        $password = strip_tags(@$_POST['password']);
+        // zahashuju password
+        $password = password_hash($password, PASSWORD_DEFAULT);
         // kouknu, jestli se v databázi už objevuje daný e-mail
         $pocetmailu_query = $con->query("SELECT email FROM users where email='$email'");
         // spočítám řady
@@ -51,7 +51,7 @@ class Login
         if ($pocetmailu == 0) {
             // opět zamezuju SQL injection a zároveň přidávám do databáze data
             if ($stmt = $con->prepare("insert into users values ('',?,?,?,?,'','user_data/profile-pic/default.png','')")) {
-                $stmt->bind_param("ssss", $first_name, $prijmeni, $email, $heslo);
+                $stmt->bind_param("ssss", $first_name, $last_name, $email, $password);
                 $stmt->execute();
                 $stmt->close();
             }

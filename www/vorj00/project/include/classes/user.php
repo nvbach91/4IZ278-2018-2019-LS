@@ -1,5 +1,4 @@
 <?php
-
 class User
 
 {
@@ -8,11 +7,11 @@ class User
     // jméno uživatele
 	public $first_name;
     // příjmení uživatele
-	public $prijmeni;
+	public $last_name;
     // email uživatele
 	public $email;
-    // heslo uživatele
-	private $heslo;
+    // password uživatele
+	private $password;
     // přátelé uživatele
 	public $pratele;
     // profilový obrázek uživatele
@@ -29,9 +28,9 @@ class User
 		$row = $result->fetch_assoc();
 		// beru získané údaje z databáze
 		$this->first_name = $row['first_name'];
-		$this->prijmeni = $row['prijmeni'];
+		$this->last_name = $row['last_name'];
 		$this->email = $row['email'];
-		$this->heslo = $row['heslo'];
+		$this->password = $row['password'];
 		$this->pratele = $row['pratele'];
 		$this->profile_pic = $row['profile_pic'];
 	}
@@ -47,10 +46,10 @@ class User
 		while ($row = $result->fetch_assoc()) {
 			// ukládám získané údaje
 			$this->first_name = $row['first_name'];
-			$this->prijmeni = $row['prijmeni'];
+			$this->last_name = $row['last_name'];
 			$this->profile_pic = $row['profile_pic'];
 			$this->email = $row['email'];
-			$this->heslo = $row['heslo'];
+			$this->password = $row['password'];
 			$this->pratele = $row['pratele'];
 			$this->profile_pic = $row['profile_pic'];
 			// dále HTML, které ukazuje účast !pozor - často (graficky) upraveno, aby zobrazoval jen 1-5 uživatelů
@@ -61,7 +60,7 @@ class User
 			echo $ikonka; ?>"></i></div>
     <div class="akceucastinfo">
         <div><?php
-			echo $this->first_name . ' ' . $this->prijmeni ?></div>
+			echo $this->first_name . ' ' . $this->last_name ?></div>
     </div>
 </li>
 <?php
@@ -219,7 +218,7 @@ class User
 		global $con;
 		// uložím data z formuláře
 		$firstname = strip_tags(@$_POST['first_name']);
-		$lastname = strip_tags(@$_POST['prijmeni']);
+		$lastname = strip_tags(@$_POST['last_name']);
 		// když je krátké jméno
 		if (strlen($firstname) < 3) {
 			echo '<p class="badAlert">Křestní jméno musí mít alespoň 3 znaky</p>';
@@ -232,7 +231,7 @@ class User
 			// když je vše OK
 			else {
 				// změním jméno, příjmení a refreshuji
-				$info_submit_query = $con->query("update users set first_name='$firstname', prijmeni='$lastname' where id='$this->id'");
+				$info_submit_query = $con->query("update users set first_name='$firstname', last_name='$lastname' where id='$this->id'");
 				header("Refresh:0");
 			}
 		}
@@ -301,21 +300,21 @@ class User
 		global $con;
 		// uložím údaje z formuláře
 		$old_password = strip_tags(@$_POST['oldpassword']);
-		$new_password = strip_tags(@$_POST['heslo1']);
-		$new_password2 = strip_tags(@$_POST['heslo2']);
-		// když staré heslo nesedí
-		if (!password_verify($old_password, $this->heslo)) {
+		$new_password = strip_tags(@$_POST['password1']);
+		$new_password2 = strip_tags(@$_POST['password2']);
+		// když staré password nesedí
+		if (!password_verify($old_password, $this->password)) {
 			echo '<p class="badAlert">Staré heslo nesedí</p>';
 		}
 		else {
-			// když staré heslo sedí, ale nová hesla nejsou shodná
+			// když staré password sedí, ale nová hesla nejsou shodná
 			if ($new_password != $new_password2) {
 				echo '<p class="badAlert">Tvoje nová hesla nesedí</p>';
 			}
 			else {
 				// když je vše v pořádku, zahashuju nové heslo a uložím do databáze
 				$new_password = password_hash($new_password, PASSWORD_DEFAULT);
-				$password_update_query = $con->query("update users set heslo='$new_password' where id='$this->id'");
+				$password_update_query = $con->query("update users set password='$new_password' where id='$this->id'");
 				echo '<p class="goodAlert">Úspěch</p>';
 			}
 		}

@@ -8,9 +8,9 @@ class Event
     // id události
 	public $event_id;
     // jméno události
-	public $jmeno;
-    // foto události
-	public $foto;
+	public $name;
+    // photo události
+	public $photo;
     // místo události
 	public $place;
     // počáteční datum události
@@ -42,13 +42,13 @@ class Event
     // konečná hodina události
 	public $endHour;
     // pole účastnících se
-	public $ucastni_se_explode;
+	public $attending_explode;
     // pole neúčastnících se
-	public $nemuze_explode;
+	public $not_going_explode;
     // pole pozvaných
-	public $pozvani_explode;
+	public $invited_explode;
     // pole všech pozvaných, neúčastnících se a pozvaných
-	public static $vsichni_pozvani;
+	public static $vsichni_invited;
 
 	// získá data z databáze a přiřadí
 	public function event_data()
@@ -65,8 +65,8 @@ class Event
 		// přiřazení z databáze
 		$this->event_id = $row['event_id'];
 		self::$static_event_id = $this->event_id;
-		$this->jmeno = $row['event_name'];
-		$this->foto = $row['event_photo'];
+		$this->name = $row['event_name'];
+		$this->photo = $row['event_photo'];
 		$this->place = $row['event_place'];
 		$this->startdate = strtotime($row['event_startdate']);
 		$this->starttime = strtotime($row['event_starttime']);
@@ -89,29 +89,29 @@ class Event
 		// fetch příkazu
 		$row = $result->fetch_assoc();
 		// přirazení z fetchu
-		$ucastni_se = $row['ucastni_se'];
+		$attending = $row['attending'];
 		// vytvoření pole
-		$this->ucastni_se_explode = explode(",", $ucastni_se);
-		$nemuze = $row['nemuze'];
-		$this->nemuze_explode = explode(",", $nemuze);
-		$pozvani = $row['pozvani'];
-		$this->pozvani_explode = explode(",", $pozvani);
+		$this->attending_explode = explode(",", $attending);
+		$not_going = $row['not_going'];
+		$this->not_going_explode = explode(",", $not_going);
+		$invited = $row['invited'];
+		$this->invited_explode = explode(",", $invited);
 		// přiřazení do statické proměnné souhrn všech pozvaných, jedná se o pole
-		self::$vsichni_pozvani = array_merge($this->ucastni_se_explode, $this->nemuze_explode, $this->pozvani_explode);
+		self::$vsichni_invited = array_merge($this->attending_explode, $this->not_going_explode, $this->invited_explode);
 	}
-	// reálné zobrazení účastí na obrazovce, $typ je druh účasti (účast/neúčast/pozvání), $ikonka je ikonka, která se zobrazí u uživatele (účast - zelená fajfka, neúčast - červený škrtnutý kalendář, pozvání - modrý otazník)
-	public function zobrazeni_ucasti($typ, $ikonka)
+	// reálné zobrazení účastí na obrazovce, $type je druh účasti (účast/neúčast/pozvání), $icon je ikonka, která se zobrazí u uživatele (účast - zelená fajfka, neúčast - červený škrtnutý kalendář, pozvání - modrý otazník)
+	public function show_attendence($type, $icon)
 
 	{
 		global $con;
 		// spočítám počet lidí v daném typu účasti
-		$count = count(array_filter($typ));
+		$count = count(array_filter($type));
 		// pokud je někdo v typu účasti, zobrazím ho s danou ikonkou
 		if ($count) {
 			// vytvořím si pomocnou proměnnou, která bude použita pro MySQL příkaz
 			$lide = "";
 			// pokud bude v typu účasti jen jeden člověk, bude $lide rovna jeho hodnotě, pokud ne, přidá se za každého (kromě posledního) příkaz OR, který používá MySQL
-			foreach($typ as $key => $value) {
+			foreach($type as $key => $value) {
 				$lide.= "id=$value";
 				if (!($key + 1 == $count)) {
 					$lide.= " or ";
@@ -119,9 +119,9 @@ class Event
 			}
 			// vyechuji fci, která napíše správně HTML formát
             /* tohle funguje jen na localhostu, ne na serveru, nevím proč:
-			echo user::user_participation($lide, $ikonka); */
+			echo user::user_participation($lide, $icon); */
             $user_participate = new User();
-            echo $user_participate->user_participation($lide, $ikonka);
+            echo $user_participate->user_participation($lide, $icon);
 		}
 	}
 	// pokud je rok události jiný než je aktuální rok, zobrazím ho
@@ -163,8 +163,8 @@ class Event
 			setlocale(LC_ALL, '');
 			// přiřazení z MySQL
 			$this->event_id = $row['event_id'];
-			$this->jmeno = $row['event_name'];
-			$this->foto = $row['event_photo'];
+			$this->name = $row['event_name'];
+			$this->photo = $row['event_photo'];
 			$this->place = $row['event_place'];
 			$this->startdate = strtotime($row['event_startdate']);
 			$this->starttime = strtotime($row['event_starttime']);
@@ -177,21 +177,21 @@ class Event
 			// získám přehled o účastech všech typů události - účast/neúčast/pozvání
 			$this->participation();
 			// pokud je uživatel adminem události nebo je nějakým způsobem v guestlistu, zobrazím mu událost
-			if (in_array($user_id->id, $admin_explode) || in_array($user_id->id, self::$vsichni_pozvani)) {
+			if (in_array($user_id->id, $admin_explode) || in_array($user_id->id, self::$vsichni_invited)) {
 				// nastavím správný formát datumu
 				$this->event_date_output();
 				// dále pokračuje HTML zobrazení karty události
 ?>
 
 <div class="akceviewcont" style="background: url(user_data/events_pics/<?php
-				echo $this->foto; ?>);
+				echo $this->photo; ?>);
 	background-size: cover;
 	background-position: center center;">
     <div class="akceview">
         <div class="nadpis">
             <h1><a href="<?php
 				echo $this->event_id ?>"><?php
-				echo $this->jmeno; ?></a></h1>
+				echo $this->name; ?></a></h1>
         </div>
         <div class="eventlistTermin">
             <div><?php
@@ -209,9 +209,9 @@ class Event
             <ul>
                 <?php
 				// zobrazím účastníků s ikonkou účasti; pozor! CSS je nastaveno, aby zobrazilo jen první řadu (počet lidí v ní: 1-5)
-				echo $this->zobrazeni_ucasti($this->ucastni_se_explode, "fa fa-check-circle");
-				echo $this->zobrazeni_ucasti($this->nemuze_explode, "fa fa-calendar-times-o");
-				echo $this->zobrazeni_ucasti($this->pozvani_explode, "fa fa-question-circle");
+				echo $this->show_attendence($this->attending_explode, "fa fa-check-circle");
+				echo $this->show_attendence($this->not_going_explode, "fa fa-calendar-times-o");
+				echo $this->show_attendence($this->invited_explode, "fa fa-question-circle");
 ?>
             </ul>
         </div>
@@ -228,16 +228,16 @@ class Event
 		}
 	}
 	// výběr přátel, když vytvářím novou akci/hledám top termín
-	public function event_user_vyber()
+	public function event_user_choice()
 
 	{
 		global $con, $user_id;
 		// vyberu přátele
-		$query = "select pratele from users where id='$user_id->id'";
+		$query = "select friends from users where id='$user_id->id'";
 		$result = $con->query($query);
 		$row = $result->fetch_assoc();
 		// zpracuji do pole a spočítám
-		$friends = $row['pratele'];
+		$friends = $row['friends'];
 		$friends_explode = explode(",", $friends);
 		$friends_explode_count = count(array_filter($friends_explode));
 		$friends = "";
@@ -266,7 +266,7 @@ class Event
     <td><img src="<?php
 				echo $friend->profile_pic; ?>"></td>
     <td><?php
-				echo $friend->first_name . ' ' . $friend->prijmeni; ?></td>
+				echo $friend->first_name . ' ' . $friend->last_name; ?></td>
 </tr>
 <?php
 			}
@@ -279,7 +279,7 @@ class Event
 		global $con, $user_id;
 		// vezmu údaje z formuláře
 		$nazev = @$_POST['nazev'];
-		$foto = @$_FILES['foto']['name'];
+		$photo = @$_FILES['photo']['name'];
 		$kde = @$_POST['kde'];
 		$od = @$_POST['od'];
 		$do = @$_POST['do'];
@@ -304,21 +304,21 @@ class Event
 			}
 		}
 		// když chybí fotka, dám defaultní
-		if (!$foto) {
-			$foto = "default.jpg";
+		if (!$photo) {
+			$photo = "default.jpg";
 		}
 		else {
 			// když ne, zkontroluji formát a velikost
-			if (((@$_FILES['foto']['type'] == "image/jpeg") || (@$_FILES['foto']['type'] == "image/png") || (@$_FILES['foto']['type'] == "image/gif")) && (@$_FILES['foto']['size'] < 5242880)) {
+			if (((@$_FILES['photo']['type'] == "image/jpeg") || (@$_FILES['photo']['type'] == "image/png") || (@$_FILES['photo']['type'] == "image/gif")) && (@$_FILES['photo']['size'] < 5242880)) {
 				// když je dobrá, uložím si cestu a úplnou cestu
-				$path = $_FILES['foto']['name'];
+				$path = $_FILES['photo']['name'];
 				$ext = pathinfo($path, PATHINFO_EXTENSION);
 				// fotky přejmenuju, aby se náhodou nepřepsaly - z $chars udělám dvě náhodné 15 místní stringy pro názvy složky a souboru
 				$chars = 'abcdecfghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 				$rand_dir_name = substr(str_shuffle($chars) , 0, 15);
 				$file_name = substr(str_shuffle($chars) , 0, 15);
 				// vezmu koncovku (typ) souboru
-				$extension = end(explode(".", $_FILES['foto']['name']));
+				$extension = end(explode(".", $_FILES['photo']['name']));
 				// budu koukat do složky, zda náhodou neexistuje stejné jméno složky a souboru dokud nenajdu volno v obou případech, budu měnit názvy
 				while (file_exists("user_data/events_pics/$rand_dir_name/" . $file_name)) {
 					$rand_dir_name = substr(str_shuffle($chars) , 0, 15);
@@ -329,9 +329,9 @@ class Event
 					mkdir("user_data/events_pics/$rand_dir_name");
 				}
 				// uložím si výsledek cesty
-				$foto = "$rand_dir_name/$file_name.$ext";
+				$photo = "$rand_dir_name/$file_name.$ext";
 				// přesunu fotku do dané cesty
-				move_uploaded_file(@$_FILES['foto']['tmp_name'], "user_data/events_pics/$foto");
+				move_uploaded_file(@$_FILES['photo']['tmp_name'], "user_data/events_pics/$photo");
 			}
 			// když formát nesedí, hodím chybu a umřu
 			else {
@@ -340,7 +340,7 @@ class Event
 			}
 		}
 		// vložím údaje do databáze
-		$event_query_push = $con->query("insert into events values ('','$nazev','$foto','$kde','$odDatum','$odCas','$doDatum','$doCas','$co','$user_id->id')");
+		$event_query_push = $con->query("insert into events values ('','$nazev','$photo','$kde','$odDatum','$odCas','$doDatum','$doCas','$co','$user_id->id')");
 		// z databáze si vytáhnu id vytvořené události
 		$id = $con->insert_id;
 		// do účastí vložím admina jako účastníka a pozvané do pozvaných
@@ -383,20 +383,20 @@ class Event
 			$akce_kontra_query = $con->query("update participation set $akce_kontra='$akce_kontra_implode' where id='$this->event_id'");
 		}
 		// vezmu si pozvané lidi do pole
-		$akce_pozvani_array = $get_akce_row['pozvani'];
-		$akce_pozvani_explode = explode(",", $akce_pozvani_array);
+		$akce_invited_array = $get_akce_row['invited'];
+		$akce_invited_explode = explode(",", $akce_invited_array);
 		// když budu v pozvaných, odeberu se z nich
-		if (($key = array_search($user_id->id, $akce_pozvani_explode)) !== false) {
-			unset($akce_pozvani_explode[$key]);
-			$akce_pozvani_implode = true;
+		if (($key = array_search($user_id->id, $akce_invited_explode)) !== false) {
+			unset($akce_invited_explode[$key]);
+			$akce_invited_implode = true;
 		}
 		else {
-			$akce_pozvani_implode = false;
+			$akce_invited_implode = false;
 		}
 		// pokud jsem byl v pozvaných, udělám z pole pozvaných string (pro MySQL) a upravím pozvané
-		if ($akce_pozvani_implode) {
-			$akce_kontra_implode = implode(",", $akce_pozvani_explode);
-			$akce_pozvani_query = $con->query("update participation set pozvani='$akce_kontra_implode' where id='$this->event_id'");
+		if ($akce_invited_implode) {
+			$akce_kontra_implode = implode(",", $akce_invited_explode);
+			$akce_invited_query = $con->query("update participation set invited='$akce_kontra_implode' where id='$this->event_id'");
 		}
 		// nakonec se přidám do kliknutého typu účasti
 		$akce_query = $con->query("update participation set $akce_primarni=concat('$akce_array','$user_id_insert') where id='$this->event_id'");
@@ -426,18 +426,18 @@ class Event
 			$akce_kontra_query = $con->query("update participation set $akce_kontra='$akce_kontra_implode' where id='$this->event_id'");
 		}
 		// vyberu si pozvané, hodím do pole a spočítám je
-		$akce_pozvani_array = $get_akce_row['pozvani'];
-		$akce_pozvani_explode = explode(",", $akce_pozvani_array);
-		$akce_pozvani_array_count = count(array_filter($akce_pozvani_explode));
+		$akce_invited_array = $get_akce_row['invited'];
+		$akce_invited_explode = explode(",", $akce_invited_array);
+		$akce_invited_array_count = count(array_filter($akce_invited_explode));
 		// když tam nikdo nebude, přidám jen sebe, jinak před sebe dám čárku
-		if ($akce_pozvani_array_count == 0) {
-			$akce_pozvani_insert = $user_id->id;
+		if ($akce_invited_array_count == 0) {
+			$akce_invited_insert = $user_id->id;
 		}
 		else {
-			$akce_pozvani_insert = ',' . $user_id->id;
+			$akce_invited_insert = ',' . $user_id->id;
 		}
 		// nakonec se přidám do pozvaných
-		$akce_pozvani_query = $con->query("update participation set pozvani=concat('$akce_pozvani_array','$akce_pozvani_insert') where id='$this->event_id'");
+		$akce_invited_query = $con->query("update participation set invited=concat('$akce_invited_array','$akce_invited_insert') where id='$this->event_id'");
 	}
 }
 

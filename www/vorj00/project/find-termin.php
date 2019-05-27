@@ -48,7 +48,7 @@ $("."+id).toggle();
     <table>
         <?php
 $event_find_termin = new Event();
-$event_find_termin->event_user_vyber();
+$event_find_termin->event_user_choice();
 ?>
     </table>
 </div>

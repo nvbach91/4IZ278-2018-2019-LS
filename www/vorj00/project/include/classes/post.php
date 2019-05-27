@@ -61,7 +61,7 @@ echo $user_poster->profile_pic ?>"></div>
         <div class="akceprispevekright">
             <div class="akceprispevekheader">
                 <h2><?php
-echo $user_poster->first_name . ' ' . $user_poster->prijmeni; ?></h2><?php
+echo $user_poster->first_name . ' ' . $user_poster->last_name; ?></h2><?php
 echo $this->post_date_posted; ?>
             </div>
             <div class="akceprispevekprispevek">

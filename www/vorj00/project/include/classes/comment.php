@@ -45,7 +45,7 @@ echo $user_commenter->profile_pic ?>"></div>
     <div class="akcekomentright">
         <div class="akceprispevekheader">
             <h2><?php
-echo $user_commenter->first_name . ' ' . $user_commenter->prijmeni; ?></h2> <?php
+echo $user_commenter->first_name . ' ' . $user_commenter->last_name; ?></h2> <?php
 echo $this->comment_date; ?>
         </div>
         <div class="akceprispevekkoment">

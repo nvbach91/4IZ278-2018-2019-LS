@@ -6,7 +6,7 @@ $event_detail = new Event();
 $event_detail->id = $id_event;
 $event_detail->event_data();
 
-$title = $event_detail->jmeno;
+$title = $event_detail->name;
 include "include/head.php";
 ?>
 
@@ -15,23 +15,23 @@ include "include/head.php";
 include "include/zahlavi.php";?>
     <?php include "include/menu.php";
 
-if (isset($_POST['akceUcastniSe'])) {$event_detail->event_participation_click('ucastni_se', 'nemuze');}
-if (isset($_POST['akceNemuze'])) {$event_detail->event_participation_click('nemuze', 'ucastni_se');}
+if (isset($_POST['akceUcastniSe'])) {$event_detail->event_participation_click('attending', 'not_going');}
+if (isset($_POST['akcenot_going'])) {$event_detail->event_participation_click('not_going', 'attending');}
 
-if (isset($_POST['akceUcastniSeSMAZAT'])) {$event_detail->event_participation_delete('ucastni_se');}
-if (isset($_POST['akceNemuzeSMAZAT'])) {$event_detail->event_participation_delete('nemuze');}
+if (isset($_POST['akceUcastniSeSMAZAT'])) {$event_detail->event_participation_delete('attending');}
+if (isset($_POST['akcenot_goingSMAZAT'])) {$event_detail->event_participation_delete('not_going');}
 
 if (isset($_POST['insertpost'])) {
     Post::post_insert();
 }
 ?>
     <div class="akce" style="
-background: linear-gradient(rgba(44, 62, 80, .8), rgba(44, 62, 80, .8)), url(../user_data/events_pics/<?php echo $event_detail->foto; ?>);
+background: linear-gradient(rgba(44, 62, 80, .8), rgba(44, 62, 80, .8)), url(../user_data/events_pics/<?php echo $event_detail->photo; ?>);
 background-size: 100%;
 background-position: center center;">
 
         <div class="cont">
-            <h1><?php echo $event_detail->jmeno; ?></h1>
+            <h1><?php echo $event_detail->name; ?></h1>
 
             <form class="akcepridatform" method="post">
                 <input type="hidden" name="token" value="<?php echo $token; ?>" />
@@ -40,16 +40,16 @@ background-position: center center;">
                     <?php
 $event_detail->participation();
 
-if (in_array($user_id->id, $event_detail->ucastni_se_explode)) {
-    echo '<button class="active" name="akceUcastniSeSMAZAT">Přidat se</button><button name="akceNemuze">Neúčastnit se</button>';
+if (in_array($user_id->id, $event_detail->attending_explode)) {
+    echo '<button class="active" name="akceUcastniSeSMAZAT">Přidat se</button><button name="akcenot_going">Neúčastnit se</button>';
 }
 
-if (in_array($user_id->id, $event_detail->nemuze_explode)) {
-    echo '<button name="akceUcastniSe">Přidat se</button><button class="active" name="akceNemuzeSMAZAT">Neúčastnit se</button>';
+if (in_array($user_id->id, $event_detail->not_going_explode)) {
+    echo '<button name="akceUcastniSe">Přidat se</button><button class="active" name="akcenot_goingSMAZAT">Neúčastnit se</button>';
 }
 
-if (in_array($user_id->id, $event_detail->pozvani_explode)) {
-    echo '<button name="akceUcastniSe">Přidat se</button><button name="akceNemuze">Neúčastnit se</button>';
+if (in_array($user_id->id, $event_detail->invited_explode)) {
+    echo '<button name="akceUcastniSe">Přidat se</button><button name="akcenot_going">Neúčastnit se</button>';
 }
 ?>
                 </div>
@@ -93,9 +93,9 @@ $post_view->post_read();
                 <div class="akceucast">
                     <ul>
                         <?php
-echo $event_detail->zobrazeni_ucasti($event_detail->ucastni_se_explode, "fa fa-check-circle");
-echo $event_detail->zobrazeni_ucasti($event_detail->nemuze_explode, "fa fa-calendar-times-o");
-echo $event_detail->zobrazeni_ucasti($event_detail->pozvani_explode, "fa fa-question-circle");
+echo $event_detail->show_attendence($event_detail->attending_explode, "fa fa-check-circle");
+echo $event_detail->show_attendence($event_detail->not_going_explode, "fa fa-calendar-times-o");
+echo $event_detail->show_attendence($event_detail->invited_explode, "fa fa-question-circle");
 ?>
 
                     </ul>

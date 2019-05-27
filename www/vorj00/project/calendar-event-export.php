@@ -50,16 +50,16 @@ $xml .= "<events>";
 
     $participation_query = $con->query("select * from participation where id='$event_id'");
     $participation_row = $participation_query->fetch_assoc();
-    $ucastni_se = $participation_row['ucastni_se'];
-    $ucastni_se_explode = explode(",", $ucastni_se);
-    $nemuze = $participation_row['nemuze'];
-    $nemuze_explode = explode(",", $nemuze);
-    $pozvani = $participation_row['pozvani'];
-    $pozvani_explode = explode(",", $pozvani);
+    $attending = $participation_row['attending'];
+    $attending_explode = explode(",", $attending);
+    $not_going = $participation_row['not_going'];
+    $not_going_explode = explode(",", $not_going);
+    $invited = $participation_row['invited'];
+    $invited_explode = explode(",", $invited);
 
-    $ucast_a_pozvani = array_merge($ucastni_se_explode, $pozvani_explode);
+    $ucast_a_invited = array_merge($attending_explode, $invited_explode);
 
-    if (in_array($user_id->id, $admin_explode) || in_array($user_id->id, $ucast_a_pozvani)) {
+    if (in_array($user_id->id, $admin_explode) || in_array($user_id->id, $ucast_a_invited)) {
 
     $xml .= "<event>";
 

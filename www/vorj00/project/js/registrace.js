@@ -30,7 +30,7 @@ else{
 }
 });
 
-$('#prijmeni').on('input', function() {
+$('#last_name').on('input', function() {
 if($(this).val().length>25){
 $(this).each(function() {
    this.setCustomValidity('Jméno může obsahovat maximálně 25 znaků.');
@@ -57,7 +57,7 @@ else{
 }}
 });  
     
-$('#heslo').on('input', function() {
+$('#password').on('input', function() {
 if($(this).val().length<6){
 $(this).each(function() {
    this.setCustomValidity('Heslo musí absahovat alespoň 6 znaků nebo odpověď na smysl života, PIN ke kartě, klíče od baráku a krev jednorožce.');
@@ -70,20 +70,20 @@ else{
 }
 });
 
-$('#heslo1, #heslo2').on('input', function() {
+$('#password1, #password2').on('input', function() {
 if($(this).val().length<6){
 $(this).each(function() {
    this.setCustomValidity('Heslo musí absahovat alespoň 6 znaků nebo odpověď na smysl života, PIN ke kartě, klíče od baráku a krev jednorožce.');
 });
 }
 else{
-    if(!($(this).val()==$('#heslo1').val() && $(this).val()==$('#heslo2').val())){
-        $('#heslo1').get(0).setCustomValidity('');   
-        $('#heslo2').get(0).setCustomValidity('Hesla nejsou shodná.');   
+    if(!($(this).val()==$('#password1').val() && $(this).val()==$('#password2').val())){
+        $('#password1').get(0).setCustomValidity('');   
+        $('#password2').get(0).setCustomValidity('Hesla nejsou shodná.');   
     }
     else{
-    $('#heslo1').get(0).setCustomValidity('');
-    $('#heslo2').get(0).setCustomValidity('');
+    $('#password1').get(0).setCustomValidity('');
+    $('#password2').get(0).setCustomValidity('');
 }
 }
 });      
