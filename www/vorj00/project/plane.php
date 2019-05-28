@@ -47,14 +47,12 @@ include "include/menu.php";?>
 
                 <tr>
                     <td>Od:</td>
-                    <td><input class="startDateTime1" type="text" data-field="datetime" data-startend="start"
-                            data-startendelem=".endDateTime1" name="od" required></td>
+                    <td><input class="startDateTime1" type="datetime-local" name="od" required></td>
                 </tr>
 
                 <tr>
                     <td>Do:</td>
-                    <td><input class="endDateTime1" type="text" data-field="datetime" data-startend="end"
-                            data-startendelem=".startDateTime1" name="do" required></td>
+                    <td><input class="endDateTime1" type="datetime-local" name="do" required></td>
                 </tr>
 
                 <tr>

@@ -28,19 +28,19 @@ include "include/menu.php";?>
             <table class="horizontal-center">
                 <tr>
                     <td>Interval od:</td>
-                    <td><input class="startDateTime1" type="text" data-field="datetime" data-startend="start"
+                    <td><input class="startDateTime1" type="datetime-local" data-startend="start"
                             data-startendelem=".endDateTime1" name="od" required></td>
                 </tr>
 
                 <tr>
                     <td>Interval do:</td>
-                    <td><input class="endDateTime1" type="text" data-field="datetime" data-startend="end"
+                    <td><input class="endDateTime1" type="datetime-local" data-startend="end"
                             data-startendelem=".startDateTime1" name="do" required></td>
                 </tr>
 
                 <tr>
                     <td>Kolik dní bude akce trvat:</td>
-                    <td><input type="number" name="dni" value="dni" min="1" max="20" required></td>
+                    <td><input type="number" name="dni" min="1" max="20" required></td>
                 </tr>
 
                 <tr>
