@@ -13,12 +13,14 @@ $xml .= "<events>";
     include "include/connect.php";
 
     if (!isset($_SESSION['user_id'])) {
-    $user_id->id = "";
+    // $user_id->id = "";
     if (basename($_SERVER['PHP_SELF']) != "index.php") {
     header("location: index");
     }
     } else {
-    $user_id = new User($_SESSION['user_id']);
+    $user_id = new User();
+    $user_id->id = $_SESSION['user_id'];
+    $user_id->user_data();
     }
 
     $sql = "SELECT * FROM events";
@@ -62,6 +64,7 @@ $xml .= "<events>";
             //and close the element
             $xml .= "</$key>";
         }
+        $xml .= "<userid>$user_id->id</userid>";
 
         $xml .= "</event>";
     }
