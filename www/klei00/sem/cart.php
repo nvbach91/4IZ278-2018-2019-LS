@@ -50,6 +50,18 @@ if (is_array($goodsInCart) && count($goodsInCart)) {
     $statement->execute(array_keys($goodsInCart));
     $books = $statement->fetchAll();
 }
+
+// back to shopping
+if(isset($_SESSION['offset'])){
+  $offset=$_SESSION['offset'];
+}else{
+  $offset=0;
+}
+if(isset($_SESSION['genre'])){
+  $genre = $_SESSION['genre'];
+}else{
+  $genre = 0;
+}
 ?>
 
 <?php include './components/header.php' ?>
@@ -71,7 +83,7 @@ if (is_array($goodsInCart) && count($goodsInCart)) {
     <h1>Nákupní košík</h1>
     <p>Knih v košíku: <?php echo @$sumPieces; ?></p>
     <br>
-    <a class="btn btn-dark" href="index.php">Zpět k nákupu</a>
+    <a class="btn btn-dark" href="index.php?offset=<?php echo $offset; echo $genre?"&genre=".$genre:""; ?>">Zpět k nákupu</a>
     <br><br>
     <?php if(@$books): ?>
     <div class="products">

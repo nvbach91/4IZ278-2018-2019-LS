@@ -36,6 +36,7 @@ if (isset($_GET['offset'])) {
 } else {
     $offset = 0;
 }
+$_SESSION['offset'] = $offset;
 
 // Show books in particular genre
 if(isset($_GET['genre'])){
@@ -47,6 +48,7 @@ if(isset($_GET['genre'])){
   $statement->bindValue(1, $currentGenre, PDO::PARAM_STR);
   $statement->bindValue(2, $offset, PDO::PARAM_INT);
   $statement->execute();
+  $_SESSION['genre'] = $currentGenre;
 }else{
   //show all books
   $count = $booksDB->getPDO()->query("SELECT COUNT(book_code) FROM books")->fetchColumn();
@@ -54,6 +56,7 @@ if(isset($_GET['genre'])){
   $statement = $booksDB->getPDO()->prepare("SELECT * FROM books ORDER BY title ASC LIMIT 6 OFFSET ?");
   $statement->bindValue(1, $offset, PDO::PARAM_INT);
   $statement->execute();
+  unset($_SESSION['genre']);
 }
 $books = $statement->fetchAll();
 $genres = $genresDB->fetchAllOrdered('name');
