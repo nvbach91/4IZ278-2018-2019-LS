@@ -14,7 +14,6 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 class HotReloader {
-
   /**
    * Constructor
    *
@@ -29,7 +28,6 @@ class HotReloader {
     $this->IGNORE    = [];      // file or folders to ignore
     $this->ADDED     = [];      // extra files to be watched
   }
-
   /**
    * Set Root
    *
@@ -39,17 +37,16 @@ class HotReloader {
    *
    * @param String
    * @return void
-  */  
+  */
   public function setRoot($root){
     $this->ROOT = $root;
-  }  
-
+  }
   /**
    * Set Diff Mode
    *
-   * Set the way the Reloader must hash the files and 
-   * folders. It can be 'mtime' or 'md5'. The mtime is the 
-   * default mode. Anyway, final unique checksums will always 
+   * Set the way the Reloader must hash the files and
+   * folders. It can be 'mtime' or 'md5'. The mtime is the
+   * default mode. Anyway, final unique checksums will always
    * use md5
    *
    * @param String
@@ -58,7 +55,6 @@ class HotReloader {
   public function setDiffMode($mode){
     $this->DIFFMODE = $mode;
   }
-
   /**
    * Set Watch Mode
    *
@@ -75,7 +71,7 @@ class HotReloader {
    * 3. "added" - will react to changes only in the files setted from
    * the add() method, and on the script and link tags
    *
-   * 4. "tags" - will react to changes only in the script and link tags   
+   * 4. "tags" - will react to changes only in the script and link tags
    * on the code
    *
    * @param String
@@ -88,10 +84,9 @@ class HotReloader {
     }
     $this->WATCHMODE = $mode;
   }
-
   /**
    * Ignore
-   * 
+   *
    * Set an array of files or folder paths to be ignored by the reloader.
    * The paths and filenames must be relative to the setted ROOT
    *
@@ -101,14 +96,13 @@ class HotReloader {
   public function ignore($array){
     $this->IGNORE = array_filter(array_unique($array));
   }
-
   /**
    * Add
-   * 
+   *
    * Set an array of files or folder paths to be watched by the reloader.
-   * The files or folders included with add() will trigger a page reload 
+   * The files or folders included with add() will trigger a page reload
    * when changed even if they have any link with the current code. Folders
-   * are recursively added, so, a change in any file or subfolder will be 
+   * are recursively added, so, a change in any file or subfolder will be
    * relevant
    *
    * @param Array
@@ -116,11 +110,10 @@ class HotReloader {
    */
   public function add($array){
     $this->ADDED = array_filter(array_unique($array));
-  }  
-
+  }
   /**
    * Set Shorthand Method
-   * 
+   *
    * This is a shorthand for all setters, it allows to set parameters to
    * the reloader with one function. The parameters can be:
    *
@@ -138,14 +131,13 @@ class HotReloader {
      if(isset($this->$key)) $this->$key = $val;
     }
   }
-
   /**
    * Current Config
-   * 
+   *
    * This function prints relevant information about the reloader current
    * configuration and state. Its to debug and information purposes only.
    * The information will be printed on the browser console via javascript
-   * 
+   *
    * @return void
    */
   public function currentConfig(){
@@ -208,49 +200,48 @@ class HotReloader {
     </script>
     <?php echo ob_get_clean();
   }
-
   /**
    * Initiate the reloader
-   * 
+   *
    * Start the Reloader with the setted configurations or the default
    * for the non setted ones. This functions gets the application fingerprint
    * and sends on every current page request (Etag), than add the JS watcher.
    * When this fingerprint changes, means a change on the page, when it happens,
-   * a reload will be triggered by the JS wich is always wathing this changes   
+   * a reload will be triggered by the JS wich is always wathing this changes
    *
    * @return void
    */
   public function init(){
     // add the application state hash on the headers
-    $this->addEtagOnHeader();
+    if(!headers_sent()) {
+      $this->addEtagOnHeader();
+    }
     // add the JS Watcher
     $this->addJsWatcher();
   }
-
   /**
    * Add the application state hash on the Etag of the Headers
    *
    * This function will get a new state hash of the current code and its dependencies
-   * an will treat this hash as a fingerprint of your script state. then will set this 
+   * an will treat this hash as a fingerprint of your script state. then will set this
    * hash as an etag on the current script headers, a hash change means a code change
    *
    * @return void
-  */    
+  */
   private function addEtagOnHeader(){
       $hash = $this->createStateHash();
       if( $hash ) header( "Etag: " . $hash ); return true;
       echo "Hot Reloader failed to generate Application State Hash";
-  }     
-
+  }
   /**
    * Create the application state hash
-   * 
-   * Collects all the timestamps/hashes from the included files and from the added() 
-   * method, and than transforms it into a unique md5 hash. this unique hash is your 
+   *
+   * Collects all the timestamps/hashes from the included files and from the added()
+   * method, and than transforms it into a unique md5 hash. this unique hash is your
    * app fingerprint.
    *
    * @return String
-   */    
+   */
   private function createStateHash(){
     $hashes = [];
     // when in 'tags' watch mode, we send a fake hash just to
@@ -269,7 +260,6 @@ class HotReloader {
     // transform all hashes into a unique md5 checksum
     return md5(implode("",$hashes));
   }
-
   /**
    * Generates a hash list of all included/required files of the running file
    *
@@ -289,11 +279,10 @@ class HotReloader {
         }
       }
     }
-    return $hashes;    
+    return $hashes;
   }
-
   /**
-   * Generates a hash list of all files added to watch with the method add() 
+   * Generates a hash list of all files added to watch with the method add()
    *
    * This function build the hash/timestamp list of the files and folders which
    * came from the added() method
@@ -324,9 +313,8 @@ class HotReloader {
         }
       }
     }
-    return $hashes; 
+    return $hashes;
   }
-
   /**
    * Generates a unique hash of an entire directory
    *
@@ -334,7 +322,7 @@ class HotReloader {
    * given directory, than transform this array in a unique md5 checksum
    *
    * @return String
-  */    
+  */
   private function getDirectoryHash($directory){
     $mode = $this->DIFFMODE;
     if (! is_dir($directory)) return false;
@@ -355,8 +343,7 @@ class HotReloader {
     }
     $dir->close();
     return md5(implode("",$files));
-  }  
-
+  }
   /**
    * Will Be Ignored ?
    *
@@ -382,26 +369,25 @@ class HotReloader {
     }
     // if the file will not be ignored
     return false;
-  } 
-
+  }
   /**
    * Add the modified Live.js script to the current page
    *
    * This is the HotReloader JS Watcher. This script derives from live.js, due
-   * several modifications it turned into another script already. This script 
-   * will watch the page headers, scripts and links, based on the Reloader 
-   * configuration. When a change is catched a page reload will be triggered 
+   * several modifications it turned into another script already. This script
+   * will watch the page headers, scripts and links, based on the Reloader
+   * configuration. When a change is catched a page reload will be triggered
    * or the changes will be directly applied.
    *
    * @return void
   */
   private function addJsWatcher(){
     ob_start(); ?>
-      <script>
+      <script defer>
       (function () {
         // get the ignore list from php
         var ignoreList = [<?php foreach($this->IGNORE as $key){ echo "'$key',"; } ?>];
-        // script only (live.js)        
+        // script only (live.js)
         var headers = { "Etag": 1, "Last-Modified": 1, "Content-Length": 1, "Content-Type": 1 },
             resources = {},
             pendingRequests = {},
@@ -413,8 +399,8 @@ class HotReloader {
             currentHeartBeat = undefined;
         var Live = {
           // performs a cycle per interval
-          heartbeat: function () {      
-            if (document.body) {        
+          heartbeat: function () {
+            if (document.body) {
               // make sure all resources are loaded on first activation
               if (!loaded) Live.loadresources();
               Live.checkForChanges();
@@ -449,7 +435,7 @@ class HotReloader {
               if (src && src.match(/\blive.js#/)) {
                 for (var type in active)
                   active[type] = src.match("[#,|]" + type) != null
-                if (src.match("notify")) 
+                if (src.match("notify"))
                   alert("Live.js is loaded.");
               }
             }
@@ -499,30 +485,31 @@ class HotReloader {
             xhr.open( 'GET', url );
             xhr.responseType = 'document';
             xhr.send();
-          },          
+          },
           checkBackEndFails: function(newInfo, oldInfo) {
             /*
               this little section try to catch errors
               from the backend that could break the watcher
-              before the page reloads. if the newInfo key has 
-              sended and Etag, Last-Modified and Content-Length 
-              are null, and the Content-Type = "text/html", this 
+              before the page reloads. if the newInfo key has
+              sended and Etag, Last-Modified and Content-Length
+              are null, and the Content-Type = "text/html", this
               Means a possible back end error on code, so we
-              stop the reloadings a little and console the 
+              stop the reloadings a little and console the
               possible error. Then, we will get the current page
               content with a xhr request and dinamically print its
-              content on screen, overwriting the current one. 
+              content on screen, overwriting the current one.
               This will output the error, if has one withou break
-              out script. This is an special situation of error. 
+              out script. This is an special situation of error.
             */
             if(newInfo['Content-Type'] == 'text/html'){
               if(newInfo['Etag'] == null && newInfo['Last-Modified'] == null && newInfo['Content-Length'] == null){
-                if(!phperror){
-                  console.error("Hot Reloader tracked a possible error on your back end code");
-                }
                 Live.getHTML( window.location.href, function (response) {
-                  if(document.documentElement.innerHTML != response.documentElement.innerHTML)
-                  document.documentElement.innerHTML = response.documentElement.innerHTML;
+                  if(document.documentElement.innerHTML != response.documentElement.innerHTML) {
+                    document.documentElement.innerHTML = response.documentElement.innerHTML;
+                    if(!phperror){
+                      console.error("Hot Reloader tracked a possible error on your back end code");
+                    }
+                  }
                 });
                 phperror = true;
               }
@@ -569,7 +556,7 @@ class HotReloader {
               case "text/css":
                 var link = currentLinkElements[url].setAttribute("href", url + "?now=" + new Date() * 1);
                 break;
-              // check if an html resource is our current url, then reload                               
+              // check if an html resource is our current url, then reload
               case "text/html":
                 if (url != document.location.href)
                   return;
@@ -613,7 +600,7 @@ class HotReloader {
           window.liveJsLoaded = true;
         }
         else if (window.console)
-          console.log("Php Hot Reloader: Live.js doesn't support the file protocol. It needs http.");    
+          console.log("Php Hot Reloader: Live.js doesn't support the file protocol. It needs http.");
       })();
       </script>
     <!-- END AND PRINT OF LIVE.JS -->

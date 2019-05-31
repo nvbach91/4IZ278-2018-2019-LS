@@ -3,8 +3,8 @@
 require './Person.php';
 
 $people = [];
-
-/*array_push($people, new Person(
+/*
+array_push($people, new Person(
     'jedi-logo.svg',
     'Anakin',
     'Skywalker',
