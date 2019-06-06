@@ -4,7 +4,7 @@
 const DB_HOST = 'localhost';
 const DB_DATABASE = 'test';
 const DB_USERNAME = 'zemk05';
-const DB_PASSWORD = 'L`J_C)-.~q9w*ty+Ch';
+const DB_PASSWORD = 'xxxxx';
 const GLOBAL_CURRENCY = 'Kč';
 
 abstract class Database implements DatabaseOperations {

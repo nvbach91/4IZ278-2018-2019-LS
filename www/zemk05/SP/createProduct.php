@@ -1,30 +1,39 @@
 <?php
-require_once __DIR__ . './ProductsDB.php'; 
-$productsDB = new ProductsDB('products_eshop');
+require 'db.php';
+require 'admin_req.php';
 $errors=[];
 
 if (!empty($_POST)){
     $nameValue = $_POST['name'];
     $descriptionValue = $_POST['description'];
-    $priceValue = $_POST['price'];
+    $priceValue = (int)$_POST['price'];
     $imgValue = $_POST['img'];
+    $categoryValue = $_POST['img'];
 
     if (!$nameValue){
         array_push($errors, 'Zadejte jméno produktu!');
+    }else {
+        if (!is_string($nameValue)){
+            array_push($errors, 'Pole popis musí obsahovat pouze text!');
+        }
     }
     if (!$descriptionValue){
         array_push($errors, 'Zadejte popis produktu!');
     }
     if (!$priceValue){
         array_push($errors, 'Zadejte cenu produktu!');
+    }else {
+        if (!is_int($priceValue)){
+            array_push($errors, 'Pole cena musí obsahovat pouze číslo!');
+        }
     }
 
     if (!$imgValue){
-        array_push($errors, 'Zadejte adresu obrázku produktu!');
+        array_push($errors, 'Zadejte url adresu obrázku produktu!');
     }
 
     if(!count($errors)){
-        $productsDB->create(['name'=>$nameValue, 'description'=>$descriptionValue, 'price'=>$priceValue,'img'=>$imgValue]);
+        $productsDB->create(['name'=>$nameValue, 'description'=>$descriptionValue, 'price'=>$priceValue,'category'=>1]);
         header('Location: index.php?create=true');
         die();
     }
@@ -55,11 +64,11 @@ if (!empty($_POST)){
         </div>
         <div class="form-group">
             <label>Cena</label>
-            <input class="form-control" type="number" name="price" min="0" value="<?php echo @$priceValue; ?>">
+            <input class="form-control calculator-input" type="number" name="price" min="0" value="<?php echo @$priceValue; ?>">
         </div>
         <div class="form-group">
             <label>Obrázek</label>
-            <input class="form-control" name="img" value="<?php echo @$imgValue; ?>">
+            <input class="form-control" name="img" type="url" value="<?php echo @$imgValue; ?>">
         </div>
         <button class="btn btn-primary text-center" type="submit" action="createProduct.php">Vytvořit</button>
     </form>
