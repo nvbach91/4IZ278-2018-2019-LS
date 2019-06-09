@@ -1,0 +1,55 @@
+h1,h2 {
+    text-align:center;
+}
+
+main {
+    margin: 30px 30px 30px 30px;
+    padding:20px;
+    background-color: #A1CDA8;
+}
+
+body {
+    background-color: #AD9BAA;
+}
+
+a {
+    color:black;
+}
+.card {
+    background-color: rgb(197, 245, 222);
+}
+/*********************INDEX.PHP*************************/
+#productCard {
+    background-color: rgb(197, 245, 222);
+    display:flex;
+    flex-direction: inherit;
+}
+#productCard .btn {
+    display:flex;
+    flex-direction: row;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+    margin-top:10px;
+}
+
+.col-lg-4,.col-md-6 {
+    margin-bottom:20px;
+}
+h4 {
+    color:black;
+}
+
+.page-item {
+    display:contents;
+}
+.page-item a {
+    color:black;
+}
+/*********************LOGIN.PHP*************************/
+.fb-login-button {
+    margin:auto;
+}
