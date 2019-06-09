@@ -1,0 +1,11 @@
+vendor/
+include/fb-config.php
+user_data/*
+
+!user_data/events_pics
+user_data/events_pics/*
+!user_data/events_pics/default.jpg
+
+!user_data/profile-pic
+user_data/profile-pic/*
+!user_data/profile-pic/default.png
