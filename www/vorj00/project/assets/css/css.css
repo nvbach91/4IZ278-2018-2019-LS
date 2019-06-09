@@ -1,0 +1,515 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input,
+textarea {
+    color: #000;
+    padding: 0 10px;
+    border: 1px solid #000;
+    transition: background-color 0.5s;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+textarea {
+    height: 100px;
+}
+
+button {
+    background-color: #2ecc71;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    padding: 15px 20px;
+}
+
+form {
+    margin: 0;
+}
+
+.headercont {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+.header {
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header * {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+}
+
+.nadpis h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 25px;
+}
+
+.headerright ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+.headerright ul li {
+    padding: 0 30px 0 0;
+    margin: auto;
+}
+
+.cont {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+}
+
+.cont.text {
+    display: block;
+}
+
+.cont.text a {
+    color: #000;
+}
+
+.cont h1 {
+    width: 100%;
+}
+
+.akce {
+    /* zbytek nainterpretován v event.php kvůli zobrazení fotky */
+    height: auto;
+}
+
+.akce * {
+    color: #fff;
+}
+
+.akce h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 50px;
+    font-weight: lighter;
+}
+
+.akcepridatform {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.badAlert,
+.goodAlert {
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+}
+
+.badAlert a,
+.goodAlert a {
+    text-decoration: underline;
+}
+
+.badAlert {
+    background-color: #d35400;
+}
+
+.goodAlert {
+    background-color: #2980b9;
+}
+
+.akcepridat button {
+    width: 175px;
+    background: transparent;
+    border: 2px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-radius: 0px;
+}
+
+.akcepridat button:first-of-type {
+    border-left: 2px solid white;
+    border-radius: 5px 0 0 5px;
+}
+
+.akcepridat button:last-of-type {
+    border-right: 2px solid white;
+    border-radius: 0 5px 5px 0;
+}
+
+.akcepridan button {
+    width: 525px;
+    background: transparent;
+    border: 2px solid white !important;
+    border-radius: 5px !important;
+}
+
+.akcepridat button {
+    background-image: linear-gradient(transparent, transparent 50%, #27ae60 50%, #27ae60);
+    background-size: auto 200%;
+    background-position: 0 0;
+    transition: background-position .5s;
+}
+
+.akcepridat button:hover {
+    background-position: 0 100%;
+}
+
+.akcepridat .active {
+    background-position: 0 100%;
+}
+
+.flexakce1 {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    width: 25%;
+}
+
+.flexakce1>* {
+    margin: 0 10px;
+}
+
+.termin {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.akcedatum {
+    padding: 10px;
+    background-color: #ecf0f1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.akcedatum * {
+    color: #000;
+}
+
+.akcedatum div:first-child {
+    font-size: 50px;
+}
+
+.akcemistocont {
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #ecf0f1;
+}
+
+.akcemistocont iframe {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+.flexakce2 {
+    margin: 0;
+    width: 50%;
+}
+
+.flexakce2 * {
+    color: #000;
+}
+
+.flexakce2 input {
+    border: 1px solid #bdc3c7;
+    background: transparent;
+    margin: 0 5px;
+    transition: .5s;
+    width: 100%;
+}
+
+.flexakce2 input:focus {
+    border: 1px solid #000;
+}
+
+.flexakce2 img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.akceprispevekvlozit form,
+.akceprispevek,
+.akcekoment,
+.akceprispevekokomentovat {
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 5px;
+}
+
+.akceprispevekvlozit form {
+    border-radius: 10px;
+    margin: 0 0 10px 0;
+    padding: 10px;
+}
+
+.akceprispevekright,
+.akcekomentright {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 0 0 0 20px;
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.akceprispevekheader,
+.akcekomentheader {
+    color: #aaa;
+}
+
+.akceprispevek h2,
+.akcekoment h2 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.akceprispevekprispevek,
+.akcekomentkoment {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.akcekoment,
+.akceprispevekokomentovat {
+    border-radius: 0;
+    background-color: #ecf0f1;
+}
+
+.akceprispevekokomentovat {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 10px 0;
+    border-radius: 0 0 10px 10px;
+}
+
+.akceprispevekokomentovat form {
+    padding: 0 5px;
+    width: 100%;
+}
+
+.flexakce3 {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 0;
+    width: 25%;
+}
+
+.flexakce3>* {
+    margin: 0 10px;
+}
+
+.akceucast ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.oneline ul {
+    height: 75px;
+    overflow: hidden;
+}
+
+.akceucast ul li {
+    border-radius: 5px;
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin: 0 2.5px 5 2.5px;
+    color: #000;
+}
+
+.akceucast ul li img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.akcestatus {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 2px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.akcestatus i {
+    color: #27ae60;
+}
+
+.akcestatus .fa-calendar-times-o {
+    color: #c0392b;
+}
+
+.akcestatus .fa-question-circle {
+    color: #2980b9;
+}
+
+.akceucastinfo {
+    display: none;
+}
+
+.akceucast img:hover~.akceucastinfo {
+    display: block;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+    top: 70;
+    z-index: 2;
+    background-color: #ecf0f1;
+}
+
+.akceucastinfo * {
+    color: #000;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.akcepopis {
+    background-color: rgba(0, 0, 0, .5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.naplanovat {
+    margin: auto auto;
+    background-color: #fff;
+}
+
+.naplanovat table tr td:first-child {
+    text-align: right;
+}
+
+#naseptavac {
+    background-color: #dbf2e5;
+    color: #24a058;
+    padding: 0.5rem;
+    display: flex;
+    cursor: pointer;
+}
+
+#naseptavac * {
+    align-items: center;
+}
+
+#naseptavac input[type="checkbox"] {
+    width: auto;
+}
+
+#naseptavac img {
+    width: 50px;
+}
+
+.nastaveniIcons {
+    width: 100%;
+}
+
+.nastaveniIconsCont {
+    background-color: #dbf2e5;
+    color: #24a058;
+    padding: 1rem;
+    margin: 5px 0 0 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nastaveniIconsCont img {
+    height: 30px;
+}
+
+#userCard {
+    max-width: 300px;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 10px auto;
+    text-align: center;
+    border: 1px solid #7f8c8d;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#userCard h2 {
+    font-size: 25px;
+}
+
+#userCard button {
+    border-radius: 0px;
+}
+
+.searchOutput a {
+    color: 000;
+    text-decoration: underline;
+}
+
+.searchOutput img {
+    width: 50px;
+}
+
+.searchOutput * {
+    display: flex;
+    align-self: center;
+}
+
+.display-none {
+    display: none;
+}
+
+.background-blue {
+    background-color: #3498db;
+}
+
+.background-red {
+    color: #e74c3c
+}
+
+.horizontal-center {
+    margin: 0 auto;
+}
