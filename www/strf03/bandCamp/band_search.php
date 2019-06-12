@@ -40,7 +40,7 @@ if ($submittedForm) {
     // vyberu kapely podle jmena, data nebo kraje
     $stmt = $db->prepare("SELECT band_id FROM bands WHERE band_name like :band_name OR district = :district OR date_started > :date_started");
     $stmt->execute([
-        'band_name' => '%'.$band_name.'%',
+        'band_name' => '%' . $band_name . '%',
         'date_started' => $date_started,
         'district' => $district
     ]);
@@ -101,7 +101,7 @@ $music_genres = $stmt->fetchAll();
                 <div class="form-group"> <!-- Date input -->
                     <label class="control-label" for="date">Datum vzniku kapely</label>
                     <input class="form-control" name="date_started" placeholder="YYYY-MM-DD" type="text"
-                           value="<?php echo @$date_started; ?>" autocomplete="off" />
+                           value="<?php echo @$date_started; ?>" autocomplete="off"/>
                 </div>
                 <div class="mb-3">
                     <label for="music_genres">Hudební styly (podrž ctrl pro označení více)</label>
@@ -120,18 +120,19 @@ $music_genres = $stmt->fetchAll();
         <div class="col-8">
             <?php if (isset($bands)): ?>
                 <?php foreach ($bands as $band): ?>
+                    <a href="band_profile.php?band_id=<?php echo $band['band_id'] ?>">
+                        <div class="card" style="width: 50%; float: left">
+                            <img src="./images/<?php echo isset($band['avatar']) ? $band['avatar'] : $DEFAULT_AVATAR ?>"
+                                 style="width:100%; height: 300px">
+                            <h3><?php echo $band['band_name']; ?></h3>
+                            <p class="title">Datum vzniku: <?php echo $band['date_started']; ?></p>
+                            <p><?php echo $band['district']; ?></p>
+                            <p><b><u>Hudební žánry</u></b></p>
+                            <?php // foreach ($music_genres as $music_genre): ?>
+                            <p><?php //echo $music_genre['music_genre_name'] ?></p>
 
-                    <div class="card" style="width: 50%; float: left">
-                        <img src="./images/<?php echo isset($band['avatar']) ? $band['avatar'] : $DEFAULT_AVATAR  ?>"
-                              style="width:100%">
-                        <a href="band_profile.php?band_id=<?php echo $band['band_id']?>"><h3><?php echo $band['band_name']; ?></h3></a>
-                        <p class="title">Datum vzniku: <?php echo $band['date_started']; ?></p>
-                        <p><?php echo $band['district']; ?></p>
-                        <p><b><u>Hudební žánry</u></b></p>
-                        <?php // foreach ($music_genres as $music_genre): ?>
-                        <p><?php //echo $music_genre['music_genre_name'] ?></p>
-
-                    </div>
+                        </div>
+                    </a>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>

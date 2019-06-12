@@ -2,13 +2,13 @@
 session_start();
 require 'db.php';
 
-if(isset($_SESSION['band_id'])){
+if (isset($_SESSION['band_id'])) {
     header('Location: band_profile.php?band_id=' . $_SESSION['band_id']);
 }
-if(isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id'])) {
     header('Location: user_profile.php?user_id=' . $_SESSION['user_id']);
 }
-$submittedForm=$_SERVER['REQUEST_METHOD'] == 'POST';
+$submittedForm = $_SERVER['REQUEST_METHOD'] == 'POST';
 
 if ($submittedForm) {
     $email = test_input($_POST['email']);
@@ -27,7 +27,7 @@ if ($submittedForm) {
             $_SESSION['email'] = $existing_user['email'];
             header('Location: user_profile.php?user_id=' . $_SESSION['user_id']);
         } else {
-        $errors['invalid'] = 'Nesprávný email nebo heslo';
+            $errors['invalid'] = 'Nesprávný email nebo heslo';
         }
     }
     //-------------------
@@ -54,27 +54,36 @@ if ($submittedForm) {
 ?>
 <?php require __DIR__ . '/incl/header.php' ?>
     <main class="container">
-            <h4 class="mb-3">Přihlásit uživatele</h4>
+        <h4 class="mb-3">Přihlásit uživatele</h4>
+
+        <?php if (isset($_GET['registration'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Registrace úspěšná</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
         <?php if ($submittedForm && !empty($errors)): ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <?php echo implode('<br>', array_values($errors)); ?>
             </div>
         <?php endif; ?>
-            <form method="POST">
+        <form method="POST">
 
-                <div class="mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="you@example.com">
-                </div>
+            <div class="mb-3">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo @$email; ?>">
+            </div>
 
-                <div class="mb-3">
-                    <label for="email">Password</label>
-                    <input name="password" type="password" class="form-control" placeholder="Password">
-                </div>
+            <div class="mb-3">
+                <label for="email">Heslo</label>
+                <input name="password" type="password" class="form-control" placeholder="Heslo">
+            </div>
 
 
-                <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Přihlásit se</button>
-            </form>
+            <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Přihlásit se</button>
+        </form>
         <b><a href="registration.php">Nemáš účet? Registrace!</a></b>
     </main>
 

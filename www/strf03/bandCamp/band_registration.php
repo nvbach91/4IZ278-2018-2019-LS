@@ -24,7 +24,7 @@ if ($submittedForm) {
 
     if (!empty($date_started)) {
         $date_exploded = explode('-', $date_started);
-        if (!checkdate($date_exploded[1], $date_exploded[2], (int)$date_exploded[0])) {
+        if (!checkdate($date_exploded[1], $date_exploded[2], $date_exploded[0])) {
             $errors['date_started'] = 'Prosím zvolte platné datum';
         }
     } else {
@@ -55,7 +55,7 @@ if ($submittedForm) {
     $file_tmp;
     $file_name;
     $uploads_dir = "images";
-    if (isset($_FILE['image']) && !empty($_FILE['image'])) {
+    if (file_exists($_FILES['image']['tmp_name']) || is_uploaded_file($_FILES['image']['tmp_name'])) {
         $file_name = $_FILES['image']['name'];
         $file_size = $_FILES['image']['size'];
         $file_tmp = $_FILES['image']['tmp_name'];
@@ -120,7 +120,7 @@ if ($submittedForm) {
             $stmt->execute();
         }
 
-        header('Location: index.php');
+        header('Location: index.php?registration=success');
     }
 }
 
@@ -131,74 +131,83 @@ $music_genres = $stmt->fetchAll();
 
 ?>
 <?php require __DIR__ . '/incl/header.php' ?>
-    <main class="container">
-        <div class="col-md-8 order-md-1">
-            <h4 class="mb-3">Zaregistrovat kapelu</h4>
-            <?php if ($submittedForm && !empty($errors)): ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <?php echo implode('<br>', array_values($errors)); ?>
-                </div>
-            <?php endif; ?>
-            <form method="POST" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="username">Jméno kapely</label>
-                    <div class="input-group">
+<main class="container">
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Zaregistrovat kapelu</h4>
+        <?php if ($submittedForm && !empty($errors)): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo implode('<br>', array_values($errors)); ?>
+            </div>
+        <?php endif; ?>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="band_name">Jméno kapely</label>
 
-                        <input name="band_name" type="text" class="form-control" placeholder="Jméno kapely"
-                               value="<?php echo @$band_name; ?>">
-                    </div>
-                </div>
+                <input name="band_name" type="text" class="form-control" placeholder="Jméno kapely"
+                       value="<?php echo @$band_name; ?>">
 
-                <div class="mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="Email"
-                           value="<?php echo @$email; ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="music_genres">Hudební styly (podrž ctrl pro označení více)</label>
-                    <select name="music_genres[]" class="form-control" multiple="multiple">
-                        <?php foreach ($music_genres as $music_genre): ?>
-                            <option value="<?php echo $music_genre['music_genre_id']; ?>"><?php echo $music_genre['music_genre_name']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
+            </div>
 
-                </div>
-                <div class="form-group"> <!-- Date input -->
-                    <label class="control-label" for="date">Datum vzniku kapely</label>
-                    <input class="form-control" name="date_started" placeholder="YYYY-MM-DD" type="text"
-                           value="<?php echo @$date_started; ?>"/>
-                </div>
+            <div class="mb-3">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Email"
+                       value="<?php echo @$email; ?>">
+            </div>
+            <div class="mb-3">
+                <label for="music_genres">Hudební styly (podrž ctrl pro označení více)</label>
+                <select name="music_genres[]" class="form-control" multiple="multiple">
+                    <?php foreach ($music_genres as $music_genre): ?>
+                        <option value="<?php echo $music_genre['music_genre_id']; ?>"><?php echo $music_genre['music_genre_name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
 
+            </div>
 
-                <div class="mb-3">
-                    <label for="district">Kraj</label>
-                    <select name="district" class="custom-select d-block w-100">
-                        <option value="">Vyber kraj...</option>
-                        <?php foreach ($districts as $name): ?>
-                            <option value="<?php echo $name ?>"> <?php echo $name ?> </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="password">Heslo</label>
-                    <input name="password" type="password" class="form-control" placeholder="Heslo">
-                </div>
-                <div class="mb-3">
-                    <label for="password_again">Heslo znovu</label>
-                    <input name="password_again" type="password" class="form-control"
-                           placeholder="Heslo ještě jednou">
-                </div>
+            <div class="mb-3"> <!-- Date input -->
+                <label class="control-label" for="date">Datum vzniku kapely</label>
+                <input class="form-control" name="date_started" placeholder="YYYY-MM-DD" type="text"
+                       value="<?php echo @$date_started; ?>" autocomplete="off"/>
+            </div>
 
 
-                <div class="mb-3">
-                    <label for="image">Avatar</label>
-                    <input name="image" type="file" class="form-control-input">
-                </div>
+            <div class="mb-3">
+                <label for="district">Kraj</label>
+                <select name="district" class="custom-select d-block w-100">
+                    <option value="">Vyber kraj...</option>
+                    <?php foreach ($districts as $name): ?>
+                        <option value="<?php echo $name ?>"> <?php echo $name ?> </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-                <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Vytvoř kapelu!</button>
+            <div class="mb-3">
+                <label for="password">Heslo</label>
+                <input name="password" type="password" class="form-control" placeholder="Heslo">
+            </div>
 
-    </main>
-    <div style="margin-bottom: 50px"></div>
+            <div class="mb-3">
+                <label for="password_again">Heslo znovu</label>
+                <input name="password_again" type="password" class="form-control"
+                       placeholder="Heslo ještě jednou">
+            </div>
+
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" name="image" accept="image/x-png,image/gif,image/jpeg">
+                <label class="custom-file-label" for="customFile">Vybrat profilový obrázek</label>
+            </div>
+
+
+            <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Vytvoř kapelu!</button>
+
+</main>
+<div style="margin-bottom: 50px"></div>
 
 <?php require __DIR__ . '/incl/footer.php' ?>
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>

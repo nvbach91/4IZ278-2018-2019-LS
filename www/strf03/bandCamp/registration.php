@@ -8,9 +8,10 @@
             </div>
             <div class="card-body">
                 <h1 class="card-title pricing-card-title">Založ kapelu</h1>
+                <img class="card-img-top" src="./images/site/band.png" alt="Card image" style="height: 100px; width:100px;">
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li>Prezentace kapely</li>
-                    <li>Informace o kapele (členové, videa, styl)</li>
+                    <li>Prezentujte své skladby a videa</li>
+                    <li>Získejte nové fanoušky</li>
                     <li>Novinky v kapele</li>
                 </ul>
                 <a href="band_registration.php" class="btn btn-lg btn-block btn-dark">Zaregistruj kapelu</a>
@@ -22,10 +23,11 @@
             </div>
             <div class="card-body">
                 <h1 class="card-title pricing-card-title">Založ si profil hudebníka</h1>
+                <img class="card-img-top" src="./images/site/singer.png" alt="Card image" style="height: 100px; width:100px;">
                 <ul class="list-unstyled mt-3 mb-4">
                     <li>Informace o tobě</li>
-                    <li>Tvoje prezentace (vkus, styl)</li>
-                    <li>Lorem ipsum</li>
+                    <li>Objev nové kapely a kámoše</li>
+                    <li>Sdílej svůj hudební vkus</li>
                 </ul>
                 <a href="user_registration.php" class="btn btn-lg btn-block btn-dark">Zaregistruj hudebníka</a>
             </div>

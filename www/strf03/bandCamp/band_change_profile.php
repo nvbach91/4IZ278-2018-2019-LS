@@ -6,16 +6,12 @@ require 'band_required.php';
 
 $submittedForm = $_SERVER['REQUEST_METHOD'] == 'POST';
 
-
 if ($submittedForm) {
     $band_name = test_input($_POST['band_name']);
     $avatar; //TODO change avatar
     $dateStarted = test_input($_POST['date_started']);
     $district = test_input($_POST['district']);
 
-    $password = test_input($_POST['password']);
-
-    $password_again = test_input($_POST['password_again']);
 
     if (empty($band_name)) {
         $errors['band_name'] = 'Fill your name';
@@ -94,43 +90,43 @@ $music_genres = $stmt->fetchAll();
                 </div>
             <?php endif; ?>
             <img src="./images/<?php echo isset($current_band['avatar']) ? $current_band['avatar'] : $DEFAULT_AVATAR ?>"
-                 alt="John" style="width:100%" height="300px">
+                 alt="Profilový obrázek" style="width:100%" height="300px">
             <br>
-            <label for="band_name">Name:</label>
-            <input type="text" name="band_name" class="form-control" value="<?php echo $current_band['band_name']; ?>"
-                   placeholder="New name of your band" required="required">
+            <div class="mb-3">
+                <label for="band_name">Jméno kapely</label>
+                <input type="text" name="band_name" class="form-control"
+                       value="<?php echo $current_band['band_name']; ?>"
+                       placeholder="New name of your band" required="required">
 
-            Hudební styly (podrž ctrl pro označení více)
-            <select name="music_genres[]" class="form-control" multiple="multiple">
-                <?php foreach ($music_genres as $music_genre): ?>
-                    <option value="<?php echo $music_genre['music_genre_id']; ?>"><?php echo $music_genre['music_genre_name']; // todo selected ?></option>
-                <?php endforeach; ?>
-            </select>
-
-
-            <div class="form-group"> <!-- Date input -->
-                Date: <input name="date_started" class="form-control" placeholder="YYYY-MM-DD"
-                             value="<?php echo $current_band['date_started']; ?>" type="text" required="required"/>
             </div>
 
-            Kraj: <select value="<?php echo $current_band['district'] ?>" name="district"
-                          class="custom-select d-block w-100" id="state" required="required">
-                <option value="">Vyber kraj...</option>
-                <?php foreach ($districts as $name): ?>
-                    <option value="<?php echo $name ?>" <?php echo $current_band['district'] == $name ? 'selected=selected' : '' ?>> <?php echo $name ?> </option>
-                <?php endforeach; ?>
-            </select>
+            <div class="mb-3">
+                <label for="music_genres">Hudební styly (podrž ctrl pro označení více)</label>
+                <select name="music_genres[]" class="form-control" multiple="multiple">
+                    <?php foreach ($music_genres as $music_genre): ?>
+                        <option value="<?php echo $music_genre['music_genre_id']; ?>"><?php echo $music_genre['music_genre_name']; // todo selected ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="mb-3"> <!-- Date input -->
+                <label class="control-label" for="date">Datum vzniku kapely</label>
+                <div class="form-group"> <!-- Date input -->
+                    <input name="date_started" class="form-control" placeholder="YYYY-MM-DD"
+                           value="<?php echo $current_band['date_started']; ?>" type="text" required="required"/>
+                </div>
+            </div>
 
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" class="form-control"
-                   placeholder="Your new password" required="required">
-
-            <label for="password_again">Password again:</label>
-            <input type="password" name="password_again" class="form-control"
-                   placeholder="New password again" required="required">
-            <br>
-            <button class="btn btn-lg btn-secondary btn-block text-uppercase" type="submit">Update account</button>
+            <div class="mb-3">
+                <label for="district">Kraj</label>
+                <select value="<?php echo $current_band['district'] ?>" name="district"
+                        class="custom-select d-block w-100" id="state" required="required">
+                    <option value="">Vyber kraj...</option>
+                    <?php foreach ($districts as $name): ?>
+                        <option value="<?php echo $name ?>" <?php echo $current_band['district'] == $name ? 'selected=selected' : '' ?>> <?php echo $name ?> </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <button class="btn btn-lg btn-secondary btn-block text-uppercase" type="submit">Upravit profil</button>
         </div>
 </div>
 </form>

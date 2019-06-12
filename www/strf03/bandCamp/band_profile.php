@@ -13,7 +13,7 @@ $stmt = $db->prepare('SELECT * FROM bands WHERE band_id = ?');
 $stmt->execute([$band_id]);
 $band = $stmt->fetch();
 
-if(empty($band)){
+if (empty($band)) {
     redirect();
 }
 
@@ -32,6 +32,11 @@ $stmt = $db->prepare('SELECT * FROM music_genres join bands_genres WHERE
 $stmt->execute([$band_id]);
 $music_genres = $stmt->fetchAll();
 
+$stmt = $db->prepare('SELECT * FROM users join band_members WHERE
+users.user_id = band_members.users_user_id and band_members.bands_band_id = ?');
+$stmt->execute([$band_id]);
+$members_of_band = $stmt->fetchAll();
+
 ?>
 
 <?php require __DIR__ . '/incl/header.php' ?>
@@ -39,16 +44,32 @@ $music_genres = $stmt->fetchAll();
     <br>
     <div class="row">
         <div class="col-4">
-            <div class="card">
+            <div class="card border-dark">
                 <img src="./images/<?php echo isset($band['avatar']) ? $band['avatar'] : $DEFAULT_AVATAR ?>"
                      alt="Profile image" style="width:100%">
-                <h1><?php echo $band_name; ?></h1>
-                <p class="title">Datum vzniku: <?php echo $date_started; ?></p>
-                <p><?php echo $district; ?></p>
-                <p><b><u>Hudební žánry</u></b></p>
-                <?php foreach ($music_genres as $music_genre): ?>
-                    <p><?php echo $music_genre['music_genre_name'] ?></p>
-                <?php endforeach; ?>
+
+                <h2 class="card-title"><?php echo $band_name; ?></h2>
+                <p class="card-text">Datum vzniku: <?php echo $date_started; ?>
+
+                <p class="card-text">Kraj: <?php echo $district; ?></p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h6 class="card-subtitle mb-2 text-muted">Hudební žánry</h6>
+                        <?php foreach ($music_genres as $music_genre) {
+                            if (!next($music_genres)) {
+                                echo $music_genre['music_genre_name'];
+                            } else {
+                                echo $music_genre['music_genre_name'] . ', ';
+                            }
+                        } ?>
+                    </li>
+                    <li class="list-group-item">
+                        <h6 class="card-subtitle mb-2 text-muted">Členové kapely</h6>
+                        <?php foreach ($members_of_band as $member_of_band): ?>
+                            <a href="user_profile.php?user_id=<?php echo $member_of_band['user_id']; ?>"><?php echo $member_of_band['first_name'] . ' ' . $member_of_band['last_name'] ?></a>
+                        <?php endforeach; ?>
+                    </li>
+                </ul>
 
                 <?php if ($owner): ?>
 
@@ -64,6 +85,10 @@ $music_genres = $stmt->fetchAll();
                 <br><br>
             <?php endif; ?>
 
+            <?php if (empty($articles) && !$owner): ?>
+                <h5 class="card-subtitle mb-2 text-muted text-center">Kapela ještě nepřidala žádné články</h5>
+            <?php endif; ?>
+
             <?php foreach ($articles as $article): ?>
                 <h2>
                     <?php if ($owner): ?>
@@ -71,7 +96,35 @@ $music_genres = $stmt->fetchAll();
                         <?php echo $article['header'] ?><?php if ($owner): ?> </a> <?php endif; ?></h2>
                 <p><?php echo $article['content'] ?></p>
 
-                <!-- TODO if(isset(user_id)) zobraz input komentare k clankum -->
+                    <div class="container">
+                        <h4>Komentáře</h4>
+
+                            <?php
+                            $stmt = $db->prepare('select * from comments join users 
+where comments.users_user_id=users.user_id and comments.articles_article_id = ?');
+                            $stmt->execute([$article['article_id']]);
+                            $comments = $stmt->fetchAll();
+
+                            foreach ($comments as $comment): ?>
+                                <div class="card">
+                                <?php echo $comment['first_name'].' '. $comment['text']; ?>
+                                </div>
+                            <?php endforeach; ?>
+
+
+                        <br>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                        <form class="form-inline" method="post" action="add_comment.php?article_id=<?php echo $article['article_id']; ?>&band_id=<?php echo $article['bands_band_id']; ?>">
+                            <div class="form-group">
+                                <input class="form-control" name="text"  type="text" placeholder="Your comments" />
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-large">Add</button>
+                            </div>
+                        </form>
+                        <?php endif; ?>
+                    <br><br>
+
             <?php endforeach; ?>
         </div>
 

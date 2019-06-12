@@ -23,10 +23,7 @@ if ($submittedForm) {
 
     $district = $_POST['district'];
 
-    $password = test_input($_POST['password']);
-    $password_again = test_input($_POST['password_again']);
-
-    if (!preg_match('/^(\+\d{3} ?)?(\d{3} ?){3}$/', $phone)) {
+    if (!preg_match('/^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$/', $phone)) {
         $errors['phone'] = 'Vyplň validní telefonní číslo';
 
     }
@@ -37,9 +34,6 @@ if ($submittedForm) {
         $errors['last_name'] = 'Vyplň příjmení';
     }
 
-    if (strlen($password) < 3 || $password != $password_again) { // TODO change size
-        $errors['password'] = 'Použij více než 7 znaků pro heslo. Hesla se musí shodovat';
-    }
     if (!in_array($district, $districts)) {
         $errors['district'] = 'Vyber kraj ze kterého pocházíš';
     }
@@ -76,15 +70,13 @@ if ($submittedForm) {
     }
 
     if (empty($errors)) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $db->prepare('UPDATE users SET first_name= :first_name, last_name =:last_name, phone=:phone, district= :district, password=:password WHERE user_id = :user_id');
+        $stmt = $db->prepare('UPDATE users SET first_name= :first_name, last_name =:last_name, phone=:phone, district= :district WHERE user_id = :user_id');
         $stmt->execute([
             'first_name' => $first_name,
             'last_name' => $last_name,
             'phone' => $phone,
             'district' => $district,
-            'password' => $hashedPassword,
             'user_id' => $_SESSION['user_id']
         ]);
 
@@ -132,10 +124,11 @@ $instruments = $stmt->fetchAll();
 ?>
 <?php require __DIR__ . '/incl/header.php' ?>
     <main class="container">
+        <h5 class="text-center">Úprava profilu</h5>
         <form method="POST">
         <div class="card" style="width: 50%">
-            <h5 class="card-header">Úprava profilu</h5>
-            <br>
+
+
             <?php if ($submittedForm && !empty($errors)): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <?php echo implode('<br>', array_values($errors)); ?>
@@ -170,7 +163,7 @@ $instruments = $stmt->fetchAll();
 
                     <div class="input-group">
 
-                        <input name="phone" type="tel" pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$}"
+                        <input name="phone" type="tel" pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"
                                class="form-control"
                                placeholder="Telefonní číslo" value="<?php echo $current_user['phone']; ?>">
                     </div>
@@ -206,17 +199,9 @@ $instruments = $stmt->fetchAll();
                     </select>
                 </div>
 
-                <div class="mb-3">
-                    <label for="password">Heslo</label>
-                    <input name="password" type="password" class="form-control" placeholder="Password">
-                </div>
-                <div class="mb-3">
-                    <label for="password">Heslo znovu</label>
-                    <input name="password_again" type="password" class="form-control"
-                           placeholder="Heslo znovu">
-                </div>
 
-                <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Creat account</button>
+
+                <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Upravit profil</button>
             </form>
 
         </div>

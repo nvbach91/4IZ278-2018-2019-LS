@@ -10,7 +10,6 @@ if ($submittedForm) {
 
     $phone = test_input($_POST['phone']);
 
-    $avatar; // TODO avatar
 
     if (isset($_POST['music_genres'])) {
         $music_genres = $_POST['music_genres'];
@@ -27,8 +26,8 @@ if ($submittedForm) {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = 'Zadej validní email';
     }
-    if (!preg_match('/^(\+\d{3} ?)?(\d{3} ?){3}$/', $phone)) {
-            $errors['phone'] = 'Vyplň validní telefonní číslo';
+    if (!preg_match('/^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$/', $phone)) {
+        $errors['phone'] = 'Vyplň validní telefonní číslo';
 
     }
     if (empty($first_name)) {
@@ -38,7 +37,7 @@ if ($submittedForm) {
         $errors['last_name'] = 'Vyplň příjmení';
     }
 
-    if (strlen($password) < 7 || $password!=$password_again) {
+    if (strlen($password) < 7 || $password != $password_again) {
         $errors['password'] = 'Použij více než 7 znaků pro heslo. Hesla se musí shodovat';
     }
     if (!in_array($district, $districts)) {
@@ -53,14 +52,14 @@ if ($submittedForm) {
     $select->execute([$email]);
     $existing_band = $select->fetch();
 
-    if (!empty($existing_user)|| !empty($existing_band)) {
+    if (!empty($existing_user) || !empty($existing_band)) {
         $errors['existing'] = 'Uživatel s tím emailem už existuje';
     }
 
-    $file_tmp = '';
-    $file_name = '';
+    $file_tmp;
+    $file_name;
     $uploads_dir = "images";
-    if (isset($_FILES['image'])) {
+    if (file_exists($_FILES['image']['tmp_name']) || is_uploaded_file($_FILES['image']['tmp_name'])) {
         $file_name = $_FILES['image']['name'];
         $file_size = $_FILES['image']['size'];
         $file_tmp = $_FILES['image']['tmp_name'];
@@ -71,11 +70,11 @@ if ($submittedForm) {
         $extensions = array("jpeg", "jpg", "png");
 
         if (in_array($file_ext, $extensions) === false) {
-            $errors['extensions'] = "extension not allowed, please choose a JPEG or PNG file.";
+            $errors['extensions'] = "Zvolte obrázek s příponou .jpg nebo .png";
         }
 
         if ($file_size > 2097152) {
-            $errors['size'] = 'File size must be excately 2 MB';
+            $errors['size'] = 'Soubor musí být menší než 2MB'; // todo change
         }
 
         $increment = 0;
@@ -88,16 +87,20 @@ if ($submittedForm) {
     }
 
     if (empty($errors)) {
+
+        move_uploaded_file($file_tmp, $uploads_dir . "/" . $file_name);
+
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $db->prepare('Insert Into users(email, first_name, last_name, phone, avatar, district, password)
-          Values (:email, :name, :last_name,:phone, null, :district, :password)');
+          Values (:email, :first_name, :last_name,:phone, :avatar, :district, :password)');
 
         $stmt->execute([
             'email' => $email,
-            'name' => $first_name,
+            'first_name' => $first_name,
             'last_name' => $last_name,
             'phone' => $phone,
+            'avatar' => $file_name,
             'district' => $district,
             'password' => $hashedPassword
         ]);
@@ -132,7 +135,7 @@ if ($submittedForm) {
             $stmt->execute();
         }
 
-        header('Location: index.php');
+        header('Location: index.php?registration=success');
     }
 }
 
@@ -154,11 +157,12 @@ $instruments = $stmt->fetchAll();
                     <?php echo implode('<br>', array_values($errors)); ?>
                 </div>
             <?php endif; ?>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
 
                 <div class="mb-3">
                     <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="you@example.com" value="<?php echo @$email ?>">
+                    <input type="email" name="email" class="form-control" placeholder="Email"
+                           value="<?php echo @$email ?>">
                 </div>
 
                 <div class="mb-3">
@@ -166,16 +170,18 @@ $instruments = $stmt->fetchAll();
 
                     <div class="input-group">
 
-                        <input name="first_name" type="text" class="form-control" placeholder="Jméno" value="<?php echo @$first_name ?>">
+                        <input name="first_name" type="text" class="form-control" placeholder="Jméno"
+                               value="<?php echo @$first_name ?>">
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="last_name" >Příjmení</label>
+                    <label for="last_name">Příjmení</label>
 
                     <div class="input-group">
 
-                        <input name="last_name" type="text" class="form-control" placeholder="Příjmení" value="<?php echo @$last_name ?>">
+                        <input name="last_name" type="text" class="form-control" placeholder="Příjmení"
+                               value="<?php echo @$last_name ?>">
                     </div>
                 </div>
 
@@ -184,7 +190,8 @@ $instruments = $stmt->fetchAll();
 
                     <div class="input-group">
 
-                        <input name="phone" type="tel" pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$}" class="form-control"
+                        <input name="phone" type="tel" pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"
+                               class="form-control"
                                placeholder="Telefonní číslo" value="<?php echo @$phone ?>">
                     </div>
                 </div>
@@ -211,7 +218,8 @@ $instruments = $stmt->fetchAll();
 
                 <div class="mb-3">
                     <label for="district">Kraj</label>
-                    <select name="district" class="custom-select d-block w-100" value="<?php echo @$district  //todo funguje takhle? ?>">
+                    <select name="district" class="custom-select d-block w-100"
+                            value="<?php echo @$district  //todo funguje takhle? ?>">
                         <option value="">Vyber kraj...</option>
                         <?php foreach ($districts as $name): ?>
                             <option value="<?php echo $name ?>"> <?php echo $name ?> </option>
@@ -228,11 +236,15 @@ $instruments = $stmt->fetchAll();
                     <input name="password_again" type="password" class="form-control"
                            placeholder="Heslo znovu">
                 </div>
-
+                <div class="mb-3">
+                    <label for="image">Avatar</label>
+                    <input name="image" type="file" class="form-control-input" accept="image/x-png,image/gif,image/jpeg">
+                </div>
                 <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Vytvořit profil</button>
-
+            </form>
+        </div>
     </main>
-    <br><br>
+    <div style="margin-bottom: 50px"></div>
 
 
 <?php require __DIR__ . '/incl/footer.php' ?>
