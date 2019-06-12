@@ -53,6 +53,7 @@ if ($submittedForm) {
 }
 ?>
 <?php require __DIR__ . '/incl/header.php' ?>
+    <div class="bg">
     <main class="container">
         <h4 class="mb-3">Přihlásit uživatele</h4>
 
@@ -73,12 +74,12 @@ if ($submittedForm) {
 
             <div class="mb-3">
                 <label for="email">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo @$email; ?>">
+                <input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo @$email; ?>" id="email">
             </div>
 
             <div class="mb-3">
-                <label for="email">Heslo</label>
-                <input name="password" type="password" class="form-control" placeholder="Heslo">
+                <label for="password">Heslo</label>
+                <input name="password" type="password" class="form-control" placeholder="Heslo" id="password">
             </div>
 
 
@@ -86,7 +87,7 @@ if ($submittedForm) {
         </form>
         <b><a href="registration.php">Nemáš účet? Registrace!</a></b>
     </main>
-
+    </div>
 
     <div style="margin-bottom: 300px"></div>
 

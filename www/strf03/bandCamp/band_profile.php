@@ -22,7 +22,7 @@ $date_started = $band['date_started'];
 $district = $band['district'];
 
 
-$stmt = $db->prepare('SELECT * FROM articles WHERE bands_band_id =?'); // TODO offset ?? cv08
+$stmt = $db->prepare('SELECT * FROM articles WHERE bands_band_id =?');
 $stmt->execute([$band_id]);
 $articles = $stmt->fetchAll();
 
@@ -89,46 +89,59 @@ $members_of_band = $stmt->fetchAll();
                 <h5 class="card-subtitle mb-2 text-muted text-center">Kapela ještě nepřidala žádné články</h5>
             <?php endif; ?>
 
-            <?php foreach ($articles as $article): ?>
-                <h2>
-                    <?php if ($owner): ?>
-                    <a href="article_edit.php?article_id=<?php echo $article['article_id'] ?>"> <?php endif; ?>
-                        <?php echo $article['header'] ?><?php if ($owner): ?> </a> <?php endif; ?></h2>
-                <p><?php echo $article['content'] ?></p>
+            <?php foreach ($articles
 
-                    <div class="container">
-                        <h4>Komentáře</h4>
+            as $article): ?>
+            <h2>
+                <?php if ($owner): ?>
+                <a href="article_edit.php?article_id=<?php echo $article['article_id'] ?>"> <?php endif; ?>
+                    <?php echo $article['header'] ?><?php if ($owner): ?> </a> <?php endif; ?></h2>
+            <p><?php echo $article['content'] ?></p>
 
-                            <?php
-                            $stmt = $db->prepare('select * from comments join users 
-where comments.users_user_id=users.user_id and comments.articles_article_id = ?');
-                            $stmt->execute([$article['article_id']]);
-                            $comments = $stmt->fetchAll();
+            <div class="container">
+                <h4>Komentáře</h4>
 
-                            foreach ($comments as $comment): ?>
-                                <div class="card">
-                                <?php echo $comment['first_name'].' '. $comment['text']; ?>
-                                </div>
-                            <?php endforeach; ?>
+                <?php
+                $stmt = $db->prepare('select * from comments join users 
+where comments.users_user_id=users.user_id and comments.articles_article_id = ? ORDER BY comments.comment_id');
+                $stmt->execute([$article['article_id']]);
+                $comments = $stmt->fetchAll();
+                ?>
+                <?php foreach ($comments as $comment): ?>
+                <div class="card">
 
-
-                        <br>
-                        <?php if (isset($_SESSION['user_id'])): ?>
-                        <form class="form-inline" method="post" action="add_comment.php?article_id=<?php echo $article['article_id']; ?>&band_id=<?php echo $article['bands_band_id']; ?>">
-                            <div class="form-group">
-                                <input class="form-control" name="text"  type="text" placeholder="Your comments" />
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="images/<?php echo isset($comment['avatar']) ? $comment['avatar'] : $DEFAULT_AVATAR ?>" class="img rounded-circle img-fluid" style="width: 75px; height: 75px"/>
                             </div>
-                            <div class="form-group">
-                                <button class="btn btn-large">Add</button>
+                            <div class="col-md-10">
+                                <a class="float-left" href="user_profile.php?user_id=<?php echo $comment['users_user_id'];?>"><strong><?php echo $comment['first_name'] . ' ' . $comment['last_name']; ?></strong></a>
+                                <div class="clearfix"></div>
+                                <p class="float-left"><?php echo $comment['text']; ?></p>
                             </div>
-                        </form>
-                        <?php endif; ?>
-                    <br><br>
+                        </div>
 
-            <?php endforeach; ?>
+                </div>
+                <br>
+                <?php endforeach; ?>
+
+
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <form method="POST" action="add_comment.php?article_id=<?php echo $article['article_id']; ?>&band_id=<?php echo $article['bands_band_id']; ?>">
+                        <div class="input-group mb-3">
+                            <input name="text" type="text" class="form-control" placeholder="Tvůj komentář..">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary">Odeslat</button>
+                            </div>
+                        </div>
+                    </form>
+                <?php endif; ?>
+                <br><br>
+
+                <?php endforeach; ?>
+            </div>
+
         </div>
-
-    </div>
 </main>
 <div style="margin-bottom: 150px"></div>
 <?php require __DIR__ . '/incl/footer.php' ?>

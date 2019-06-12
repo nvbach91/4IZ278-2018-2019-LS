@@ -91,12 +91,14 @@ $bands_member = $stmt->fetchAll();
         if (isset($_SESSION['band_id'])):
             if (is_in_array($bands_member, 'band_id', $_SESSION['band_id'])):
                 ?>
-                <button class="btn btn-lg btn-dark btn-block" disabled="disabled">Tento uživatel již je členem
-                    tvé
-                    kapely
-                </button>
+                <form action="delete_member_from_band.php?user_id=<?php echo $user_id ?>" method="POST">
+                    <button class="btn btn-lg btn-dark btn-block">Odebrat člena z tvé kapely
+                    </button>
+                </form>
             <?php else: ?>
-                <button class="btn btn-lg btn-dark btn-block">Přidat uživatele do kapely</button>
+                <form action="add_member_to_band.php?user_id=<?php echo $user_id ?>" method="POST">
+                    <button class="btn btn-lg btn-dark btn-block">Přidat uživatele do tvé kapely</button>
+                </form>
             <?php endif; ?>
         <?php endif; ?>
         <?php if ($owner): ?>

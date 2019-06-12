@@ -37,7 +37,7 @@ function is_in_array($array, $key, $key_value)
     ## END forearch
     return $within_array;
 }
-$DEFAULT_AVATAR = 'no_profile.jpg';
+$DEFAULT_AVATAR = 'no_profile.png';
 
 $districts = array("Praha", "Středočeský", "Jihočeský",
     "Plzeňský", "Karlovarský", "Ústecký", "Liberecký", "Královéhradecký", "Pardubický",

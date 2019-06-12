@@ -12,7 +12,7 @@ if ($submittedForm) {
 
     $phone = test_input($_POST['phone']);
 
-    $avatar; // TODO avatar
+    $avatar;
 
     if (isset($_POST['music_genres'])) {
         $music_genres = $_POST['music_genres'];
@@ -92,7 +92,7 @@ if ($submittedForm) {
             $values = array();
 
             foreach ($music_genres as $music_genre) {
-                $values[] = '(' . $music_genre . ', ' . $_SESSION['user_id'] . ')'; // TODO ošetřit vstup
+                $values[] = '(' . $music_genre . ', ' . $_SESSION['user_id'] . ')';
             }
 
             $stmt = $db->prepare('INSERT INTO listens_to (music_genres_music_genre_id, users_user_id) VALUES ' . implode(',', $values));
@@ -103,7 +103,7 @@ if ($submittedForm) {
             $values = array();
 
             foreach ($instruments as $instrument) {
-                $values[] = '(' . $instrument . ', ' . $_SESSION['user_id'] . ')'; // TODO ošetřit vstup
+                $values[] = '(' . $instrument . ', ' . $_SESSION['user_id'] . ')';
             }
 
             $stmt = $db->prepare('INSERT INTO person_instrument (instruments_instrument_id, users_user_id) VALUES ' . implode(',', $values));
@@ -194,7 +194,7 @@ $instruments = $stmt->fetchAll();
                     <select name="district" class="custom-select d-block w-100">
                         <option value="">Vyber kraj...</option>
                         <?php foreach ($districts as $name): ?>
-                            <option value="<?php echo $name ?>" <?php echo $name == $current_user['district'] ? 'selected' : '' // todo dát všude?> > <?php echo $name ?> </option>
+                            <option value="<?php echo $name ?>" <?php echo $name == $current_user['district'] ? 'selected' : ''?> > <?php echo $name ?> </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
